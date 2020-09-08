@@ -1,0 +1,29 @@
+.custom-backhistory-wrap{
+  &.fixed{
+    width: 100vw;
+    position: fixed;
+    z-index: 2;
+    background: #22242a;
+  }
+  .custom-backhistory{
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+  }
+  .login-img{
+    margin-left: 10px;
+    height: 32px;
+    width: 50px;
+  }
+  .backhistory-content-wrap{
+    display: flex;
+    align-items: center;
+    padding: 0 0 15px 24px ;
+    .at-icon-chevron-left{
+      transform: translateY(2px);
+    }
+  }
+  .cuntom-nav-title{
+    margin-left: 20px;
+  }
+}

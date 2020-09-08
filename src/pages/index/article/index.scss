@@ -1,0 +1,9 @@
+page{
+    background: rgb(252, 252, 252);
+}
+.article{
+  max-height: calc(100vh - 380px);
+  overflow-y: auto;
+}
+
+
