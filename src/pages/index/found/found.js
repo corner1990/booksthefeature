@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-// import CustomNavBar from '../../../components/navbar'
+import CustomNavBar from '../../../components/navbar'
 // import SearchBar from './found/searchBar'
-import Card from './card'
 import './index.scss'
 
 
@@ -41,9 +40,7 @@ export default class Index extends Component {
       id: 3
     }]
   }
-  index = 0
-  timer = 0
-  isfirst = true
+  
   componentDidMount () {
     let { data } = this.state
     
@@ -57,6 +54,10 @@ export default class Index extends Component {
       })
     }, 20)
   }
+
+  index = 0
+  timer = 0
+  isfirst = true
 
   showItem = info => {
     let time = 200
@@ -83,16 +84,11 @@ export default class Index extends Component {
   }
 
   render () {
-    let { data } = this.state
     return (
       <View className='found' >
-        {/* <CustomNavBar title='发现' /> */}
+        <CustomNavBar title='发现' />
         {/* <SearchBar className='found-search' /> */}
-        {
-          data.map((item, index)=> 
-            ( <Card key={index} index={index} { ...item } />) 
-          )
-        }
+  
       </View>
     )
   }

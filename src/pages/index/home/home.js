@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
-import CustomNavBar from '../../components/navbar'
+import { AtButton } from 'taro-ui'
+import CustomNavBar from '../../../components/navbar'
 
 import './home.scss'
 
-import MainProduct from './home/main-product'
-import OrderNews from './home/order-news'
-import NewsWarp from './home/news-warp'
 
 const mapState = state => state.global
 class Home extends Component {
@@ -51,15 +49,15 @@ class Home extends Component {
   }
   render () {
     
-    let { touchstart, setIsTouch } = this
+    let { touchstart } = this
     let { isTouch } = this.state
 
     return (
       <View className={`home ${isTouch ? 'hidden': ''}`} onTouchStart={touchstart} onTouchMove={touchstart}>
         { this.getNavBar() }
-        <MainProduct setIsTouch={setIsTouch} />
-        <OrderNews />
-        <NewsWarp />
+        <AtButton>按钮文案</AtButton>
+        <AtButton type='primary'>按钮文案</AtButton>
+        <AtButton type='secondary'>按钮文案</AtButton>
       </View>
     )
   }
