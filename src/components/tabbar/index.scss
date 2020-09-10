@@ -1,3 +1,4 @@
+@import '../../scss/index.scss';
 .custom-tabbar-wrap{
   position: fixed;
   bottom: 0;
@@ -8,13 +9,10 @@
   display: flex;
   justify-content: space-between;
   align-content: center;
-  background-color: #24242a;
-  color: #fff;
-  border-radius: 40px 40px 0 0;
-  // .custom-navbar{
-  //   display: flex;
-  //   align-items: center;
-  // }
+  background-color: $white;
+  color: $black;
+  @include shadow;
+  
   .tab-item{
     height: 100%;
     padding: 20px 0;
@@ -24,7 +22,17 @@
     display: block;
     flex: 1;
     align-items: center; 
-    font-size: 24px; 
+    font-size: 24px;
+    &.active{
+      color: $primary;
+      .tab-item-icon {
+        color: $primary;
+      }
+    }
+    .tab-item-icon{
+      font-weight: 500;
+      color: $black;
+    }
   }
   .tab-text{
     margin-top: 6px;

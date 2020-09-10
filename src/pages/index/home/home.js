@@ -42,7 +42,7 @@ class Home extends Component {
    * @desc 动态控制是否显示navBar
    */
   getNavBar = () => {
-    let title = '首页'
+    let title = 'FLOWERPLUS花加'
     let { showNavBar } = this.state
     if(!showNavBar) return ''
     return (<CustomNavBar title={title} />)

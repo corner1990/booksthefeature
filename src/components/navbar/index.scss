@@ -1,27 +1,18 @@
+@import '../../scss/index.scss';
 .custom-navbar-wrap{
   .custom-navbar{
+    position: relative;
     display: flex;
     padding: 0 15px 24px;
     align-items: center;
   }
   .nav-bar-title{
-    position: relative;
-    padding: 0 24px;
-    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: $font-lg;
     line-height: 28px;
-    width: 24px;
-    &::after{
-      position: absolute;
-      content: ':';
-      font-size: 36px;
-      color: #ed1c22;
-      font-weight: 700;
-      transform: translate(8px, -30px);
-    }
-  }
-  .login-img{
-    margin-left: 10px;
-    height: 50px;
-    width: 280px;
+    max-width: 480px;
   }
 }

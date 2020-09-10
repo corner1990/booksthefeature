@@ -32,10 +32,10 @@ const Index = props => {
       // 处理返回数据
       return (<View
         key={key}
-        className='tab-item'
+        className={['tab-item', title ? 'active' : '']}
         onClick={() => handleClick(key)} 
       >
-        <AtIcon value={item.iconType} size='20' color='#FFF'></AtIcon>
+        <AtIcon value={item.iconType} size='20' className='tab-item-icon'></AtIcon>
         { title  ? <View  className='tab-text'>{ title }</View> : null }
       </View>)
 
