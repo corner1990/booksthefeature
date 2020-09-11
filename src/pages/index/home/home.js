@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
 import { AtButton } from 'taro-ui'
 import CustomNavBar from '../../../components/navbar'
+import Swiper from './home-components/swiper'
 
 import './home.scss'
 
@@ -55,6 +56,7 @@ class Home extends Component {
     return (
       <View className={`home ${isTouch ? 'hidden': ''}`} onTouchStart={touchstart} onTouchMove={touchstart}>
         { this.getNavBar() }
+        <Swiper />
         <AtButton>按钮文案</AtButton>
         <AtButton type='primary'>按钮文案</AtButton>
         <AtButton type='secondary'>按钮文案</AtButton>
