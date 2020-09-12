@@ -1,0 +1,10 @@
+@import '../../../scss/index.scss';
+.filterBar{
+  margin: 36px 36px 0;
+  @include flex;
+  font-size: $font-sm;
+  color: $black85;
+  .active{
+    color: $primary;
+  }
+}

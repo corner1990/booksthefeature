@@ -1,0 +1,47 @@
+@import '../../../../scss/index.scss';
+.newProductListWrap{
+  padding: 24px;
+
+  .newProductListTitle{
+    color: $black;
+    font-family: PingFangSC-Semibold;
+    font-size: $font-lg;
+    text-align: center;
+    line-height: 48px;
+
+  }
+  .newProductList{
+    @include flex;
+    margin-top: 32px;
+  }
+  .productCard{
+    border-radius: 16px;
+    overflow: hidden;
+    color: $black;
+    @include shadow;
+    margin-bottom: 24px;
+    max-width: 340px;
+
+    .productImg{
+      max-width: 340px;
+      height: 400px;
+      margin-bottom: 24px;
+    }
+    .productTitle{
+      padding: 0 12px;
+      line-height: 44px;
+      font-size: $font-sm;
+      font-family: PingFangSC-Regular;
+      letter-spacing: 0;
+      @include textHide(2);
+    }
+    .productPrice{
+      padding: 0 12px;
+      font-family: PingFangSC-Semibold;
+      font-size: $font-md;
+      font-weight: 700;
+      line-height: 44px;
+      margin-bottom: 24px;
+    }
+  }
+}

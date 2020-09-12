@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
-import { AtButton } from 'taro-ui'
 import CustomNavBar from '../../../components/navbar'
 import Swiper from './home-components/swiper'
+import PromotionCard from './home-components/promotionCard'
+import NewProductList from './home-components/newProductList'
 
 import './home.scss'
 
@@ -57,9 +58,8 @@ class Home extends Component {
       <View className={`home ${isTouch ? 'hidden': ''}`} onTouchStart={touchstart} onTouchMove={touchstart}>
         { this.getNavBar() }
         <Swiper />
-        <AtButton>按钮文案</AtButton>
-        <AtButton type='primary'>按钮文案</AtButton>
-        <AtButton type='secondary'>按钮文案</AtButton>
+        <PromotionCard />
+        <NewProductList />
       </View>
     )
   }
