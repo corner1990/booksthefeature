@@ -10,10 +10,20 @@
   align-item: $align;
   flex-wrap: wrap;
 }
+// 隐藏文本
 @mixin textHide($line: 1) {
   overflow:hidden; 
   text-overflow:ellipsis;
   display:-webkit-box; 
   -webkit-box-orient:vertical;
   -webkit-line-clamp: $line; 
+}
+// margin
+@mixin mgx($content: 24px){
+  margin-left: $content;
+  margin-right: $content;
+}
+// border-radus
+@mixin  bdr($content: 16px) {
+  border-radius: $content;
 }

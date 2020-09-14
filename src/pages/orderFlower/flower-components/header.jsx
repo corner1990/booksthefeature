@@ -76,12 +76,26 @@ class Header extends Component {
       <View
         className='tabContentItem'
         key={item.key}
+        onClick={() => this.showOption(item.key)}
       >
         <View className='tabContentItemTitle'>{item.label}</View>
         <View className='tabContentItemSubTitle'>{ item.subLabel }</View>
       </View>
-    ))
-)
+    )))
+  }
+  /**
+   * @desc 显示对应的操作弹框
+   * @param { number } key 
+   */
+  showOption = key => {
+    let { update } = this.props
+    let options= {
+      1: 'showSelectArea'
+    }
+    let optionKey = options[key]
+    if (optionKey) {
+      update(optionKey, true)
+    }
   }
   /**
    * @desc 设置tab active

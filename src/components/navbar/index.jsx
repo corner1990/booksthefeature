@@ -44,7 +44,7 @@ export default class Index extends Component {
     let { clickLeft, color, iconSize=24 } = this.props
     if (!clickLeft) return ''
     return (<View className='clickLeft-wrap' onClick={ clickLeft } >
-      <AtIcon value='chevron-left' size={iconSize} color={color}></AtIcon>
+      <AtIcon  value='chevron-left' size={iconSize} color={color}></AtIcon>
     </View>)
   }
   render () {

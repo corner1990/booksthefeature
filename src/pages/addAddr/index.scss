@@ -1,0 +1,39 @@
+@import '../../scss/index.scss';
+.AddAddr{
+  .addrInfoWrap{
+    @include mgx;
+    @include shadow;
+    @include bdr;
+    overflow: hidden;
+  }
+  .at-input__title{
+    font-size: $font-sm;
+    color: $black85;
+  }
+  .addrAreaWrap{
+    padding:  0 24px;
+    @include flex;
+    .addrAreaTitle{
+      padding: 12px 0;
+      font-size: $font-sm;
+      color: $black85;
+    }
+    .addrArea{
+      border: 0;
+      padding: 19px 12px;
+      text-align: left;
+      width: auto;
+      flex: 1;
+      line-height: 40px;
+    }
+  }
+  
+  .setDefault{
+    margin-top: 24px;
+    @include mgx;
+    switch{
+      transform: scale(.8);
+      width: 88px;
+    }
+  }
+}
