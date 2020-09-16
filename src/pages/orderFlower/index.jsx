@@ -39,7 +39,7 @@ class OrderFlower extends Component {
     this.setState({ [key]: val })
   }
   render () {
-    let { filterActive, priceSort, showSelectArea } = this.state
+    let { filterActive, priceSort } = this.state
     let { update } = this
     return (
       <View className='orderFlowerWrap'>
@@ -52,11 +52,7 @@ class OrderFlower extends Component {
         <FlowerList />
         {/* 选择地址 */}
         
-        <AtFloatLayout
-          isOpened={showSelectArea}
-        >
-          <SelectArea />
-        </AtFloatLayout>
+  
       </View>
     )
   }

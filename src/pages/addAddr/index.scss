@@ -1,10 +1,11 @@
 @import '../../scss/index.scss';
 .AddAddr{
   .addrInfoWrap{
-    @include mgx;
+    @include mgx(36px);
     @include shadow;
     @include bdr;
     overflow: hidden;
+    margin-top: 40px;
   }
   .at-input__title{
     font-size: $font-sm;
@@ -30,10 +31,32 @@
   
   .setDefault{
     margin-top: 24px;
-    @include mgx;
+    @include flex;
+    @include mgx(36px);
+    @include shadow;
+    justify-content: space-between;
+    align-items: center;
+    height: 96px;
+    border-radius: 16px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    .setDefaultText{
+      font-size: $font-sm;
+
+    }
     switch{
       transform: scale(.8);
       width: 88px;
+    }
+  }
+  .subBtnWrap{
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    .subBtn{
+      height: 120px;
+      line-height: 120px;
+      font-size: $font-md;
     }
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Picker, Switch } from '@tarojs/components'
-import { AtInput, AtTextarea, AtSwitch, AtList, AtListItem } from 'taro-ui';
+import { AtInput, AtTextarea, AtSwitch, AtButton } from 'taro-ui';
 import CustomNavBar from '../../components/navbar'
 import Address from '../../components/address'
 import './index.scss';
@@ -10,10 +10,6 @@ import './index.scss';
 class AddAddr extends Component {
   state = {
     name: '',
-    addr: '',
-    isDefault: false,
-    selector: ['美国', '中国', '巴西', '日本'],
-    selectorChecked: '美国'
   }
   nameChange = (...args) => {
     console.log('123', args)
@@ -22,11 +18,6 @@ class AddAddr extends Component {
    * @desc 返回
    */
   backHistory = () => {}
-  onChange = e => {
-    this.setState({
-      selectorChecked: this.state.selector[e.detail.value]
-    })
-  }
   render() {
     let { backHistory, nameChange } = this
     return (<View className='AddAddr'>
@@ -65,10 +56,12 @@ class AddAddr extends Component {
         
       </View>
       <View className='setDefault'>
-        {/* <AtSwitch title='开启中' checked={this.state.isDefault} onChange={nameChange} /> */}
-        <Switch type='switch' color='#00B799'></Switch>
+        <View class='setDefaultText'>设为默认地址</View>
+        <AtSwitch type='switch' color='#00B799'></AtSwitch>
       </View>
-
+      <View className='subBtnWrap'>
+        <AtButton type='primary' className='subBtn'>保存</AtButton>
+      </View>
     </View>)
   }
 }
