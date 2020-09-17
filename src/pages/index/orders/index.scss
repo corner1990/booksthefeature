@@ -1,0 +1,65 @@
+@import '../../../scss/index.scss';
+.myOrders{
+  max-height: calc(100vh - 116px);
+  height: calc(100vh - 116px);
+  overflow: auto;
+  .custom-navbar-wrap{
+    background-color: $white;
+  }
+  .OrderFilterBar{
+    margin-top: 2px;
+    position: relative;
+    background-color: $white;
+    .OrderFilterBarItemWrap{
+      height: 72px;
+      @include flex;
+      
+      text-align: center;
+      font-family: PingFangSC-Semibold;
+      font-size: $font-sm;
+      color: $black;
+      letter-spacing: 0;
+    }
+    .OrderFilterBarItem{
+      flex: 1;
+      line-height: 72px;
+    }
+    .OrderFilterBarItem.active{
+      color: $primary;
+    }
+    .indexBar{
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 32px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: $primary;
+      transition: transform .2s;
+    }
+  }
+  .OrderList{
+    padding: 24px;
+  }
+  .OrderCard{
+    @include shadow;
+    background-color: $white;
+    border-radius: 12px;
+    .OrderCardTime{
+      @include flex;
+      height: 84px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-family: PingFangSC-Regular;
+      letter-spacing: 0;
+      line-height: 20px;
+      font-size: $font-sm;
+      color: $black85;
+      border-bottom: 2px solid $bg-grey;
+    }
+    .CountDown{
+      color: $primary;
+    }
+  }
+}
