@@ -1,7 +1,7 @@
 @import './variable.scss';
 // 阴影
 @mixin shadow {
-  box-shadow: 0 0 30px 0px $shadow-color;
+  box-shadow: 0 0 24px 0px $shadow-color;
 }
 // flex
 @mixin  flex($content: space-between, $align: center) {

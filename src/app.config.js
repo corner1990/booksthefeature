@@ -1,8 +1,8 @@
 export default {
   pages: [
-    'pages/addAddr/index',
+    'pages/index/index',
     'pages/orderFlower/index',
-    'pages/index/index'
+    'pages/addAddr/index'
   ],
   window: {
     navigationStyle: 'custom',

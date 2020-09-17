@@ -5,6 +5,9 @@ import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../../components/navbar'
 import { setTab } from '../../../store/actions/global'
+import UserInfo from './user-info'
+import CalendarBar from './calendar-bar'
+import OrdersCard from  './order-card'
 
 import './index.scss'
 
@@ -37,9 +40,11 @@ class Index extends Component {
 
 
     return (
-      <View className='my'>
-        <CustomNavBar title='我的' />
-        
+      <View className='my-center'>
+        <CustomNavBar title='FLOWERPLUS 花加' bgColor='#fff' />
+        <UserInfo />
+        <CalendarBar />
+        <OrdersCard />
       </View>
     )
   }

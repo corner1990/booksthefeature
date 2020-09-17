@@ -1,0 +1,31 @@
+@import '../../../scss/index.scss';
+.userInfo{
+  @include flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+  height: 200px;
+  background-color: $white;
+  padding: 0 28px;
+
+  .userInfoLeft{
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .userAvatar{
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+  }
+  .myInfoBtn{
+    margin: 0;
+  }
+  .userInfoName{
+    font-family: Avenir-Heavy;
+    font-size: 44px;
+    color: $black;
+    letter-spacing: 0.35px;
+    margin-left: 24px;
+  }
+}
