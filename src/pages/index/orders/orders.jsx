@@ -51,6 +51,9 @@ class Index extends Component {
         <FilterBar />
         <View className='OrderList'>
           <OrderCard />
+          <OrderCard />
+          <OrderCard />
+          <OrderCard />
         </View>
       </View>
     )

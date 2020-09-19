@@ -54,7 +54,9 @@ export default class Index extends Component {
     let { title } = this.props
     const { statusBarHeight } = wx.getSystemInfoSync()
     return (
-      <View className='custom-navbar-wrap'>
+      <View
+        className='custom-navbar-wrap'
+      >
         <View className='white-swpace' style={{height: statusBarHeight}}></View>
         <View className='custom-navbar' style={{ height: navigationBarHeight }}>
           { this.getArrowLeft() }

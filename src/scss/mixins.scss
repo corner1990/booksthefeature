@@ -7,7 +7,7 @@
 @mixin  flex($content: space-between, $align: center) {
   display: flex;
   justify-content: $content;
-  align-item: $align;
+  align-items: $align;
   flex-wrap: wrap;
 }
 // 隐藏文本

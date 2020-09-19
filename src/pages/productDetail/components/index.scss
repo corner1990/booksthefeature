@@ -1,0 +1,116 @@
+@import '../../../scss/index.scss';
+@mixin pd32 {
+  padding: 0 32px;
+}
+.ProductMainImage{
+  .mainImage{
+    width: 100vw;
+    height: 640px;
+  }
+}
+.white-space{
+  height: 20px;
+}
+.ProductProductInfo{
+  padding: 32px 0 0;
+  // border: 2px solid $shadow-color;
+  .ProductName{
+    @include pd32;
+    font-size: $font-md;
+    color: $black85;
+    line-height: 40px;
+  }
+  .ProductPrice{
+    @include pd32;
+    font-size: $font-lg;
+    color: $black;
+    line-height: 60px;
+    font-weight: 700;
+  }
+  .currency{
+    font-size: $font-sm;
+  }
+
+  .OperationWrap{
+    padding: 32px;
+    margin-top: 8px;
+    border-top: 2px solid $shadow-color;
+    .OperationCard{
+      @include shadow;
+      @include flex(space-between, center);
+      padding: 0 24px;
+      height: 96px;
+      margin-bottom: 18px;
+      border-radius: 16px;
+      font-size: $font-sm;
+      color: $black;
+    }
+    .OperationTitle{
+      color: $black65;
+    }
+    .at-icon{
+      margin-left: 8px;
+    }
+  }
+}
+.MainProductdetail{
+  font-family: PingFangSC-Semibold;
+  padding: 0 32px;
+  margin-bottom: 40px;
+  .DetailTitle{
+    line-height: 60px;
+    font-size: $font-lg;
+    color: $black85;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .DetailImage{
+    width: 100%;
+    height: 900px;
+  }
+  .InfoAccordion{
+    margin-top: 16px;
+    @include shadow;
+    border-radius: 16px;
+  }
+  .at-accordion__info__title{
+    font-size: $font-md;
+    color: $black85;
+    font-weight: 700;
+  }
+  .at-accordion__content{
+    transition: height .3s cubic-bezier(.47,0,.745,.715);
+  }
+  
+}
+
+.ProuductFooter{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 120px;
+  @include pd32;
+  box-sizing: border-box;
+  background-color: $white;
+  @include flex(space-between, center);
+  .button{
+    width: 240px;
+    line-height: 80px;
+    text-align: center;
+    background-color: $primary;
+    color: $white;
+    font-size: $font-md;
+    border-radius: 40px;
+  }
+  .AddShoppingCart{
+    background-color: rgba(0,183,153,0.20);
+    color: $primary;
+    margin-right: 20px;
+  }
+  
+  .BtnWrap{
+    @include flex(space-between, center);
+  }
+}

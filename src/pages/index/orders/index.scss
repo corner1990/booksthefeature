@@ -45,21 +45,71 @@
     @include shadow;
     background-color: $white;
     border-radius: 12px;
+    margin-bottom: 24px;
     .OrderCardTime{
-      @include flex;
+      @include flex(space-between, center);
       height: 84px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 26px;
       font-family: PingFangSC-Regular;
       letter-spacing: 0;
       line-height: 20px;
       font-size: $font-sm;
       color: $black85;
-      border-bottom: 2px solid $bg-grey;
+      border-bottom: 2px solid #eee;
     }
     .CountDown{
       color: $primary;
+    }
+    .ProductInfoWrap{
+      @include flex('start');
+      padding: 26px;
+
+      .ProductImg{
+        background-color: $shadow-color;
+        border-radius: 16px;
+        width: 100px;
+        height: 100px;
+      }
+      .ProductInfo{
+        width: 500px;
+        margin-left: 14px;;
+        font-family: PingFangHK-Regular;
+        font-size: $font-sm;
+        color: $black85;
+        letter-spacing: 0;
+      }
+      .ProductName{
+        @include textHide(2);
+        min-height: 64px;
+      }
+      .ProductSkuWrap{
+        @include flex;
+        margin-top: 18px;
+      }
+      .ProductPrice{
+        color: $black;
+      }
+      .ProductCount{
+        font-size: $font-xs;
+      }
+    }
+    .ProductOperationWrap{
+      @include flex(space-between, center);
+      padding: 0 26px;
+      border-top: 2px solid #eee;
+      height: 100px;
+      .at-button{
+        margin: 0;
+        height: 64px;
+      }
+
+      .ProductSkuText{
+        
+        font-family: PingFangHK-Regular;
+        font-size: $font-sm;
+        color: $black85;
+        letter-spacing: 0;
+      }
     }
   }
 }
