@@ -1,0 +1,9 @@
+@import '../../scss/index.scss';
+.ShoppingCardWrap{
+  max-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}

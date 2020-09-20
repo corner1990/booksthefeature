@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/shopping-cart/index',
     'pages/productDetail/index',
     'pages/index/index',
     'pages/orderFlower/index',

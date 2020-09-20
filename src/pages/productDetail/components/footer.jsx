@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { AtIcon, AtButton } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 
 const ProuductFooter = () => {
   return <View class='ProuductFooter'>
