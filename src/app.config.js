@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/user-info/index',
     'pages/shopping-cart/index',
     'pages/productDetail/index',
     'pages/index/index',

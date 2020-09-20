@@ -1,0 +1,24 @@
+@import '../../scss/index.scss';
+.MainItemWrap{
+  @include flex(space-between, center);
+  height: 110px;
+  padding: 0 24px;
+  border-bottom: 2px solid #eee;
+  font-family: PingFangSC-Regular;
+  font-size: $font-sm;
+  color: $black85;
+  &.HasImg{
+    height: 160px;
+  }
+
+  .MainItemtImg{
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .MainItemInfo{
+    @include flex(space-between, center);
+    flex: 1;
+  }
+}
