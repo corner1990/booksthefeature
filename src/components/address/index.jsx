@@ -82,14 +82,22 @@ class Address extends Component{
   }
   render() {
     // let { update } = this
+    let {
+      style = {
+        height: 48,
+        width: 336
+      }
+    } = this.props
     return (<View className='address-wrap'>
       
       <Picker
         mode='multiSelector'
         className='address-picker'
+        style={style}
         range={this.getCloumns()}
         onChange={this.pickerChange}
         onColumnChange={this.columnChange}
+        hasBorder={false}
       >
         <AtList>
           <AtListItem

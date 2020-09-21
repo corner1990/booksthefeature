@@ -1,0 +1,15 @@
+@import '../../scss/index.scss';
+.ConfirmOrderWrap{
+  min-height: 100vh;
+  max-height: 100vh;
+  box-sizing: 120px;
+  padding-bottom: 120px;
+  .ConfirmOrderContentWrap{
+    padding: 24px;
+  }
+  .ProductList{
+    @include shadow;
+    border-radius: 16px;
+    margin: 40px 0 20px;
+  }
+}

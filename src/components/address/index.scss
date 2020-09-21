@@ -19,6 +19,9 @@
     color: #D8D8D8;
   }
   .address-picker{
+    opacity: 0;
+    position: absolute;
+    z-index: 3;
     .at-list__item{
       font-size: $font-sm;
       .item-extra__info{

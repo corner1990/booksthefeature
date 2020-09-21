@@ -4,7 +4,7 @@ import { AtIcon } from 'taro-ui'
 
 import './index.scss'
 /**
- * @desc item
+ * @desc item 个人资料也页面
  * @param { Object } props { title, src, hideIcon } 
  */
 const MainItem = props => {
