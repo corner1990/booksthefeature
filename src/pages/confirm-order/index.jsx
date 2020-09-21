@@ -7,6 +7,7 @@ import ProductCard from './components/prodct-card'
 import Switch from '../../components/switch'
 import UseCoupon from './components/use-coupon'
 import PriceDetail from './components/price-detail'
+import Footer from './components/footer'
 
 import './index.scss'
 /**
@@ -51,6 +52,7 @@ const ConfirmOrder = () => {
       />
       <PriceDetail />
     </View>
+    <Footer />
   </View>)
 }
 

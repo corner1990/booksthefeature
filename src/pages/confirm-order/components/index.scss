@@ -111,3 +111,39 @@
     font-size: $font-xs;
   }
 }
+
+.ShoppingCardFooter{
+  @include shadow;
+  @include flex(space-between, center);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 120px;
+  box-sizing: border-box;
+  padding: 0 32px;
+  background-color: $white;
+
+  .button{
+    width: 240px;
+    line-height: 80px;
+    text-align: center;
+    background-color: $primary;
+    color: $white;
+    font-size: $font-md;
+    border-radius: 40px;
+    &.disabled{
+      background-color: rgba(0,183,153,0.50);
+    }
+  }
+  .PriceWrap{
+    font-size: $font-md;
+    color: $black;
+    margin-right: 20px;
+    font-weight: 700;
+  }
+  .Currency{
+    font-size: $font-xs;
+    font-weight: 400;
+  }
+}

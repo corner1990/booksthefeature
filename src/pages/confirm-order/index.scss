@@ -2,8 +2,10 @@
 .ConfirmOrderWrap{
   min-height: 100vh;
   max-height: 100vh;
-  box-sizing: 120px;
+  box-sizing: border-box;
   padding-bottom: 120px;
+  overflow: auto;
+  position: relative;
   .ConfirmOrderContentWrap{
     padding: 24px;
   }
