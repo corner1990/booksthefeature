@@ -1,0 +1,54 @@
+@import '../../../scss/index.scss';
+// 地址卡片
+.AddressCardWrap{
+  position: relative;
+  background-color: #f6f6f6;
+  color: rgba(23,7,7,.45);
+  font-size: $font-sm;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  .Default{
+    position: absolute;
+    background: linear-gradient(310deg,#ff0ba8,#bc22f8);
+    font-size: $font-xs;
+    padding: 6px 16px;
+    color: #fff;
+    right: 0;
+    top: 16px;
+  }
+  .Name{
+    font-size: $font-md;
+    color: rgba(23,7,7,.85);
+    margin-right: 10px;
+  }
+  .Address{
+    margin-top: 10px;
+  }
+  .OperationWrap{
+    margin-top: 10px;
+    text-align: right;
+    .at-icon{
+      margin-top: -5px;
+    }
+    .del{
+      margin-right: 20px;
+    }
+  }
+}
+
+// 添加新地址
+.AddBtnWrap{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  padding: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  .at-button{
+    height: 84px;
+    line-height: 84px;
+    font-size: $font-md;
+  }
+}
