@@ -1,0 +1,52 @@
+@import '../../../scss/index.scss';
+.OrderHeaderWrap{
+  width: 100vw;
+  height: 320px;
+  background-image: linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
+  color: $white;
+  padding: 40px;
+  box-sizing: border-box;
+
+  .OrderHeaderTitle{
+    font-family: SourceHanSansCN-Medium;
+    font-size: $font-lg;
+  }
+  .OrderHeaderSubTitle{
+    font-size: $font-sm;
+    margin-top: 10px;
+  }
+}
+
+.ReceiptInfoWrap{
+  @include shadow;
+  background-color: $white;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  .Title{
+    font-size: $font-sm;
+    color: $black65;
+    line-height: 76px;
+    padding: 0 24px;
+    border-bottom: 2px solid #eee;
+  }
+  .Line{
+    @include flex(flex-start, center);
+    padding: 0 24px;
+    height: 76px;
+    font-size: $font-sm;
+  }
+  .LineTitle{
+    font-family: PingFangSC-Regular;
+    color: $black85;
+  }
+  .LineText{
+    font-family: PingFangSC-Semibold;
+    color: $black;
+  }
+  .AddrLine{
+    display: block;
+    height: auto;
+    line-height: 60px;
+  }
+}
