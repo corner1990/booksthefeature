@@ -41,6 +41,7 @@
     "@tarojs/react": "3.0.6",
     "@tarojs/runtime": "3.0.6",
     "@tarojs/taro": "3.0.6",
+    "axios": "^0.20.0",
     "lodash": "4.17.15",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
@@ -48,6 +49,7 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "taro-listview": "^2.0.2",
     "taro-ui": "^3.0.0-alpha.3",
     "terser-webpack-plugin": "^3.0.8"
   },

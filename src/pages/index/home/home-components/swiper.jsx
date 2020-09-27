@@ -3,22 +3,19 @@ import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import { connect } from 'react-redux'
 // import Article from './article' // 文章列表页
 import './swiper.scss'
+import { getAdvertisingList } from '../api'
 
 const mapState = state => state.global
 class SwiperComponent extends Component {
   state = {
-    // tab只有三个，当下标大于2的组件在内页跳转的时候需要在global中配置当前组件的坐标到对应的tab active 中
-    // 如Endorsement下标为3, 我需要他展示我的，那么我需要3 配置到{ title: '我的', iconType: 'user', active: [ 2, 3]} 中
-    banner: [
-      'https://ipxcdn.jfshare.com/system/star/f68e734b111d90f7a0a80186749e193a.jpg?x-oss-process=image/resize,m_fill,h_560,w_750',
-      'https://ipxcdn.jfshare.com/system/star/462654947c70d56a888532cef8348842.jpg?x-oss-process=image/resize,m_fill,h_560,w_750',
-      'https://ipxcdn.jfshare.com/scrape/starBgs/%E5%BC%A0%E7%BF%B0.jpg?x-oss-process=image/resize,m_fill,h_560,w_750'
-    ],
+    banner: [],
     current: 0,
     indexWidth: 74,
     indexWrapWidth: 360
   }
-  componentWillMount () { }
+  componentWillMount () {
+    this.loadInfo()
+  }
 
   componentDidMount () { }
 
@@ -46,7 +43,11 @@ class SwiperComponent extends Component {
   getItem = () => {
     let { banner } = this.state
     return banner.map((item, key) => ( <SwiperItem key={key}>
-      <Image src={item} className='home-swiper-img' />
+      <Image
+        src={item.image}
+        className='home-swiper-img'
+        mode='aspectFill'
+      />
     </SwiperItem>))
   }
   /**
@@ -57,6 +58,17 @@ class SwiperComponent extends Component {
     let step = (indexWrapWidth - indexWidth) / (banner.length - 1) / 2
     return {
       transform: `translateX(${current * step}px)`
+    }
+  }
+  /**
+   * @desc 加载数据
+   */
+  async loadInfo() {
+    let { errorCode, data } = await getAdvertisingList()
+    if (errorCode === 0) {
+      this.setState({
+        banner: data.advertising_list
+      })
     }
   }
   render () {
@@ -71,6 +83,7 @@ class SwiperComponent extends Component {
         >
           { getItem() }
         </Swiper>
+        {/* //TODO: 需要调整宽度 */}
         <View className='swiper-index-wrap'>
           <View className='swiper-index' style={{...getTransformX() }}></View>
         </View>

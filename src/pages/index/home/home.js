@@ -1,45 +1,56 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
+import ListView, { LazyBlock } from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import Swiper from './home-components/swiper'
 import PromotionCard from './home-components/promotionCard'
 import NewProductList from './home-components/newProductList'
 
 import './home.scss'
+import { getProductList } from '../api'
 
 
 const mapState = state => state.global
 class Home extends Component {
   state = {
+    list: [],
     isTouch: false,
-    showNavBar: true
+    showNavBar: true,
+    pageInfo: {
+      index: 0
+    }
   }
+  
   componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    this.loadInfo()
+  }
 
   componentWillUnmount () { }
 
   componentDidShow () { }
 
   componentDidHide () { }
-
-  touchstart = e => {
-    e.stopPropagation()
-    e.preventDefault()
-    let { isTouch } = this.state
-    if(isTouch) {
-      this.setIsTouch()
-    }
+  pageInfo = {
+    index: 0
   }
-  /**
-   * @desc 控制是否页面可以滚动
-   * @param { number | undefined } val 
-   */
-  setIsTouch = (isTouch = false) => {
-    this.setState({ isTouch })
-  }
+  // touchstart = e => {
+  //   e.stopPropagation()
+  //   e.preventDefault()
+  //   let { isTouch } = this.state
+  //   if(isTouch) {
+  //     this.setIsTouch()
+  //   }
+  // }
+  // /**
+  //  * @desc 控制是否页面可以滚动
+  //  * @param { number | undefined } val 
+  //  */
+  // setIsTouch = (isTouch = false) => {
+  //   this.setState({ isTouch })
+  // }
   /**
    * @desc 动态控制是否显示navBar
    */
@@ -49,18 +60,41 @@ class Home extends Component {
     if(!showNavBar) return ''
     return (<CustomNavBar title={title} />)
   }
+  /**
+   * @desc 加载数据
+   */
+  loadInfo = async () => {
+    let list = []
+    let pageInfo = {}
+    let { errorCode, data } = await getProductList(this.state.pageInfo)
+    if (errorCode === 0) {
+      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, data.product_list]
+    }
+    this.setState({
+      list, pageInfo
+    })
+  }
   render () {
     
-    let { touchstart } = this
-    let { isTouch } = this.state
+    // let { touchstart } = this
+    let { isTouch, list, pageInfo } = this.state
 
     return (
-      <View className={`home ${isTouch ? 'hidden': ''}`} onTouchStart={touchstart} onTouchMove={touchstart}>
-        { this.getNavBar() }
-        <Swiper />
-        <PromotionCard />
-        <NewProductList />
-      </View>
+      <ListView
+        hasMore={pageInfo.index}
+        onScrollToLower={this.loadInfo}
+      >
+        <View
+          className={`home ${isTouch ? 'hidden': ''}`}
+          // onTouchStart={touchstart}
+          // onTouchMove={touchstart}
+        >
+          { this.getNavBar() }
+          <Swiper />
+          <PromotionCard />
+          <NewProductList list={list} />
+        </View>
+      </ListView>
     )
   }
 }
