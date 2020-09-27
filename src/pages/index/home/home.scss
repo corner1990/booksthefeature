@@ -1,6 +1,9 @@
 .home{
-  max-height: calc(100vh - 116px);
-  overflow: auto;
+  height: calc(100vh - 116px);
+  overflow: hidden;
+  .sbListView{
+    height: 100%;
+  }
   &.hidden{
     overflow: hidden;
   }

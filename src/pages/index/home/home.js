@@ -18,7 +18,8 @@ class Home extends Component {
     isTouch: false,
     showNavBar: true,
     pageInfo: {
-      index: 0
+      index: 0,
+      has_more: true
     }
   }
   
@@ -63,7 +64,7 @@ class Home extends Component {
   /**
    * @desc 加载数据
    */
-  loadInfo = async () => {
+  loadInfo = async ()=> {
     let list = []
     let pageInfo = {}
     let { errorCode, data } = await getProductList(this.state.pageInfo)
@@ -80,21 +81,24 @@ class Home extends Component {
     let { isTouch, list, pageInfo } = this.state
 
     return (
-      <ListView
-        hasMore={pageInfo.index}
-        onScrollToLower={this.loadInfo}
+      <View
+        className={`home ${isTouch ? 'hidden': ''}`}
+        // onTouchStart={touchstart}
+        // onTouchMove={touchstart}
       >
-        <View
-          className={`home ${isTouch ? 'hidden': ''}`}
-          // onTouchStart={touchstart}
-          // onTouchMove={touchstart}
+        <ListView
+          hasMore={pageInfo.has_more}
+          onScrollToLower={this.loadInfo}
+          className='sbListView'
+          autoHeight
         >
-          { this.getNavBar() }
-          <Swiper />
-          <PromotionCard />
-          <NewProductList list={list} />
-        </View>
-      </ListView>
+        { this.getNavBar() }
+        <Swiper />
+        <PromotionCard />
+        <NewProductList list={list} />
+        
+        </ListView>
+      </View>
     )
   }
 }
