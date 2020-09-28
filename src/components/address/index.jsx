@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { View, Picker } from '@tarojs/components'
-import { AtIcon, AtFloatLayout, AtList, AtListItem } from 'taro-ui'
+import { AtList, AtListItem } from 'taro-ui'
 import districts from './districts'
 import './index.scss'
 
 /**
- * @desc 地址选择控件
+ * @desc 地址选择控件\
+ * 使用方式, 放在需要触发改组件的上一行
+ * <Address  change={change} />
  */
 class Address extends Component{
   state = {
@@ -19,12 +21,15 @@ class Address extends Component{
       value
     } = e.detail
     let { city, area } = this.state
+    let { change=() => {} } = this.props
     let [provIndex, cityIndex, areaIndex] = value
     let provStr = Object.values(districts['100000'])[provIndex]
     let cityStr = Object.values(districts[city])[cityIndex]
     let areaStr = Object.values(districts[area])[areaIndex]
     let selected = `${provStr} ${cityStr} ${areaStr}`
     this.setState({ selected })
+    // channge事件 传递选中的值
+    change([provStr, cityStr, areaStr])
   }
   update = (key, val) => {
     this.setState({

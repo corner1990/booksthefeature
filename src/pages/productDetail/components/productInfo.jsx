@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
+import Addr from '../../../components/address'
 import './index.scss'
 /**
  * @desc 花束信息
  */
 const ProductInfo = props => {
+  let [addr, setAddr] = useState('')
   let {
     info: {
       base_info={}
     }
   } = props
   
+  const addrChnage = selectAddr => {
+    setAddr(selectAddr)
+    console.log('addr', selectAddr)
+  }
   return (<View className='ProductProductInfo'>
     <View className='ProductName'>{base_info.product_name}</View>
     <View className='ProductPrice'>
@@ -19,10 +25,11 @@ const ProductInfo = props => {
       {base_info.sale_price}
     </View>
     <View className='OperationWrap'>
+      <Addr change={addrChnage} />
       <View className='OperationCard'>
         <View className='OperationTitle'>配送区域</View>
         <View className='OperationVal'>
-          北京市 北京市 东城区
+          <Text className={(addr ? '' : 'Placehoder' )}>{(addr ? addr : '请选择行政区域')}</Text>
           <AtIcon value='chevron-down' size='20' color='#d8d8d8'></AtIcon>
         </View>
       </View>
