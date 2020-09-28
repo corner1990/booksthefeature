@@ -56,13 +56,19 @@
 .MainProductdetail{
   font-family: PingFangSC-Semibold;
   padding: 0 32px;
-  margin-bottom: 40px;
+  margin-bottom: 180px;
   .DetailTitle{
     line-height: 60px;
     font-size: $font-lg;
     color: $black85;
     font-weight: 700;
     margin-bottom: 20px;
+  }
+  .textContent{
+    background-color: $white;
+    padding: 24px 0;
+    color: $black85;
+    font-size: $font-sm;
   }
   .DetailImage{
     width: 100%;

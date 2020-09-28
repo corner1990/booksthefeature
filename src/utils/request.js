@@ -16,8 +16,8 @@ axios.defaults.adapter = function (config) {
     }
     // console.log('data', data, config)
     // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
-    let token = wx.getStorageSync('token')
-    let userId = wx.getStorageSync('$user_id')
+    let token = wx.getStorageSync('token') || 'token'
+    let userId = wx.getStorageSync('$user_id') || '1'
 
     wx.request({
       url: `${config.baseURL}${config.url}`,

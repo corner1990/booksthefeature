@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import './newProductList.scss'
 
 class NewProductList extends Component{
@@ -7,14 +8,28 @@ class NewProductList extends Component{
   componentDidMount() {
   }
   /**
+   * @desc 跳转详情
+   * @param {*} info 
+   */
+  goDetail = info => {
+    let  id = info.base_info.item_id
+    // eslint-disable-next-line no-undef
+    Taro.navigateTo({ url: `/pages/productDetail/index?id=${id}`})
+  }
+  /**
    * @desc 处理商品
    */
   getProduct = () => {
     let { list = [] } = this.props
+    let { goDetail } = this
     return list.map((info, key) => {
       return (
         // <LazyBlock current={key} key={key} >
-          <View className='productCard' key={key}>
+          <View
+            className='productCard'
+            key={key}
+            onClick={() => goDetail(info)}
+          >
             <Image
               src={info.base_info.main_image}
               className='productImg'

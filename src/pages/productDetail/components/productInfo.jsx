@@ -5,12 +5,18 @@ import './index.scss'
 /**
  * @desc 花束信息
  */
-const ProductInfo = () => {
+const ProductInfo = props => {
+  let {
+    info: {
+      base_info={}
+    }
+  } = props
+  
   return (<View className='ProductProductInfo'>
-    <View className='ProductName'>心形礼盒 怦然心动</View>
+    <View className='ProductName'>{base_info.product_name}</View>
     <View className='ProductPrice'>
       <Text className='currency'>&yen;</Text>
-      999
+      {base_info.sale_price}
     </View>
     <View className='OperationWrap'>
       <View className='OperationCard'>
