@@ -5,7 +5,7 @@ import './index.scss'
 
 const Header = () => {
   return (<View className='CalendarHeader'>
-    2020.09
+    <View className='DateStr'>2020.9</View>
   </View>)
 }
 

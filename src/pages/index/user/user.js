@@ -10,6 +10,7 @@ import CalendarBar from './calendar-bar'
 import OrdersCard from  './order-card'
 
 import './index.scss'
+// import { getOrderCount } from './api'
 
 const mapState = state => state.global
 
@@ -18,24 +19,28 @@ class Index extends Component {
   state = {
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    // console.log('123123'
+  }
 
   componentDidMount() { }
 
   componentWillUnmount() { }
 
-  componentDidShow() { }
+  componentDidShow() { 
+    
+  }
 
   componentDidHide() { }
 
   toEndorsement = () => {
     this.props.setTab(3)
   }
-
+  
   handleToast=()=>{
     // this.setState({ isOpened:true })
   }
-
+  
   render() {
 
 

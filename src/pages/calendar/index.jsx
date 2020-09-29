@@ -17,7 +17,6 @@ const CalendarWrap = () => {
     />
     <Header />
     <Calendar />
-    CalendarWrap
   </View>)
 }
 
