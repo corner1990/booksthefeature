@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import CustomNavBar from '../../../components/navbar'
-// import SearchBar from './found/searchBar'
+import FoundCard from './components/card'
 import './index.scss'
 
 
@@ -87,8 +87,9 @@ export default class Index extends Component {
     return (
       <View className='found' >
         <CustomNavBar title='发现' />
-        {/* <SearchBar className='found-search' /> */}
-  
+        <View className='at-row'>
+          <FoundCard />
+        </View>
       </View>
     )
   }

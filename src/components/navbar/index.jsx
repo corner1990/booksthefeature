@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
+
 import './index.scss'
 
 export default class Index extends Component {
