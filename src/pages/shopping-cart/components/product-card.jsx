@@ -7,8 +7,8 @@ import './index.scss'
 /**
  * @desc 商品
  */
-const ProductCard = () => {
-  
+const ProductCard = props => {
+  let { info } = props
   return (<View className='ProductCard'>
     <AtIcon
       value='check'
@@ -16,18 +16,20 @@ const ProductCard = () => {
       color='#fff' 
       className='CircleView'
     ></AtIcon>
-    <Image
-      src='https://ipxcdn.jfshare.com/ipxmall/6287ac0c5f1013aa1114029b46e44b9e'
-      className='ProductImg'
-    />
-    <View className='ProductInfoWrap'>
-      <View className='ProductName'>北极星12支-玫瑰礼盒stardust collection</View>
-      <View className='ProductSkuInfo'>
-        <View className='ProductPrice'>
-          &yen;
-          999.00
+    <View class='ProductCardRgiht'>
+      <Image
+        src={info.main_image}
+        className='ProductImg'
+      />
+      <View className='ProductInfoWrap'>
+        <View className='ProductName'>{ info.product_name }</View>
+        <View className='ProductSkuInfo'>
+          <View className='ProductPrice'>
+            &yen;
+            {info.product_price}
+          </View>
+        <View className='ProductCount'>x{info.count}</View>
         </View>
-        <View className='ProductCount'>x1</View>
       </View>
     </View>
   </View>)

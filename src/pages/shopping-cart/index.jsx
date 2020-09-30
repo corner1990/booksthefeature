@@ -31,7 +31,6 @@ class ShoppingCart extends Component {
   loadInfo = async () => {
     let { errorCode, data } = await getUserShoppingCartDetail()
     if (errorCode === 0) {
-      console.log()
       this.props.update({key: 'info', val: data.shopping_cart_product_list})
     }
   }
