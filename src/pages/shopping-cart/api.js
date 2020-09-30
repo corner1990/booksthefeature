@@ -14,3 +14,8 @@ export const updateCart = params => Axios.post('/shoppingCart/shoppingCart/updat
  * @param {*} params 
  */
 export const removeFromCart = params => Axios.post('/shoppingCart/shoppingCart/removeFromCart', params)
+/**
+ * @desc 购物车信息
+ * @param {*} params 
+ */
+export const getUserShoppingCartDetail = params => Axios.post('/shoppingCart/shoppingCart/getUserShoppingCartDetail', params)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
-import { } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 import ProductCard from './product-card'
 
 import './index.scss'
@@ -8,18 +8,26 @@ import './index.scss'
 /**
  * @desc 购物侧
  */
-const ProductList = () => {
+const ProductList = props => {
+  let { list } = props
   return (<View className='ProductList'>
     <View className='OperatonWrap'>
       <View className='SelectedAll'>
-        <View className='CircleView active'></View>全选
+        <AtIcon
+          value='check'
+          size='14'
+          color='#fff' 
+          className='CircleView active'
+        ></AtIcon>全选
       </View>
       <Text className='EditBtn'>编辑</Text>
     </View>
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
-    <ProductCard />
+    {
+      list.map((info, key) => 
+        (<ProductCard key={key} info={info} />)
+      )
+    }
+    
   </View>)
 }
 

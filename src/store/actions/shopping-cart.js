@@ -1,12 +1,13 @@
 'use strict'
-import { UPDATE } from '../types'
+import { UPDATESHOPPINGCART } from '../types'
 
 /**
  * @desc 减少
  */
-export const update = () => {
+export const update = payload => {
   return {
-    type: UPDATE
+    type: UPDATESHOPPINGCART,
+    payload
   }
 }
 /**
@@ -24,10 +25,8 @@ export const update = () => {
 //   }
 // }
 export const addShoppingCart1 = () => {
-  console.log('123')
   return async dispatch => {
     setTimeout(() => {
-      console.log('333')
       dispatch(update())
     }, 2000)
   }
@@ -37,7 +36,6 @@ export const addShoppingCart = () => {
   return async dispatch => {
     
     setTimeout(() => {
-      console.log('333')
       dispatch(update())
     }, 2000)
   }

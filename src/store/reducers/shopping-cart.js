@@ -1,5 +1,5 @@
 'use strict';
-import { ADDSHOPPINGCART, DELSHOPPINGCART, UPDATE } from '../types'
+import { ADDSHOPPINGCART, DELSHOPPINGCART, UPDATESHOPPINGCART } from '../types'
 // 初始化状态
 const initState = {
   info: []
@@ -10,6 +10,7 @@ const initState = {
  * @param {*} actions 
  */
 const ShoppingCart = (state = initState, action) => {
+  
   switch(action.type) {
     case ADDSHOPPINGCART:
       return {
@@ -19,8 +20,14 @@ const ShoppingCart = (state = initState, action) => {
     case DELSHOPPINGCART:
       console.log('add', action)
       break;
-    case UPDATE:
-      return action.payload
+    case UPDATESHOPPINGCART:
+      console.log('ssss', state, action)
+      let { key, val } = action.payload
+
+      return {
+        ...state,
+        [key]: val
+      }
 
     default:
       return state

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
-// import {  } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 
 import './index.scss'
 
@@ -10,7 +10,12 @@ import './index.scss'
 const ProductCard = () => {
   
   return (<View className='ProductCard'>
-    <View className='CircleView'></View>
+    <AtIcon
+      value='check'
+      size='14'
+      color='#fff' 
+      className='CircleView'
+    ></AtIcon>
     <Image
       src='https://ipxcdn.jfshare.com/ipxmall/6287ac0c5f1013aa1114029b46e44b9e'
       className='ProductImg'

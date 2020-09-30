@@ -10,3 +10,5 @@ export const SETTAB = 'settab'
 export const ADDSHOPPINGCART = 'ADDSHOPPINGCART'
 // 删除购物车
 export const DELSHOPPINGCART = 'DELSHOPPINGCART'
+// 设置
+export const UPDATESHOPPINGCART = 'UPDATESHOPPINGCART'
