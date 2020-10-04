@@ -10,7 +10,7 @@ export const getProductDetail = params => Axios.post('/product/FlowerProduct/get
  */
 export const updateCart = params => Axios.post('/shoppingCart/shoppingCart/updateCart', params)
 /**
- * @desc 编辑购物车
+ * @desc 删除购物车
  * @param {*} params 
  */
 export const removeFromCart = params => Axios.post('/shoppingCart/shoppingCart/removeFromCart', params)

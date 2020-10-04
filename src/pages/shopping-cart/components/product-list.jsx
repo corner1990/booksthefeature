@@ -1,34 +1,61 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
+import { connect } from 'react-redux'
 import ProductCard from './product-card'
+import { select } from '../../../store/actions/shopping-cart'
 
 import './index.scss'
-
+const mapState = state => state.shoppingCart
 /**
  * @desc 购物侧
  */
 const ProductList = props => {
-  let { list } = props
+  let { info:list, selected, update } = props
+  // 全选 取消全选
+  const selectAll = () => {
+    let arr = list.length === selected.length ? [] : list
+    props.select(arr)
+  }
+  // 切换选中状态
+  const changeSelected = arr => props.select(arr)
+  // 编辑
+  const editHanler = isEdit => {
+    props.select([])
+    props.update('isEdit', isEdit)
+  }
   return (<View className='ProductList'>
     <View className='OperatonWrap'>
-      <View className='SelectedAll'>
+      <View className='SelectedAll' onClick={selectAll} >
         <AtIcon
           value='check'
           size='14'
           color='#fff' 
-          className='CircleView active'
+          className={['CircleView', list.length === selected.length ? 'active' : '']}
         ></AtIcon>全选
       </View>
-      <Text className='EditBtn'>编辑</Text>
+      {
+        props.isEdit ? (
+          <Text className='EditBtn' onClick={() => editHanler(false)}>完成</Text>
+        ) : (<Text className='EditBtn' onClick={() => editHanler(true)}>编辑</Text>)
+      }
+      
+      
     </View>
     {
       list.map((info, key) => 
-        (<ProductCard key={key} info={info} />)
+        (<ProductCard
+          key={key}
+          product={info}
+          selected={selected}
+          isEdit={props.isEdit}
+          update={update}
+          changeSelected={changeSelected}
+        />)
       )
     }
     
   </View>)
 }
 
-export default ProductList
+export default connect(mapState, { select })(ProductList)

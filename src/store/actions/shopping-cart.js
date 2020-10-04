@@ -1,5 +1,5 @@
 'use strict'
-import { UPDATESHOPPINGCART } from '../types'
+import { UPDATESHOPPINGCART, SHOPPINGCARTSELECTED } from '../types'
 
 /**
  * @desc 减少
@@ -10,25 +10,15 @@ export const update = payload => {
     payload
   }
 }
+
 /**
  * @desc 添加到购物车
  */
-// export const addShoppingCart = (item_id, count, callFb=()=>{}) => {
+export const select = payload => {
   
-//   return async dispatch => {
-//     // console.log('item_id, count, callFb', item_id, count, callFb)
-//     // dispatch(update())
-//     setTimeout(() => {
-//       console.log('333')
-//       dispatch(update())
-//     }, 2000)
-//   }
-// }
-export const addShoppingCart1 = () => {
-  return async dispatch => {
-    setTimeout(() => {
-      dispatch(update())
-    }, 2000)
+  return {
+    type: SHOPPINGCARTSELECTED,
+    payload
   }
 }
 export const addShoppingCart = () => {

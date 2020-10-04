@@ -95,6 +95,9 @@
     &.disabled{
       background-color: rgba(0,183,153,0.50);
     }
+    &.del{
+      background-color: $red;
+    }
   }
   .PriceWrap{
     font-size: $font-md;
