@@ -4,12 +4,13 @@ import { View } from '@tarojs/components'
 // import { AtIcon, AtToast } from 'taro-ui'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../../components/navbar'
-import { setTab } from '../../../store/actions/global'
+import { setTab, getUseInfo } from '../../../store/actions/global'
 import UserInfo from './user-info'
 import CalendarBar from './calendar-bar'
 import OrdersCard from  './order-card'
 
 import './index.scss'
+
 // import { getOrderCount } from './api'
 
 const mapState = state => state.global
@@ -20,7 +21,8 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    // console.log('123123'
+    let { getUseInfo } = this.props
+    getUseInfo()
   }
 
   componentDidMount() { }
@@ -55,4 +57,4 @@ class Index extends Component {
   }
 }
 
-export default connect(mapState, { setTab })(Index)
+export default connect(mapState, { setTab, getUseInfo })(Index)

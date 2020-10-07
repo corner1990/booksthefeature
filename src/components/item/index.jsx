@@ -11,6 +11,7 @@ const MainItem = props => {
   // 解析参数
   let {
     title = 'MainItem',
+    subTitle='',
     src = '',
     hideIcon = false,
     click = () => {}
@@ -41,7 +42,10 @@ const MainItem = props => {
     { getImg() }
     <View className='MainItemInfo'>
       <Text className='MainItemTitle'>{title}</Text>
-      { getIcon() }
+      <View className='MainItemRightBox'>
+      <Text className='MainItemTitle'>{subTitle}</Text>
+        { getIcon() }
+      </View>
     </View>
   </View>)
 }

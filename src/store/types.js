@@ -6,6 +6,8 @@ export const MINUS = 'minus'
 export const UPDATE = 'UPDATE'
 // 设置tab
 export const SETTAB = 'settab'
+// 获取用户信息
+export const GETUSERINFO = 'GETUSERINFO'
 // 添加到购物车
 export const ADDSHOPPINGCART = 'ADDSHOPPINGCART'
 // 删除购物车

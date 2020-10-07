@@ -17,6 +17,10 @@
     border-radius: 50%;
     margin-right: 20px;
   }
+  .MainItemRightBox{
+    color: #999;
+    @include flex(space-between, center);
+  }
   .MainItemInfo{
     @include flex(space-between, center);
     flex: 1;

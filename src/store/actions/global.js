@@ -1,8 +1,10 @@
 import {
   ADD,
   MINUS,
-  SETTAB
+  SETTAB,
+  GETUSERINFO
 } from '../types'
+import { getUserInfo } from '../../pages/index/user/api'
 /**
  * @desc 增加
  */
@@ -28,6 +30,27 @@ export const setTab = (payload) => {
   return {
     type: SETTAB,
     payload
+  }
+}
+/**
+ * @desc 获取用户信息
+ * @param { object } payload 用户信息
+ */
+export const updateInfo = payload => {
+  return {
+    type: GETUSERINFO,
+    payload
+  }
+}
+/**
+ * @desc 获取用户信息
+ */
+export const getUseInfo = () => {
+  return async dispatch => {
+    let { errorCode, data } = await getUserInfo()
+    if (errorCode === 0) {
+      dispatch(updateInfo(data))
+    }
   }
 }
 /**

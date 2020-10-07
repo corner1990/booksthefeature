@@ -1,0 +1,10 @@
+@import '../../scss/index.scss';
+.DatePickerWRap{
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  .at-list__item{
+    line-height: 108px;
+    height: 108px;
+  }
+}

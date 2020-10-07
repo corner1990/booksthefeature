@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import axios from 'axios'
+import Taro from '@tarojs/taro'
 import { url } from './config'
 // import qs from 'qs'
 // 时间戳
@@ -52,6 +53,13 @@ request.interceptors.response.use(function (response) {
   let status = [200, 304]
   if (!status.includes(statusCode)) {
     Promise.reject(errMsg)
+  }
+  // 处理错误提示
+  if (data.errorCode !== 0) {
+    Taro.showToast({
+      icon: 'none',
+      title: data.errorMessage
+    })
   }
   return data
 }, function (error) {

@@ -25,7 +25,7 @@ const ProductCard = props => {
    * @param { number } count 购物车商品数量
    */
   const editProuctInfo = async num => {
-    
+    // TODO: 接口数据不对，会出现乘20的现象
     let { errorCode } = await updateCart({item_id: product.item_id, count: num})
     if (errorCode === 0 ) {
       setCount(num)
