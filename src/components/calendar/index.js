@@ -60,26 +60,25 @@ export default class AtCalendar extends React.Component {
             return stateValue;
         };
         this.triggerChangeDate = (value) => {
-            const { format } = this.props;
-            if (typeof this.props.onMonthChange !== 'function')
-                return;
-            this.props.onMonthChange(value.format(format));
+            const {
+                format,
+                onMonthChange=() => {}
+            } = this.props;
+            onMonthChange(value.format(format));
         };
         /**
          * @desc 设置月份
          * @param {*} vectorCount 
          */
         this.setMonth = (vectorCount) => {
-            const { format } = this.props;
+            const { format, onMonthChange=() => {} } = this.props;
             const { generateDate } = this.state;
             const _generateDate = dayjs(generateDate).add(vectorCount, 'month');
-
             this.setState({
                 generateDate: _generateDate.valueOf()
             });
-            if (vectorCount && typeof this.props.onMonthChange === 'function') {
-                this.props.onMonthChange(_generateDate.format(format));
-            }
+
+            onMonthChange(_generateDate.format(format))
         };
         this.handleClickPreMonth = (isMinMonth) => {
             if (isMinMonth === true) { return; }
@@ -92,7 +91,6 @@ export default class AtCalendar extends React.Component {
         this.handleClickNextMonth = (isMaxMonth) => {
             
             if (isMaxMonth === true) { return; }
-
             this.setMonth(1);
             if (typeof this.props.onClickNextMonth === 'function') {
                 this.props.onClickNextMonth();

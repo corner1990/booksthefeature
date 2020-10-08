@@ -26,7 +26,7 @@
     font-size: 400px;
     opacity: 0.1;
     font-family: PingFangSC-Medium;
-    color: #00B799;
+    color: $primary;
     letter-spacing: -3.53px;
   }
 
@@ -44,8 +44,28 @@
         font-size: 48px;
       }
     }
+    .flex__item--marks{
+      &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background-color: $primary;
+        left: 50%;
+        bottom: 0px;
+        transform: translateX(-50%);
+      }
+    }
+    .flex__item--selected{
+      &::after{
+        background-color: $white;
+      }
+    }
     .main__body{
       width: 300%;
+      height: 12rem;
     }
     swiper-item{
       flex: 1;

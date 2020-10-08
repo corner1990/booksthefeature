@@ -7,7 +7,6 @@
 import Base64 from './Base64'
 import HMAC from './hmac'
 import SHA1 from './sha1'
-console.log(Base64, HMAC, SHA1)
 const Crypto = {
   Base64,
   HMAC,

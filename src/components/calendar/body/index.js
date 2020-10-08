@@ -191,7 +191,7 @@ export default class AtCalendarBody extends React.Component {
     });
   }
   render() {
-    const {} = this.props;
+    const { marks } = this.props;
     const {
       listGroup
     } = this.state;
@@ -217,6 +217,7 @@ export default class AtCalendarBody extends React.Component {
           <SwiperItem key={key}>
             <AtCalendarDateList
               list={item.list}
+              marks={marks}
               onClick={this.props.onDayClick}
               onLongClick={this.props.onLongClick}
             />

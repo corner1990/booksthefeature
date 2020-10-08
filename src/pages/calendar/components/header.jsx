@@ -3,9 +3,10 @@ import { View } from '@tarojs/components'
 
 import './index.scss'
 
-const Header = () => {
+const Header = props => {
+  let { title } = props
   return (<View className='CalendarHeader'>
-    <View className='DateStr'>2020.9</View>
+    <View className='DateStr'>{title}</View>
   </View>)
 }
 
