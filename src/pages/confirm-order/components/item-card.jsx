@@ -10,7 +10,8 @@ const ItemCard = props => {
   let {
     title = 'ItemCard',
     subTitle = '',
-    hideIcon = false
+    hideIcon = false,
+    click = () => {}
   } = props
   /**
    * @desc 动态展示icon
@@ -19,7 +20,7 @@ const ItemCard = props => {
     if (hideIcon) return ''
     return (<AtIcon value='chevron-right' color='#d8d8d8' size='16' ></AtIcon>)
   }
-  return (<View className='ItemCardWrap'>
+  return (<View className='ItemCardWrap' onClick={click} >
     <Text className='ItemCardTitle'>{title}</Text>
     <View className='ItemCardRightBox'>
       {subTitle}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { AtActionSheet } from "taro-ui"
+import Taro from '@tarojs/taro'
 import CustomNavBar from '../../components/navbar'
 import MainImage from './components/header'
 import ProductInfo from './components/productInfo'
@@ -47,6 +48,10 @@ class ProductDetail extends Component{
       [key]: val
     })
   }
+  /**
+   * @desc 返回上一页
+   */
+  backHistory = () => Taro.navigateBack()
   render() {
     let { info, isOpened } = this.state
     
@@ -55,7 +60,7 @@ class ProductDetail extends Component{
         title='订花'
         clickLeft={this.backHistory}
       />
-      <MainImage />
+      <MainImage info={info} />
       <View className='ProductContentWrap'>
         <ProductInfo info={info} />
         <Detail info={info} />

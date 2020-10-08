@@ -1,8 +1,9 @@
 import React from 'react'
 import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro';
 import CustomNavBar from '../../components/navbar'
 import ItemWrap from './components/item-card'
-import Address from '../../components/address'
+// import Address from '../../components/address'
 import ProductCard from './components/product-card'
 import Switch from '../../components/switch'
 import UseCoupon from './components/use-coupon'
@@ -22,16 +23,25 @@ const ConfirmOrder = () => {
   const switchChange = (...args) => {
     console.log('switchChange', args)
   }
+  /**
+   * @desc 跳转到我的地址列表
+   */
+  const jumpToAddress = () => {
+    Taro.navigateTo({
+      url: '/pages/address/index'
+    })
+  }
   return (<View className='ConfirmOrderWrap'>
     <CustomNavBar
       title='确认订单'
       clickLeft={backHistory}
     />
     <View className='ConfirmOrderContentWrap'>
-      <Address title='添加收获地址' />
+      {/* <Address title='添加收获地址' /> */}
       <ItemWrap
         title='添加收获地址'
         subTitle=''
+        click={jumpToAddress}
       />
       <ItemWrap
         title='配送时间'

@@ -38,7 +38,7 @@ class UserInfo extends Component {
     sign: null,
     timeout: 87600,
     client: null,
-    showEditNickName: true
+    showEditNickName: false
   }
   componentDidMount() {
     this.props.getUserINfo()

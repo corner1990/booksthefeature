@@ -4,8 +4,10 @@ import './index.scss'
 /**
  * @desc 头部
  */
-const MainImage = () => {
-  let src = 'https://ipxcdn.jfshare.com/ipxmall/23e01070cb4c2cc6aa56640240948531'
+const MainImage = props => {
+  let { info } = props
+  let src = info.base_info ? info.base_info.main_image : ''
+  
   return (<View className='ProductMainImage'>
     <Image
       src={src}

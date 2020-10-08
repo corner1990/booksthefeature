@@ -55,10 +55,28 @@ class SwiperComponent extends Component {
    */
   getTransformX = () => {
     let { current, banner, indexWidth, indexWrapWidth } = this.state
-    let step = (indexWrapWidth - indexWidth) / (banner.length - 1) / 2
-    return {
-      transform: `translateX(${current * step}px)`
+    let len = banner.length
+    let step = (indexWrapWidth - indexWidth) / (len - 1) / 2
+    let style = {
+      transform: `translateX(${current * step}px)`,
     }
+    // 动态处理宽度
+    if (len < 3) {
+      style.width = len === 2 ? '50%' : '100%'
+    }
+    return style
+  }
+  /**
+   * @desc 获取下边， 
+   */
+  getSwiperIndexBar = () => {
+    let { banner } = this.state
+    let { getTransformX } = this
+    let len = banner.length
+    if (len < 2) return ''
+    return (<View className='swiper-index-wrap'>
+    <View className='swiper-index' style={{...getTransformX() }}></View>
+  </View>) 
   }
   /**
    * @desc 加载数据
@@ -72,7 +90,7 @@ class SwiperComponent extends Component {
     }
   }
   render () {
-    let { getItem, swiperChange, getTransformX } = this
+    let { getItem, swiperChange , getSwiperIndexBar} = this
     return (
       <View className='home-swiper-wrap'>
         <Swiper
@@ -84,9 +102,7 @@ class SwiperComponent extends Component {
           { getItem() }
         </Swiper>
         {/* //TODO: 需要调整宽度 */}
-        <View className='swiper-index-wrap'>
-          <View className='swiper-index' style={{...getTransformX() }}></View>
-        </View>
+        { getSwiperIndexBar() }
       </View>
     )
   }

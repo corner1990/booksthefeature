@@ -18,6 +18,14 @@ const ProuductFooter = props => {
       url: '/pages/shopping-cart/index'
     })
   }
+  /**
+   * @desc 创建订单
+   */
+  const toOrder = () => {
+    Taro.navigateTo({
+      url: '/pages/confirm-order/index'
+    })
+  }
   return <View class='ProuductFooter'>
     <AtIcon
       value='shopping-cart'
@@ -35,6 +43,7 @@ const ProuductFooter = props => {
       <View
         circle
         className='JustBuy button'
+        onClick={toOrder}
       >立即购买</View>
     </View>
   </View>

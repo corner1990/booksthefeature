@@ -98,6 +98,7 @@ class OrdersCard extends Component{
           value='chevron-right'
           size='20'
           color='#D8D8D8'
+          onClick={this.toOrderPage}
         />
      </View>
      <View className='OrderCardWrap'>

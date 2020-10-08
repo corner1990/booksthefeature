@@ -18,10 +18,6 @@ const UserAddress = () => {
     <View className='AddressList'>
       <AddressCard />
       <AddressCard />
-      <AddressCard />
-      <AddressCard />
-      <AddressCard />
-      <AddressCard />
     </View>
     <AddBtn />
   </View>)
