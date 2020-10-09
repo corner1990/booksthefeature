@@ -1,10 +1,11 @@
 export default {
   pages: [
-    'pages/addAddr/index',
+    
     'pages/index/index',
     'pages/order-detail/index',
     'pages/calendar/index',
     'pages/address/index',
+    'pages/addAddr/index',
     'pages/confirm-order/index',
     'pages/user-info/index',
     'pages/shopping-cart/index',

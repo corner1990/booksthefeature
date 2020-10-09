@@ -2,22 +2,53 @@ import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { AtInput, AtTextarea, AtSwitch, AtButton, AtIcon } from 'taro-ui'
 import Taro from '@tarojs/taro'
+import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
 import Address from '../../components/address'
-import { addShippingAddress } from '../address/api'
+import { addShippingAddress, updateShippingAddress } from '../address/api'
+import { setEditAddrInfo, updateAddrList} from '../../store/actions/addr'
+
 import './index.scss';
+
+/**
+ * @desc 合并参数
+ * @param {*} state 
+ */
+const mapState = state => state.address
 /**
  * @desc 选择地址
  */
 class AddAddr extends Component {
-  state = {
-    receiver: '',
-    addrs: [],
-    address: '',
-    phone: '',
-    is_default: true
+  
+  constructor(props) {
+    super(props)
+    let {
+      editInfo
+    } = props
+
+    let params = {
+      receiver: '',
+      address: '',
+      phone: '',
+      title: '添加收获地址',
+      is_default: true,
+      addrs: [],
+    }
+    if (editInfo ) {
+      params = {
+        ...params,
+        ...editInfo
+      }
+      params.is_default = editInfo.is_default === '1' ? true : false
+      params.title = '编辑收获地址'
+      params.addrs = [editInfo.province, editInfo.city, editInfo.area]
+      
+    }
+
+    this.state = {
+      ...params
+    }
   }
- 
   /**
    * @desc 收货人
    * @param {object} e event对象那
@@ -44,7 +75,10 @@ class AddAddr extends Component {
   /**
    * @desc 返回
    */
-  backHistory = () => {}
+  backHistory = () => {
+    this.props.setEditAddrInfo(null)
+    Taro.navigateBack()
+  }
   /**
    * @desc 地址切换
    * @param { string } addr 地址字符串
@@ -104,6 +138,10 @@ class AddAddr extends Component {
       city,
       area
     }
+    // 编辑信息
+    if (this.props.editInfo) {
+      return this.updateAddress(params)
+    }
     this.saveAddress(params)
   }
   /**
@@ -111,12 +149,33 @@ class AddAddr extends Component {
    * @param {object} params 新增地址信息
    */
   saveAddress = async params => {
-    let { errorCode, data } = await addShippingAddress(params)
+    let { errorCode } = await addShippingAddress(params)
     if (errorCode === 0) {
       // 返回页面 
       Taro.navigateBack()
     }
   }
+  updateAddress = async params => {
+    let { id } = this.state
+    let { list, updateAddrList, setEditAddrInfo } = this.props
+    params = {...params, id}
+    let { errorCode } = await updateShippingAddress(params)
+    if (errorCode === 0) {
+      setEditAddrInfo(null)
+      // 更新数据
+      list = list.map(item => {
+        if (item.id !== id) return item
+        return params
+      })
+      updateAddrList({ list })
+      // 返回页面 
+      Taro.navigateBack({
+        update: 1
+      })
+
+    }
+  }
+  
   /**
    * @desc 切换是否为默认
    * @param {*} e 
@@ -134,8 +193,10 @@ class AddAddr extends Component {
       vertifyAddress,
       changeIsDefault
     } = this
+    
+    
     return (<View className='AddAddr'>
-      <CustomNavBar title='添加收获地址' clickLeft={backHistory} />
+      <CustomNavBar title={this.state.title} clickLeft={backHistory} />
       <View className='addrInfoWrap'>
         <AtInput
           name='name'
@@ -195,4 +256,7 @@ class AddAddr extends Component {
   }
 }
 
-export default AddAddr
+export default connect(mapState, {
+  setEditAddrInfo,
+  updateAddrList
+})(AddAddr)

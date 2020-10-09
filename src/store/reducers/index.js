@@ -3,8 +3,12 @@ import { combineReducers } from 'redux'
 import global from './global'
 // 购物车reduces
 import shoppingCart from './shopping-cart'
+
+// 地址信息
+import address from './addr'
  
 export default combineReducers({
   global,
-  shoppingCart
+  shoppingCart,
+  address
 })

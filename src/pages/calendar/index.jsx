@@ -60,6 +60,7 @@ class CalendarWrap extends Component {
       <Calendar
         setDate={setDate}
       />
+      {/* // TODO: 需要添加一个tag提示 */}
     </View>)
   }
 }

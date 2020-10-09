@@ -2,25 +2,44 @@ import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import ListView from "taro-listview"
+import { connect } from 'react-redux'
+import { AtModal } from 'taro-ui'
 import CustomNavBar from '../../components/navbar'
 import AddressCard from './components/address-card'
 import AddBtn from './components/add-button'
+import {
+  setEditAddrInfo,
+  updateAddrList
+} from '../../store/actions/addr'
 
 import './index.scss'
-import { getShippingAddressList } from './api'
+import { getShippingAddressList, deleteShippingAddress } from './api'
+
+/**
+ * @desc 合并参数
+ * @param {*} state 
+ */
+const mapState = state => state.address
 /**
  * @desc 地址列表
  */
 class UserAddress extends Component {
   state = {
-    list: [],
-    pageInfo: {
-      index: 0,
-      has_more: true
-    }
+    showDel: false,
+    delInfo: null
   }
   componentDidMount() {
     this.loadInfo()
+  }
+  /**
+   * @desc 更新数据
+   * @param {*} key 
+   * @param {*} val 
+   */
+  update = (key, val) => {
+    this.setState({
+      [key]: val
+    })
   }
   /**
    * @desc 返回
@@ -30,30 +49,57 @@ class UserAddress extends Component {
    * @desc 加载数据
    */
   loadInfo = async () => {
-    let list = []
-    let pageInfo = {}
-    let { errorCode, data } = await getShippingAddressList()
+    let {list, updateAddrList, pageInfo} = this.props
+    let { errorCode, data } = await getShippingAddressList(pageInfo)
 
     if (errorCode === 0) {
-      list = data.page_info.index === 1 ? data.shipping_address_list : [...this.state.list, data.shipping_address_list]
+      list =  [...list, ...data.shipping_address_list]
+      pageInfo = data.page_info
     }
-    this.setState({
-      list, pageInfo
-    })
+    updateAddrList({pageInfo, list})
   }
   /**
    * @desc 渲染列表信息
    */
   getAddressCard = () => {
-    let { list } = this.state
-    return list.map((info, key) => (<AddressCard info={info} key={key} />))
+    // let { list } = this.state
+    let { setEditAddrInfo, list } = this.props
+    return list.map((info, key) => (<AddressCard
+      info={info}
+      key={key}
+      setInfo={setEditAddrInfo}
+      update={this.update}
+    />))
+  }
+  handleClose = () => {
+    this.setState({
+      showDel: false
+    })
+  }
+  /**
+   * @desc 删除地址
+   */
+  handleConfirm = async () => {
+    let { delInfo } = this.state
+    let { list, updateAddrList } = this.props
+    let { id } = delInfo
+    let { errorCode } = await deleteShippingAddress({id})
+    if (errorCode === 0) {
+      // 更新数据
+      list = list.filter(item => item.id !== id)
+      updateAddrList({list})
+      this.setState({
+        showDel: false,
+        delInfo: null
+      })
+    }
   }
   render() {
     let {
       backHistory,
       getAddressCard
     } = this
-    let { pageInfo } = this.state
+    let { pageInfo } = this.props
     return (<View className='UserAddressWrap'>
       <CustomNavBar
         title='收货地址'
@@ -66,14 +112,26 @@ class UserAddress extends Component {
         autoHeight
       >
         <View className='AddressList'>
-          
           { getAddressCard() }
         </View>
       </ListView>
       <AddBtn />
+      <AtModal
+        isOpened={this.state.showDel}
+        title='删除地址'
+        cancelText='取消'
+        confirmText='确认'
+        onClose={ this.handleClose }
+        onCancel={ this.handleClose }
+        onConfirm={ this.handleConfirm }
+        content='您确定要删除这条收货地址么？'
+      />
     </View>)
   }
   
 }
 
-export default UserAddress
+export default connect(mapState, {
+  setEditAddrInfo,
+  updateAddrList
+})(UserAddress)
