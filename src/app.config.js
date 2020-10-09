@@ -1,8 +1,7 @@
 export default {
   pages: [
-    
+    'pages/addAddr/index',
     'pages/index/index',
-    
     'pages/order-detail/index',
     'pages/calendar/index',
     'pages/address/index',
@@ -11,7 +10,7 @@ export default {
     'pages/shopping-cart/index',
     'pages/productDetail/index',
     'pages/orderFlower/index',
-    'pages/addAddr/index'
+    
   ],
   window: {
     navigationStyle: 'custom',

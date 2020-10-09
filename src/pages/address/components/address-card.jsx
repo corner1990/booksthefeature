@@ -6,15 +6,16 @@ import './index.scss'
 /**
  * @desc 地址
  */
-const AddressCard = () => {
+const AddressCard = props => {
+  let { info } = props
   return (<View className='AddressCardWrap'>
-    <Text className='Default'>默认</Text>
+    { info.is_default ? <Text className='Default'>默认</Text> : ''}
     <View className='UserInfo'>
-      <Text className='Name'>高富帅</Text>
-      <Text className='Phone'>188888888</Text>
+      <Text className='Name'>{info.receiver}</Text>
+      <Text className='Phone'>{info.phone}</Text>
     </View>
     <View className='Address'>
-      山西省 大同市 矿区 华富街道，莲花大厦西座1613室
+      {info.province} {info.city} {info.area} {info.addr}
     </View>
     <View className='OperationWrap'>
       <Text className='del'>

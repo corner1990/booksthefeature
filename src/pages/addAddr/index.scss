@@ -7,25 +7,29 @@
     overflow: hidden;
     margin-top: 40px;
   }
+  
+  .at-input__container{
+    height: 52px;
+  }
   .at-input__title{
     font-size: $font-sm;
     color: $black85;
   }
   .addrAreaWrap{
     padding:  0 24px;
-    @include flex;
+    @include flex(flex-start, top);
     .addrAreaTitle{
-      padding: 12px 0;
+      padding: 20px 0;
       font-size: $font-sm;
       color: $black85;
     }
     .addrArea{
       border: 0;
-      padding: 19px 12px;
+      padding: 28px 12px;
       text-align: left;
       width: auto;
       flex: 1;
-      line-height: 40px;
+      line-height: 72px;
     }
   }
   
@@ -54,8 +58,8 @@
     bottom: 0;
     width: 100vw;
     .subBtn{
-      height: 120px;
-      line-height: 120px;
+      height: 100px;
+      line-height: 100px;
       font-size: $font-md;
     }
   }
