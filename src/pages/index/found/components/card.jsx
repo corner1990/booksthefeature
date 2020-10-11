@@ -6,7 +6,7 @@ export default class Index extends Component {
   state = {
     // eslint-disable-next-line react/no-unused-state
     value: '',
-    src: 'https://ipxcdn.jfshare.com/ipxmall/0b44041be7deff3e80561932025a1243'
+    src: 'https://ipxcdn.jfshare.com/system/admin/73b49bac721467bbc62bcc67519fcb2f.jpg'
   }
   componentDidMount () {
   }
@@ -16,11 +16,33 @@ export default class Index extends Component {
       value
     })
   }
+  /**
+   * @desc 动态处理图片尺寸
+   * @param {*} img 
+   */
+  getStyle = img => {
+    let { width, height } = img
+    let screenW = wx.getSystemInfoSync().windowWidth
+    let imgMaxWidth = screenW / 2 - 7
+    if (width > imgMaxWidth) {
+      width = imgMaxWidth
+      height = width / imgMaxWidth * height
+    } else {
+      width = imgMaxWidth
+      height = imgMaxWidth / width * height
+    }
+    return {
+      width,
+      height
+    }
+  }
   render () {
-    let { src } = this.state
+    let { info } = this.props
+    let { getStyle } = this
+    let img = info.feed_detail.image_list[0]
     return (
-      <View className={['at-col', `at-colo-1`]}>
-        <Image src={src} />
+      <View className='FoundCard'>
+        <Image src={img.image} style={getStyle(img)} className='FoundCardImg' mode='aspectFill' />
       </View>
     )
   }

@@ -1,8 +1,16 @@
 .found{
-  max-height: calc(100vh - 380px);
+  max-height: 100vh;
+  height: 100vh;
   overflow-y: auto;
-  padding-bottom: 370px;
-  .found-search{
-    border: none
+  .FoundList{
+    overflow: hidden;
+    padding: 12px;
+    padding-bottom: 150px;
+    .FoundCard{
+      float: left;
+      &:nth-child(even) {
+        margin-left: 4px;
+      }
+    }
   }
 }
