@@ -2,7 +2,7 @@
 import { SETTAB, GETUSERINFO } from '../types'
 
 const initState = {
-  tabIndex: 1, // 首页tabar下标
+  tabIndex: 3, // 首页tabar下标
   userInfo: {} // 用户信息
 }
 /**

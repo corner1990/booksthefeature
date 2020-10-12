@@ -7,6 +7,7 @@ import CustomNavBar from '../../../components/navbar'
 import { setTab } from '../../../store/actions/global'
 import FilterBar from './filter-bar'
 import OrderCard from './order-card'
+import { getOrderList } from './api'
 
 import './index.scss'
 
@@ -15,9 +16,16 @@ const mapState = state => state.global
 class Index extends Component {
 
   state = {
+    list: [],
+    pageInfo: {
+      index: 0,
+      has_more: true
+    }
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    this.loadInfo()
+  }
 
   componentDidMount() { }
 
@@ -38,9 +46,21 @@ class Index extends Component {
    * @desc 返回上一页
    */
   backHistory = () => this.props.setTab(2)
-
+  /**
+   * @desc 加载数据
+   */
+  loadInfo = async ()=> {
+    let list = []
+    let pageInfo = {}
+    let { errorCode, data } = await getOrderList({...this.state.pageInfo, order_id: 0})
+    if (errorCode === 0) {
+      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, data.product_list]
+    }
+    this.setState({
+      list, pageInfo
+    })
+  }
   render() {
-
 
     return (
       <View className='myOrders'>
@@ -50,9 +70,6 @@ class Index extends Component {
         />
         <FilterBar />
         <View className='OrderList'>
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
           <OrderCard />
         </View>
       </View>
