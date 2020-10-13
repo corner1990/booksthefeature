@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { AtActionSheet } from "taro-ui"
 import Taro from '@tarojs/taro'
+import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
 import MainImage from './components/header'
 import ProductInfo from './components/productInfo'
 import Detail from './components/product-detail'
 import Footer from './components/footer'
 import AddShopCart from './components/addShopcart'
+import JustBuyComponent from './components/justBuy'
 
 import { parseQuery } from '../../utils/utils'
 import { getProductDetail } from './api'
@@ -19,7 +21,8 @@ import './index.scss'
 class ProductDetail extends Component{
   state = {
     info: {},
-    isOpened: false
+    isOpened: false,
+    showJustBuy: false
   }
   componentWillMount () {
     let path = 'pages/productDetail/index?id=269&__key_=16012089318921'
@@ -53,8 +56,8 @@ class ProductDetail extends Component{
    */
   backHistory = () => Taro.navigateBack()
   render() {
-    let { info, isOpened } = this.state
-    
+    let { info, isOpened, showJustBuy } = this.state
+    console.log('info', info)
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
         title='订花'
@@ -66,11 +69,24 @@ class ProductDetail extends Component{
         <Detail info={info} />
       </View>
       <Footer update={this.update} />
-      <AtActionSheet isOpened={isOpened} classNam='ShopCartActionSheet'>
+      <AtActionSheet
+        isOpened={isOpened}
+        className='ShopCartActionSheet'
+        onClose={() => this.update('isOpened', false)}
+      >
         <AddShopCart update={this.update} product={info} />
+      </AtActionSheet>
+      <AtActionSheet
+        isOpened={showJustBuy}
+        className='ShopCartActionSheet'
+        onClose={() => this.update('showJustBuy', false)}
+      >
+        <JustBuyComponent update={this.update} product={info} />
       </AtActionSheet>
     </View>)
   }
 }
 
-export default ProductDetail
+export default connect(state => {
+  return state.shoppingCart
+}, )(ProductDetail)

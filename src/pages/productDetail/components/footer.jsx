@@ -22,9 +22,10 @@ const ProuductFooter = props => {
    * @desc 创建订单
    */
   const toOrder = () => {
-    Taro.navigateTo({
-      url: '/pages/confirm-order/index'
-    })
+    // Taro.navigateTo({
+    //   url: '/pages/confirm-order/index'
+    // })
+    props.update('showJustBuy', true)
   }
   return <View class='ProuductFooter'>
     <AtIcon

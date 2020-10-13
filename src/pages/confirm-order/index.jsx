@@ -15,7 +15,7 @@ import './index.scss'
  * @desc 确认订单
  */
 const ConfirmOrder = () => {
-  const  backHistory = () => {}
+  const  backHistory = () => Taro.navigateBack()
   /**
    * @desc switch change
    * @param  {...any} args 

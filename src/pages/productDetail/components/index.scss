@@ -168,6 +168,10 @@
   .BtnWrap{
     margin-top: 80px;
   }
+  .at-button{
+    height: 80px;
+    line-height: 80px;
+  }
   .ShopCartBtn{
     height: 84px;
     line-height: 84px;
@@ -176,4 +180,13 @@
     font-size: $font-md;
   }
   
+}
+.JustBuyWrap{
+  .BtnWrap{
+    margin-top: 80px;
+  }
+  .JustBuyBtn{
+    height: 80px;
+    line-height: 80px;
+  }
 }

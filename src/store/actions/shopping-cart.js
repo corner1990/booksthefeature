@@ -1,5 +1,10 @@
 'use strict'
-import { UPDATESHOPPINGCART, SHOPPINGCARTSELECTED } from '../types'
+import {
+  UPDATESHOPPINGCART,
+  SHOPPINGCARTSELECTED,
+  SETPRODUCTARRAY,
+  SETSHIPPING
+} from '../types'
 
 /**
  * @desc 减少
@@ -10,7 +15,24 @@ export const update = payload => {
     payload
   }
 }
-
+/**
+ * @desc 设置购买商品列表
+ */
+export const setProductArray = payload => {
+  return {
+    type: SETPRODUCTARRAY,
+    payload
+  }
+}
+/**
+ * @desc 设置地址id
+ */
+export const setShippingId = payload => {
+  return {
+    type: SETSHIPPING,
+    payload
+  }
+}
 /**
  * @desc 添加到购物车
  */

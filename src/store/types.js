@@ -25,3 +25,7 @@ export const SELECTEDADDR = 'SELECTEDADDR'
 export const UPDATEADDRLIST = 'UPDATEADDRLIST'
 // 设置选择地址
 export const SETEDITADDRINFO = 'SETEDITADDRINFO'
+// 设置购买 商品列表
+export const SETPRODUCTARRAY = 'SETPRODUCTARRAY'
+// 设置地址id
+export const SETSHIPPING = 'SETSHIPPING'
