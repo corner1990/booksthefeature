@@ -15,6 +15,7 @@ import { parseQuery } from '../../utils/utils'
 import { getProductDetail } from './api'
 
 import './index.scss'
+
 /**
  * @desc 详情页面
  */
@@ -41,6 +42,7 @@ class ProductDetail extends Component{
     }
     
   }
+  
   /**
    * @desc 更新数据
    * @param { string } key 数据键
@@ -57,7 +59,7 @@ class ProductDetail extends Component{
   backHistory = () => Taro.navigateBack()
   render() {
     let { info, isOpened, showJustBuy } = this.state
-    console.log('info', info)
+    
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
         title='订花'
@@ -89,4 +91,4 @@ class ProductDetail extends Component{
 
 export default connect(state => {
   return state.shoppingCart
-}, )(ProductDetail)
+}, {})(ProductDetail)

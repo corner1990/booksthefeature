@@ -1,16 +1,16 @@
 export default {
   pages: [
+    'pages/productDetail/index',
+    'pages/shopping-cart/index',
     'pages/index/index',
-    'pages/confirm-order/index',
-    
+    'pages/user-info/index',
     'pages/order-detail/index',
     'pages/calendar/index',
     'pages/address/index',
     'pages/addAddr/index',
+    'pages/confirm-order/index',
     
-    'pages/user-info/index',
-    'pages/shopping-cart/index',
-    'pages/productDetail/index',
+    
     'pages/orderFlower/index',
     
   ],

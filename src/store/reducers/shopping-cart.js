@@ -14,6 +14,7 @@ const initState = {
   selected: [], // 选中的列表
   product_array: [
     {
+      count: 2,
       "base_info": {
           "product_name": "枪炮玫瑰弗洛伊德33支鲜花七夕情人节礼物",
           "summary": "气味芬芳 持久留香",

@@ -6,7 +6,7 @@ import CustomNavBar from '../../components/navbar'
 import ProductList from './components/product-list'
 import Footer from './components/footer'
 import { getUserShoppingCartDetail, removeFromCart } from './api'
-import { update, select } from '../../store/actions/shopping-cart'
+import { update, select, setProductArray } from '../../store/actions/shopping-cart'
 
 import './index.scss'
 
@@ -65,12 +65,19 @@ class ShoppingCart extends Component {
    */
   toOrder = () => {
     let { selected } = this.props
+    
     if (selected.length === 0) {
       return Taro.showToast({
         title: '请先选择商品',
         icon: 'none'
       })
     }
+    this.props.setProductArray(selected)
+    setTimeout(() => {
+      Taro.navigateTo({
+        url: '/pages/confirm-order/index'
+      })
+    }, 100)
   }
   render() {
     let { isEdit } = this.state
@@ -92,4 +99,4 @@ class ShoppingCart extends Component {
   
 }
 
-export default connect(mapState, { update, select })(ShoppingCart)
+export default connect(mapState, { update, select, setProductArray })(ShoppingCart)

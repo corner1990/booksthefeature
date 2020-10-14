@@ -2,7 +2,8 @@ import React from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import Taro from '@tarojs/taro'
-
+import { connect } from 'react-redux'
+import { setShipping } from '../../../store/actions/shopping-cart'
 import './index.scss'
 /**
  * @desc 地址
@@ -12,18 +13,31 @@ const AddressCard = props => {
   /**
    * @desc 编辑地址
    */
-  const setEditInfo = () => {
+  const setEditInfo = (e) => {
+    e.preventDefault()
     setInfo(info)
     Taro.navigateTo({
       url: '/pages/addAddr/index'
     })
   }
-  const delAddr = () => {
+  /**
+   * @desc 删除地址
+   * @param {*} e 
+   */
+  const delAddr = (e) => {
+    e.preventDefault()
     let { update } = props
     update('delInfo', info)
     update('showDel', true)
   }
-  return (<View className='AddressCardWrap'>
+  /**
+   * @desc 选择地址
+   */
+  const setAddr = () => {
+    props.setShipping(info)
+    Taro.navigateBack()
+  }
+  return (<View className='AddressCardWrap' onClick={setAddr}>
     { info.is_default === '1' ? <Text className='Default'>默认</Text> : ''}
     <View className='UserInfo'>
       <Text className='Name'>{info.receiver}</Text>
@@ -45,4 +59,6 @@ const AddressCard = props => {
   </View>)
 }
 
-export default AddressCard
+export default connect(() => {}, {
+  setShipping
+})(AddressCard)

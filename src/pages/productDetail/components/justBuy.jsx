@@ -16,8 +16,39 @@ const JustBuy = props => {
    * @desc 隐藏购物车
    */
   const toOrder = async () => {
-    let { product } = props
-    props.setProductArray([{...product, count}])
+    let {
+      product: {
+        base_info: {
+          main_image,
+          item_id,
+          sku_id,
+          format_sale_price,
+          format_original_price,
+          product_name,
+          sale_price
+        }
+      }
+    } = props
+    console.log('props')
+    /* 
+    count: 1
+    format_product_price: "400.00"
+    item_id: 269
+    main_image: ""
+    product_name: "枪炮玫瑰弗洛伊德33支鲜花七夕情人节礼物"
+    product_price: 40000
+    sku_id: 0
+    */
+    props.setProductArray([{
+      product_price: format_sale_price,
+      format_product_price: format_original_price,
+      main_image,
+      item_id,
+      sku_id,
+      count,
+      product_name,
+      sale_price
+    }])
     Taro.navigateTo({
       url: '/pages/confirm-order/index'
     })

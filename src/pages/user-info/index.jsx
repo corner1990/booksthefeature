@@ -10,14 +10,8 @@ import EditAvatar from './components/edit-avatar'
 import EditNickName from './components/edit-nickname'
 import DatePicker from '../../components/picker-date'
 import { getUseInfo as getUserINfo } from '../../store/actions/global'
-import { updateUserInfo, getOssSign } from '../index/user/api'
-import md5 from '../../utils/md5'
-import Crypto from '../../utils/crypto'
-import Base64 from '../../utils/Base64'
-// import HMAC from '../../utils/hmac' 
-// import SHA1 from '../../utils/sha1'
-import OSS from '../../utils/aliyun-oss'
-
+import { updateUserInfo, uploadBase64Image } from '../index/user/api'
+// import md5 from '../../utils/md5'
 
 import './index.scss'
 import { dateFormat } from '../../utils/utils'
@@ -33,42 +27,23 @@ class UserInfo extends Component {
   state = {
     showGender: false,
     genderList: ['男', '女'],
-    src: 'http://tmp/wxd8da991442b718a4.o6zAJszqCflfJiHlT5y2….iWjZtk9KF6Zm6b0b4c5442bf25717733aa59d441620b.png',
+    src: 'https://ipxcdn.jfshare.com/scrape/avatars/15520.jpg',
     showCropper: false,
-    sign: null,
-    timeout: 87600,
-    client: null,
     showEditNickName: false
   }
   componentDidMount() {
     this.props.getUserINfo()
 
-    this.getOssSignFn()
+    // this.uploadImg()
   }
   /**
    * @desc 获取上传凭证
    */
-  getOssSignFn = async () => {
-    let { errorCode, data } = await getOssSign()
+  uploadImg = async (file_base_64) => {
+    let { errorCode, data } = await uploadBase64Image({file_base_64})
     if (errorCode === 0) {
-      let {
-        securityToken,
-        accessKeyId,
-        accessKeySecret,
-        bucket,
-        endpoint
-      } = data
-      // 创建实例
-      let client  = new OSS({
-        endpoint,
-        accessKeyId,
-        accessKeySecret,
-        bucket,
-        stsToken: securityToken
-      })
       this.setState({
-        sign: data,
-        client
+        src: data
       })
     }
   }
@@ -89,34 +64,6 @@ class UserInfo extends Component {
       this.changeShowGender(false)
     })
   }
-  getPolicyBase64 = function () {
-    let date = new Date();
-    let { timeout } = this.state
-    date.setHours(date.getHours() + timeout);
-    let srcT = date.toISOString();
-    const policyText = {
-      expiration: srcT, // 设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了
-      conditions: [
-        ['content-length-range', 0, 5 * 1024 * 1024], // 设置上传文件的大小限制,5mb
-      ],
-    };
-    const policyBase64 = Base64.encode(JSON.stringify(policyText));
-    return policyBase64;
-  };
-  
-  getSignature = policyBase64 => {
-    let { sign } = this.state
-    console.log('sign', sign)
-    const accessKey = sign.accessKeySecret;
-    console.log('accessKey', accessKey, Crypto)
-    const bytes = Crypto.HMAC(Crypto.SHA1, policyBase64, accesskey, {
-      asBytes: true
-    });
-    console.log('bytes', bytes)
-    const signature = Crypto.util.bytesToBase64(bytes);
-    console.log('signature', signature)
-    return signature;
-  };
   /**
    * @desc 更新用户信息
    * @param {*} info 
@@ -165,8 +112,6 @@ class UserInfo extends Component {
    * @desc 设置头像
    */
   setAvatar = () => {
-    // console.log('123', img)
-    let self = this
     const success = info => {
       let { tempFiles } = info
       this.setState({
@@ -192,17 +137,9 @@ class UserInfo extends Component {
    * @param {*} src 
    */
   uploadAvatar = src => {
-    console.log('123', src)
-    // let dir = `/ipxmall/${src.replace('wxfile://', '')}` //在手机上检测  注意
-    // let aliyunFileKey = `/ipxmall/${src.replace('http://', '')}`  //在开发者工具里检测  注意
-    let {
-      sign: {
-        accessKeyId
-      },
-      client
-    } = this.state
+  
     let suffix = src.substring(src.lastIndexOf('.') + 1)
-    let imgKey = `ipxmall/${md5(src)}`
+ 
     let self = this
     const getBase64ImageUrl = (res, suffix) => {
       /// 获取到base64Data
@@ -210,34 +147,12 @@ class UserInfo extends Component {
       /// 通过微信小程序自带方法将base64转为二进制去除特殊符号，再转回base64
       base64Data = wx.arrayBufferToBase64(wx.base64ToArrayBuffer(base64Data));
       /// 拼接请求头，data格式可以为image/png或者image/jpeg等，看需求
-      // let base64ImgUrl = this.data.base64ImgUrl;
-      // let WorkingCard = this.data.WorkingCard;    //需要赋值的图片base64字段
       let base64Url = `data:image/${suffix};base64, ${base64Data}`;
       // base64ImgUrl.push(base64Url);   //用来显示在页面上的base64路径（数组）
-      // WorkingCard = base64Url;
-      // 获取文件(图片)MD5
-      // let dealToMD5 = sMD5.hexMD5(base64Url);   //（var sMD5 = require('../../utils/common/spark-md5.js')）
+    
       /// 刷新数据
-      // console.log(base64ImgUrl, '===========')
-      // console.log('WorkingCard', WorkingCard)
       console.log('base64ImgUrl', base64Url)
-      const formData = new OSS.Buffer(base64Url)
-      // let formData = new FormData();
-      // formData.append("file", base64Url);
-      
-      client.put(imgKey, formData)
-        .then(response => {
-          // 上传完毕回调
-          let res = response.res
-          if (res.status === 200) {
-            
-            console.log('ok', res)
-            
-          } else {
-            console.log('err', res)
-          }
-          // 图片前缀
-        })
+      self.uploadImg(base64Url)
           
     }
     const transformBase = src => {
@@ -249,25 +164,7 @@ class UserInfo extends Component {
         success: function(data) {
           let file = data.data;
           getBase64ImageUrl(file, suffix)
-          let imgKey = `ipxmall/${md5(src)}`
-          // const data = new OSS.Buffer(src)
-          // let formData = new FormData();
-          // formData.append("file", file);
-          
-          // client.put(imgKey, formData)
-          //   .then(response => {
-          //     // 上传完毕回调
-          //     let res = response.res
-          //     if (res.status === 200) {
-                
-          //       console.log('ok', res)
-                
-          //     } else {
-          //       console.log('err', res)
-          //     }
-          //     // 图片前缀
-          //   })
-          
+         
           self.cancelSetAvatar()
           console.log('234', file)
         }
@@ -365,7 +262,7 @@ class UserInfo extends Component {
       />       
       <Item
         title='修改头像'
-        src='https://ipxcdn.jfshare.com/scrape/avatars/15520.jpg'
+        src={src}
         click={setAvatar}
       />
       <Item

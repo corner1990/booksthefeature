@@ -27,7 +27,7 @@ export const setProductArray = payload => {
 /**
  * @desc 设置地址id
  */
-export const setShippingId = payload => {
+export const setShipping = payload => {
   return {
     type: SETSHIPPING,
     payload

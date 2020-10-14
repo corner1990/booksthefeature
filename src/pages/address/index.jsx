@@ -29,7 +29,10 @@ class UserAddress extends Component {
     delInfo: null
   }
   componentDidMount() {
-    this.loadInfo()
+    if (this.props.pageInfo.index === 0) {
+      this.loadInfo()
+    }
+    
   }
   /**
    * @desc 更新数据
@@ -49,25 +52,25 @@ class UserAddress extends Component {
    * @desc 加载数据
    */
   loadInfo = async () => {
-    let {list, updateAddrList, pageInfo} = this.props
+    let {list, pageInfo} = this.props
     let { errorCode, data } = await getShippingAddressList(pageInfo)
 
     if (errorCode === 0) {
       list =  [...list, ...data.shipping_address_list]
       pageInfo = data.page_info
     }
-    updateAddrList({pageInfo, list})
+    this.props.updateAddrList({pageInfo, list})
   }
   /**
    * @desc 渲染列表信息
    */
   getAddressCard = () => {
     // let { list } = this.state
-    let { setEditAddrInfo, list } = this.props
+    let { list } = this.props
     return list.map((info, key) => (<AddressCard
       info={info}
       key={key}
-      setInfo={setEditAddrInfo}
+      setInfo={this.props.setEditAddrInfo}
       update={this.update}
     />))
   }
@@ -81,13 +84,13 @@ class UserAddress extends Component {
    */
   handleConfirm = async () => {
     let { delInfo } = this.state
-    let { list, updateAddrList } = this.props
+    let { list } = this.props
     let { id } = delInfo
     let { errorCode } = await deleteShippingAddress({id})
     if (errorCode === 0) {
       // 更新数据
       list = list.filter(item => item.id !== id)
-      updateAddrList({list})
+      this.props.updateAddrList({list})
       this.setState({
         showDel: false,
         delInfo: null
@@ -109,7 +112,6 @@ class UserAddress extends Component {
         hasMore={pageInfo.has_more}
         onScrollToLower={this.loadInfo}
         className='AddressListView'
-        autoHeight
       >
         <View className='AddressList'>
           { getAddressCard() }

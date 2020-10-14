@@ -15,6 +15,6 @@ export const getUserInfo = params => axios.post('/user/user/getUserInfo', params
  */
 export const updateUserInfo = params => axios.post('/user/user/updateUserInfo', params)
 /**
- * @desc 获取
+ * @desc 上传图片
  */
-export const getOssSign =  () => axios.get('/system/aliyun/getOssSign')
+export const uploadBase64Image =  (params) => axios.post('/system/media/uploadBase64Image', params)

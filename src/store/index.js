@@ -8,12 +8,11 @@ const middlewares = [
   thunkMiddleware,
   createLogger()
 ]
- console.log('middlewares', middlewares)
+
 export default function configStore () {
   const store = createStore(
     reducers,
-    applyMiddleware(thunkMiddleware,
-      createLogger())
+    applyMiddleware(...middlewares)
   )
   return store
 }
