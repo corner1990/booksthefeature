@@ -1,11 +1,11 @@
 import React, { Component } from  'react'
 import { View, Text } from '@tarojs/components'
-import { AtIcon, AtBadge } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 import { connect } from 'react-redux'
-import { setTab } from '../../../store/actions/global'
-import { getOrderCount } from './api'
+import { setTab } from '../../../../store/actions/global'
+import { getOrderCount } from '../api'
 
-import './index.scss'
+import '../index.scss'
 
 /**
  * @desc 合并属性

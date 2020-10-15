@@ -1,7 +1,6 @@
 export default {
   pages: [
-    'pages/productDetail/index',
-    'pages/shopping-cart/index',
+    
     'pages/index/index',
     'pages/user-info/index',
     'pages/order-detail/index',
@@ -9,8 +8,8 @@ export default {
     'pages/address/index',
     'pages/addAddr/index',
     'pages/confirm-order/index',
-    
-    
+    'pages/productDetail/index',
+    'pages/shopping-cart/index',
     'pages/orderFlower/index',
     
   ],

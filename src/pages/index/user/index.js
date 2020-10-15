@@ -5,9 +5,9 @@ import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../../components/navbar'
 import { setTab, getUseInfo } from '../../../store/actions/global'
-import UserInfo from './user-info'
-import CalendarBar from './calendar-bar'
-import OrdersCard from  './order-card'
+import UserInfo from './component/user-info'
+import CalendarBar from './component/calendar-bar'
+import OrdersCard from  './component/order-card'
 
 import './index.scss'
 

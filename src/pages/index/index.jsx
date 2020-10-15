@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Tabbar from '../../components/tabbar'
 import Home from './home/home' // 首页
 import Found from './found/found' // 发现
-import User from './user/user' // 我的页面
+import User from './user' // 我的页面
 import MyOrders from './orders/orders'
 // import Article from './article' // 文章列表页
 import './index.scss'

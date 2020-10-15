@@ -13,10 +13,11 @@ import UseCoupon from './components/use-coupon'
 import PriceDetail from './components/price-detail'
 import Footer from './components/footer'
 import { getShippingAddressList } from '../address/api';
-import { setShipping } from '../../store/actions/shopping-cart'
+import { setShipping, update } from '../../store/actions/shopping-cart'
 
 import './index.scss'
 import { calculateOrderPrice, createOrder } from './api';
+import { removeFromCart } from '../shopping-cart/api';
 
 /**
  * @desc 确认订单
@@ -94,7 +95,7 @@ class ConfirmOrder extends React.Component {
     let { product_array } = this.props
     let { voucher_code } = this.state
     product_array = product_array.map(info => {
-      let { count, base_info: { item_id } } = info
+      let { count, item_id } = info
       return { count, item_id  }
     })
     let { errorCode, data } = await calculateOrderPrice({
@@ -111,6 +112,7 @@ class ConfirmOrder extends React.Component {
    * @description 创建订单
    */
   crateOrderFn = async () => {
+    this.delSelectArr()
     let { product_array, shipping } = this.props
     let {
       voucher_code,
@@ -119,7 +121,7 @@ class ConfirmOrder extends React.Component {
     } = this.state
     let anonymous_status = anonymous ? 1 : 0
     product_array = product_array.map(info => {
-      let { count, base_info: { item_id } } = info
+      let { count, item_id } = info
       return { count, item_id  }
     })
     let { errorCode, data } = await createOrder({
@@ -131,6 +133,18 @@ class ConfirmOrder extends React.Component {
     })
     if (errorCode === 0) {
       console.log('12312', data)
+    }
+  }
+  /**
+   * @desc 删除购物车
+   */
+  delSelectArr = async () => {
+    let { selected } = this.props
+    if (selected.length === 0) return false
+    selected = selected.map(item => item.item_id)
+    let { errorCode } = await removeFromCart(selected)
+    if(errorCode === 0) {
+      this.props.update({key: '', val: []})
     }
   }
   render() {
@@ -188,5 +202,5 @@ export default connect(
   state => {
     return state.shoppingCart
   },
-  { setShipping }
+  { setShipping, update }
 )(ConfirmOrder)

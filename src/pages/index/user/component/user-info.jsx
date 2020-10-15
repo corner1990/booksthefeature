@@ -1,6 +1,6 @@
 import React, { Component } from  'react'
 import { View, Image } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import { AtButton, AtIcon } from 'taro-ui'
 import { connect } from 'react-redux'
 import Taro from '@tarojs/taro'
 import './user-info.scss'
@@ -10,15 +10,21 @@ const mapState = state => state.global
  * @desc 用户信息
  */
 class UserInfo extends Component{
-  state = {
-    avatar: 'https://ipxcdn.jfshare.com/ipxmall/2c5871d1937274f5d04504e861817f9a.png'
-  }
+  state = {}
   /**
-   * @desc 跳转到日历页面
+   * @desc 跳转到个人资料
    */
-  jumpToCalendar = () => {
+  jumpToUserInfo = () => {
     Taro.navigateTo({
       url: '/pages/user-info/index'
+    })
+  }
+  /**
+   * @desc 跳转到购物车
+   */
+  jumpToShopCartPage = () => {
+    Taro.navigateTo({
+      url: '/pages/shopping-cart/index'
     })
   }
   /**
@@ -31,7 +37,7 @@ class UserInfo extends Component{
     } = this.props
     
     return(<View className='userInfo'>
-      <View className='userInfoLeft'>
+      <View className='userInfoLeft' onClick={this.jumpToUserInfo}>
         <Image src={avatar} className='userAvatar' />
         <View className='userInfoName'>{userInfo.nick_name}</View>
       </View>
@@ -39,8 +45,10 @@ class UserInfo extends Component{
         type='primary'
         circle
         className='myInfoBtn'
-        onClick={this.jumpToCalendar}
-      >我的资料</AtButton>
+        onClick={this.jumpToShopCartPage}
+      >
+        <AtIcon value='shopping-cart' size='22' color='#FFF' style={{marginTop: '-2px'}}></AtIcon> 购物车
+      </AtButton>
     </View>)
   }
 }

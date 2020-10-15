@@ -2,7 +2,7 @@ import React, { Component } from  'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import Taro from '@tarojs/taro'
-import './index.scss'
+import '../index.scss'
 /**
  * @desc 用户信息
  */

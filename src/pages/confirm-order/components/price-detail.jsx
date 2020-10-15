@@ -12,7 +12,7 @@ const PriceDetail = props => {
       <Text className='PriceDetailLineTitle'>商品总额</Text>
       <View className='PriceInfo'>
         <Text className='currency'>&yen;</Text>
-        {info.product_total_price}
+        {info.format_product_price}
       </View>
     </View>
     <View className='PriceDetailLine CouponLine'>
@@ -25,7 +25,7 @@ const PriceDetail = props => {
     <View className='PriceDetailLine CouponLine'>
       <Text className='PriceDetailLineTitle'>运费</Text>
       <View className='PriceInfo'>
-        - <Text className='Currency'>&yen;</Text>
+        <Text className='Currency'>&yen;</Text>
         {info.shipping_price}
       </View>
     </View>
