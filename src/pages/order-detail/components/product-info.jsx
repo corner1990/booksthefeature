@@ -9,7 +9,7 @@ import './index.scss'
 const ProductInfo = () => {
   return (<View className='ProductInfoWrap ReceiptInfoWrap'>
     <View className='Title'>商品信息</View>
-    <ProductCard />
+    {/* <ProductCard /> */}
     <View className='Line'>
       <Text className='LineTitle'>商品总额</Text>
       <Text className='LineText'>¥990.00</Text>

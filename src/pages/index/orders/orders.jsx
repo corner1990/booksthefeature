@@ -5,11 +5,11 @@ import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../../components/navbar'
 import { setTab } from '../../../store/actions/global'
-import FilterBar from './filter-bar'
-import OrderCard from './order-card'
+import FilterBar from './components/filter-bar'
+import OrderCard from './components/order-card'
 import { getOrderList } from './api'
 
-import './index.scss'
+import './components/index.scss'
 
 const mapState = state => state.global
 
@@ -52,14 +52,60 @@ class Index extends Component {
   loadInfo = async ()=> {
     let list = []
     let pageInfo = {}
-    let { errorCode, data } = await getOrderList({...this.state.pageInfo, order_id: 0})
+    let { errorCode, data } = await getOrderList({...this.state.pageInfo})
     if (errorCode === 0) {
-      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, data.product_list]
+      list = data.page_info.index === 1 ? data.order_list : [...this.state.list, data.order_list]
     }
     this.setState({
-      list, pageInfo
+      list,
+      pageInfo
     })
   }
+  /**
+   * @desc 获取卡片
+   */
+  getCard = () => {
+    let { list } = this.state
+    if (list.length === 0) return []
+    return list.map((info, key) => (<OrderCard info={info} key={key} submit={this.submit} />))
+  }
+  /**
+     * @desc 调用方法
+     */
+    submit = (key, info) => {
+      console.log('key', key, info)
+      switch(key){
+        
+        case 'toPay': // 去支付
+          this.changePayVisiable = true
+          break;
+        case 'cancel': // 关闭订单
+          // this.cancel()
+          break;
+        case 'delorder': // 关闭订单
+          // this.delOrder()
+          break;
+        case 'confirm': // 确认收货
+          // this.confirm()
+          break;
+        case 'evaluation': // 确认收货
+          // this.evaluation()
+          break;
+        case 'logistics': // 查看物流信息
+          // this.viewLosistics()
+          break;
+        case 'seeEvaluation': // 查看查看评价
+          // this.seeEvaluation()
+          break;
+        case 'driver': // 催发货
+          // this.driver()
+          break;
+        case 'refound': // 退款
+          // this.refound()
+          break;
+      }
+        
+    }
   render() {
 
     return (
@@ -70,7 +116,9 @@ class Index extends Component {
         />
         <FilterBar />
         <View className='OrderList'>
-          <OrderCard />
+          {
+            this.getCard()
+          }
         </View>
       </View>
     )

@@ -55,7 +55,8 @@ const ProductCard = props => {
           isEdit ? (
             <View onClick={e => {
               e.stopPropagation()
-            }}>
+            }}
+            >
               <AtInputNumber
                 min={1}
                 max={999}

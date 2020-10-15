@@ -1,4 +1,4 @@
-@import '../../../scss/index.scss';
+@import '../../../../scss/index.scss';
 .myOrders{
   max-height: calc(100vh - 116px);
   height: calc(100vh - 116px);
@@ -100,9 +100,17 @@
       height: 100px;
       .at-button{
         margin: 0;
-        height: 64px;
+        height: 56px;
+        line-height: 2;
       }
-
+      .BtnWrap{
+        @include flex(flex-end, center);
+        flex: 1;
+        .at-button{
+          width: 120px;
+          margin-left: 20px;
+        }
+      }
       .ProductSkuText{
         
         font-family: PingFangHK-Regular;
