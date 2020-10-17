@@ -2,7 +2,7 @@
 	"miniprogramRoot": ".dist/",
 	"projectname": "self1-miniprogram",
 	"description": "miniprogram",
-	"appid": "wxd8da991442b718a4",
+	"appid": "wx85a3719cf9697b24",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
