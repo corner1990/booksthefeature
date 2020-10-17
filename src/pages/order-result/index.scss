@@ -1,0 +1,15 @@
+@import '../../scss/index.scss';
+.OrderDetailWrap{
+  padding-bottom: 120px;
+  .OrderDetailContent{
+    margin: -160px 40px 0;
+  }
+  .BtnWrap{
+    margin: 80px 24px;
+    .at-button{
+      margin-top: 40px;
+      line-height: 84px;
+      height: 84px;
+    }
+  }
+}

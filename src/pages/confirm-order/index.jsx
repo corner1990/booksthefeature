@@ -119,6 +119,11 @@ class ConfirmOrder extends React.Component {
       date,
       anonymous
     } = this.state
+    if ( date === '请选择配送时间') {
+      Taro.showToast({
+        message: '请选择配送时间'
+      })
+    }
     let anonymous_status = anonymous ? 1 : 0
     product_array = product_array.map(info => {
       let { count, item_id } = info
@@ -133,6 +138,9 @@ class ConfirmOrder extends React.Component {
     })
     if (errorCode === 0) {
       console.log('12312', data)
+      Taro.navigateTo({
+        url: '/pages/order-result/index'
+      })
     }
   }
   /**

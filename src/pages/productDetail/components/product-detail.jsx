@@ -6,14 +6,24 @@ import './index.scss'
  * @desc 头部
  */
 const MainProductdetail = props => {
-  
+  let { info = {} } = props
+  let { specifications=[] } = info
   const [open, setOpen] = useState(false)
+  // brand_story
+  const [brand_story, setbrand_story] = useState(false)
+  // care_instructions
+  const [care_instructions, setcare_instructions] = useState(false)
+  // logistics_desc
+  const [logistics_desc, setlogistics_desc] = useState(false)
+  // logistics_desc
+  const [after_sale_instructions, setafter_sale_instructions] = useState(false)
   const handleClick = () => {
-    setOpen({ open: !open })
+    setOpen(!open)
   }
+  /**
+   * @desc 处理图片
+   */
   const getDetail = () => {
-    let info = props.info
-
     if (!info.detail) return ''
 
     let tems = info.detail.detail_list.map((item, key) => {
@@ -23,11 +33,24 @@ const MainProductdetail = props => {
       return (<Image
         src={item.content}
         key={key}
-        mode='aspectFill'
+        mode='aspectFit'
         className='DetailImage'
       />)
     })
     return tems
+  }
+  const  getSpecifications = () => {
+    if (!Array.isArray(specifications)) {
+      specifications = JSON.parse(specifications)
+    }
+    return specifications.map((item, key) => {
+      let itemKey = Object.keys(item)[0]
+      return (<View className='line' key={key}>
+      <View clssName='lineTitle'>{itemKey}</View>
+    <View className='lineVal'>{item[itemKey]}</View>
+    </View>)
+    })
+    
   }
 
   return (<View className='MainProductdetail'>
@@ -41,7 +64,51 @@ const MainProductdetail = props => {
       title='规格参数'
       className='InfoAccordion'
     >
-      <View>1212222</View>
+      { getSpecifications() }
+    </AtAccordion>
+    <AtAccordion
+      hasBorder={false}
+      open={brand_story}
+      className='InfoAccordion'
+      onClick={() => setbrand_story(!brand_story)}
+      title='品牌故事'
+    >
+      <View className='wrap'>
+        {info.brand_story}
+      </View>
+    </AtAccordion>
+    <AtAccordion
+      hasBorder={false}
+      open={care_instructions}
+      className='InfoAccordion'
+      onClick={() => setcare_instructions(!care_instructions)}
+      title='保养说明'
+    >
+      <View className='wrap'>
+        {info.care_instructions}
+      </View>
+    </AtAccordion>
+    <AtAccordion
+      hasBorder={false}
+      open={logistics_desc}
+      className='InfoAccordion'
+      onClick={() => setlogistics_desc(!logistics_desc)}
+      title='运输说明'
+    >
+      <View className='wrap'>
+        {info.logistics_desc}
+      </View>
+    </AtAccordion>
+    <AtAccordion
+      hasBorder={false}
+      open={after_sale_instructions}
+      className='InfoAccordion'
+      onClick={() => setafter_sale_instructions(!after_sale_instructions)}
+      title='退换货说明'
+    >
+      <View className='wrap'>
+        {info.after_sale_instructions}
+      </View>
     </AtAccordion>
   </View>)
   

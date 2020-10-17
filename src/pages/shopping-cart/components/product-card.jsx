@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import './index.scss'
 import { updateCart } from '../api'
 import { update } from '../../../store/actions/shopping-cart'
+import { calculateOrderPrice } from '../../confirm-order/api'
 
 const mapState = state => state.shoppingCart;
 /**
@@ -19,13 +20,28 @@ const ProductCard = props => {
   const changeStatus = () => {
     let arr = active ? selected.filter(item => item.item_id !== product.item_id) : [...selected, product]
     changeSelected(arr)
+    calculatePrice(arr)
+  }
+  /**
+   * @desc 计算价格
+   */
+  const calculatePrice = async arr => {
+    let product_array = arr.map(info => {
+      let { item_id } = info
+      return { count: info.count, item_id  }
+    })
+    let { errorCode, data } = await calculateOrderPrice({
+      product_array,
+    })
+    if (errorCode === 0) {
+      this.props.update('priceInfo', data)
+    }
   }
   /**
    * @desc 跟新购物商品数量
    * @param { number } count 购物车商品数量
    */
   const editProuctInfo = async num => {
-    // TODO: 接口数据不对，会出现乘20的现象
     let { errorCode } = await updateCart({item_id: product.item_id, count: num})
     if (errorCode === 0 ) {
       setCount(num)
@@ -48,7 +64,7 @@ const ProductCard = props => {
         <View className='ProductSkuInfo'>
           <View className='ProductPrice'>
             &yen;
-            {product.product_price}
+            {product.format_product_price}
           </View>
         
         {

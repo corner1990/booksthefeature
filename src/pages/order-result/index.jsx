@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import CustomNavBar from '../../components/navbar'
+import { AtButton } from 'taro-ui'
+import { connect } from 'react-redux'
 import Header from './components/header'
-import ReceiptInfo from './components/receipt-info'
 import OrderInfo from './components/oder-info'
-import ProductInfo from './components/product-info'
-import Footer from './components/footer'
 import { parseQuery } from '../../utils/utils'
+
 
 import './index.scss'
 import { queryOrderDetailInfo } from './api'
+import { setTab } from '../../store/actions/global'
+
 /**
  * @desc 我的信息
  */
@@ -40,7 +41,7 @@ class OrderDetail extends Component {
 
   componentDidMount() {
     // let {} = this.props
-    this.loadInfo()
+    // this.loadInfo()
   }
   /**
    * @desc 返回上一页
@@ -63,67 +64,32 @@ class OrderDetail extends Component {
       })
     }
   }
-  toPay = () => {
-    
-  }
   /**
-   * @desc 调用方法
+   * @desc 跳转
+   * @param {*} url 
    */
-  submit = (key, ) => {
-    console.log('key', key)
-    switch(key){
-      
-      case 'toPay': // 去支付
-        this.toPay()
-        break;
-      case 'cancel': // 关闭订单
-        // this.cancel()
-        break;
-      case 'delorder': // 关闭订单
-        // this.delOrder()
-        break;
-      case 'confirm': // 确认收货
-        // this.confirm()
-        break;
-      case 'evaluation': // 确认收货
-        // this.evaluation()
-        break;
-      case 'logistics': // 查看物流信息
-        // this.viewLosistics()
-        break;
-      case 'seeEvaluation': // 查看查看评价
-        // this.seeEvaluation()
-        break;
-      case 'driver': // 催发货
-        // this.driver()
-        break;
-      case 'refound': // 退款
-        // this.refound()
-        break;
-    }
-      
+  jumpTo = () => Taro.navigateTo({ url: '/pages/index/index' })
+  btnClick = tab => {
+    this.props.setTab(tab)
+    this.jumpTo()
   }
   render() {
-    let {
-      backHistory
-    } = this
     let { orderInfo } = this.state
 
     return (<View className='OrderDetailWrap'>
-      <CustomNavBar
-        title='订单详情'
-        clickLeft={backHistory}
-      />
     <Header info={orderInfo} />
     <View className='OrderDetailContent'>
-      <ReceiptInfo info={orderInfo.shipping_info} />
       <OrderInfo info={orderInfo} />
-      <ProductInfo info={orderInfo} />
-      <Footer info={orderInfo} submit={this.submit} />
     </View>
-    
+    <View className='BtnWrap'>
+      <AtButton type='primary' onClick={() => this.btnClick(2)}>查看订单</AtButton>
+      <AtButton onClick={() => this.btnClick(0)}>回到首页</AtButton>
+    </View>
     </View>)
   }
 }
 
-export default OrderDetail
+export default connect(
+  () => {},
+  { setTab }
+)(OrderDetail)

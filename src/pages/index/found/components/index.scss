@@ -1,8 +1,18 @@
 @import '../../../../scss/index.scss';
 .FoundCard{
+  padding-bottom: 10px;
   .FoundCardImg{
     width: 360px;
     height: 400px;
     border-radius: 8px;
+  }
+  .FoundCardDesc{
+    padding: 0 6px;
+    box-sizing: border-box;
+    font-size: $font-sm;
+    width: 360px;
+    min-height: 76px;
+    @include textHide(2);
+    
   }
 }

@@ -13,7 +13,8 @@ const initState = {
   info: [],
   selected: [], // 选中的列表
   product_array: [],
-  shipping: ''
+  shipping: '',
+  priceInfo: {}
 }
 /**
  * @desc 购物车store

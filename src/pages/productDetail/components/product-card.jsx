@@ -27,7 +27,7 @@ const ProductCard = props => {
       <View className='ProductSkuInfo'>
         <View className='ProductPrice'>
           &yen;
-          {info.base_info.sale_price}
+          {info.base_info.format_sale_price}
         </View>
       </View>
     </View>

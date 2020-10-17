@@ -22,7 +22,7 @@ const ProductInfo = props => {
     <View className='ProductName'>{base_info.product_name}</View>
     <View className='ProductPrice'>
       <Text className='currency'>&yen;</Text>
-      {base_info.sale_price}
+      {base_info.format_sale_price}
     </View>
     <View className='OperationWrap'>
       <Addr change={addrChnage} />

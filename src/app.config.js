@@ -4,6 +4,7 @@ export default {
     'pages/index/index',
     'pages/user-info/index',
     'pages/order-detail/index',
+    'pages/order-result/index',
     'pages/calendar/index',
     'pages/address/index',
     'pages/addAddr/index',

@@ -35,7 +35,7 @@ class NewProductList extends Component{
               className='productImg'
             />
             <View className='productTitle'>{info.base_info.product_name}</View>
-            <View className='productPrice'>¥{info.base_info.sale_price}</View>
+            <View className='productPrice'>¥{info.base_info.format_sale_price}</View>
           </View>
         // </LazyBlock>
       )

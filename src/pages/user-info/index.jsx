@@ -42,16 +42,22 @@ class UserInfo extends Component {
   uploadImg = async (file_base_64) => {
     let { errorCode, data } = await uploadBase64Image({file_base_64})
     if (errorCode === 0) {
-      this.setState({
-        src: data
-      })
+      // this.upLoadAvatar(data)
     }
   }
   /**
    * @desc 返回上一页
    */
   backHistory = () => Taro.navigateBack()
-
+  // /**
+  //  * desc 设置头像
+  //  * @param {*} props 
+  //  */
+  // upLoadAvatar = avatar => {
+  //   this.updateInfo({avatar}, () =>  {
+  //     this.props.getUserINfo()
+  //   })
+  // }
   /**
    * desc 设置性别
    * @param {*} props 
@@ -128,7 +134,6 @@ class UserInfo extends Component {
    */
   cancelSetAvatar = () => {
     this.setState({
-      src: '',
       showCropper: false
     })
   }
@@ -151,7 +156,7 @@ class UserInfo extends Component {
       // base64ImgUrl.push(base64Url);   //用来显示在页面上的base64路径（数组）
     
       /// 刷新数据
-      console.log('base64ImgUrl', base64Url)
+      // console.log('base64ImgUrl', base64Url)
       self.uploadImg(base64Url)
           
     }
@@ -171,31 +176,7 @@ class UserInfo extends Component {
       });
     }
     transformBase(src)
-    // const aliyunFileKey = `/ipxmall/${md5(src)}.${src.substring(src.lastIndexOf('.') + 1)}`;
-    // const aliyunServerURL = 'https://ipxmall.oss-cn-zhangjiakou.aliyuncs.com';
-    // const accessid = accessKeyId;
-    // const policyBase64 = this.getPolicyBase64();
-    // const signature = this.getSignature(policyBase64);
-
-    // console.log('999', aliyunFileKey, aliyunServerURL, accessid, policyBase64, signature)
-    // console.log('src', src, md5(src))
-    // Taro.uploadFile({
-    //   url: 'https://oss-cn-zhangjiakou.aliyuncs.com', //仅为示例，非真实的接口地址
-    //   filePath: '/ipxmall/',
-    //   name: 'file',
-    //   formData: {
-    //     key: aliyunFileKey,
-    //     'policy': policyBase64,
-    //     'OSSAccessKeyId': accessid,
-    //     'signature': signature,
-    //     'success_action_status': '200'
-    //   },
-    //   success (res){
-    //     const data = res.data
-    //     console.log('3434', res)
-    //     //do something
-    //   }
-    // })
+    
   
   }
   changeShowGender = showGender => {
@@ -255,6 +236,9 @@ class UserInfo extends Component {
     let {
       userInfo
     } = this.props
+    let  {
+      avatar= ''
+    } = userInfo
     return (<View className='UserInfoWrap'>
       <CustomNavBar
         title='个人资料'
@@ -262,7 +246,7 @@ class UserInfo extends Component {
       />       
       <Item
         title='修改头像'
-        src={src}
+        src={avatar}
         click={setAvatar}
       />
       <Item

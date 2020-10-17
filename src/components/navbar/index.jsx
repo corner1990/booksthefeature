@@ -42,7 +42,7 @@ export default class Index extends Component {
    * @desc 判断是否展示返回按钮
    */
   getArrowLeft = () => {
-    let { clickLeft, color, iconSize=24 } = this.props
+    let { clickLeft, color='#333', iconSize=24 } = this.props
     if (!clickLeft) return ''
     return (<View className='clickLeft-wrap' onClick={ clickLeft } >
       <AtIcon  value='chevron-left' size={iconSize} color={color}></AtIcon>
@@ -52,7 +52,7 @@ export default class Index extends Component {
     let {
       navigationBarHeight
     } = this.state
-    let { title } = this.props
+    let { title, color='#333' } = this.props
     const { statusBarHeight } = wx.getSystemInfoSync()
     return (
       <View
@@ -61,7 +61,7 @@ export default class Index extends Component {
         <View className='white-swpace' style={{height: statusBarHeight}}></View>
         <View className='custom-navbar' style={{ height: navigationBarHeight }}>
           { this.getArrowLeft() }
-          <Text className='nav-bar-title'>{title}</Text>
+          <Text className='nav-bar-title' style={{color}}>{title}</Text>
         </View>
       </View>
     )

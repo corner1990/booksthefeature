@@ -89,7 +89,17 @@
   .at-accordion__content{
     transition: height .3s cubic-bezier(.47,0,.745,.715);
   }
-  
+  .line{
+    @include flex(space-between, center);
+    height: 84px;
+    padding: 0 24px;
+    font-size: $font-sm;
+  }
+  .wrap{
+    padding: 24px;
+    font-size: $font-sm;
+    color: $black85;
+  }
 }
 
 .ProuductFooter{

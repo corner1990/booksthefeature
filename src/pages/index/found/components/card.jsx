@@ -43,6 +43,9 @@ export default class Index extends Component {
     return (
       <View className='FoundCard'>
         <Image src={img.image} style={getStyle(img)} className='FoundCardImg' mode='aspectFill' />
+        <View className='FoundCardDesc'>
+          {info.feed_detail.description}
+        </View>
       </View>
     )
   }

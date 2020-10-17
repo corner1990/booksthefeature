@@ -26,13 +26,15 @@ const Index = props => {
     let { tabIndex } = props
     return tabList.map((item, key) => {
       let title = ''
-      if (item.active.includes(tabIndex)) {
-        title = item.title
-      }
+      title = item.title
+      // if (item.active.includes(tabIndex)) {
+      //   title = item.title
+      // }
       // 处理返回数据
+      let isActive = item.active.includes(tabIndex)
       return (<View
         key={key}
-        className={['tab-item', title ? 'active' : '']}
+        className={['tab-item', isActive ? 'active' : '']}
         onClick={() => handleClick(key)} 
       >
         <AtIcon value={item.iconType} size='20' className='tab-item-icon'></AtIcon>
