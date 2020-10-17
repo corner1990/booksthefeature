@@ -37,21 +37,7 @@ class Home extends Component {
   pageInfo = {
     index: 0
   }
-  // touchstart = e => {
-  //   e.stopPropagation()
-  //   e.preventDefault()
-  //   let { isTouch } = this.state
-  //   if(isTouch) {
-  //     this.setIsTouch()
-  //   }
-  // }
-  // /**
-  //  * @desc 控制是否页面可以滚动
-  //  * @param { number | undefined } val 
-  //  */
-  // setIsTouch = (isTouch = false) => {
-  //   this.setState({ isTouch })
-  // }
+
   /**
    * @desc 动态控制是否显示navBar
    */

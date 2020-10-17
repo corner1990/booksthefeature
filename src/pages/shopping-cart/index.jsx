@@ -43,7 +43,7 @@ class ShoppingCart extends Component {
    * @param { any } val 任何数据
    */
   updateState = (key, val) => {
-    console.log('key', key, val)
+    
     this.setState({ [key]: val })
   }
   // 删除

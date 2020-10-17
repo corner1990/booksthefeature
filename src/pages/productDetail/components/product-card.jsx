@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
-import Addr from '../../../components/address'
+// import Addr from '../../../components/address'
 import './index.scss'
 
 /**

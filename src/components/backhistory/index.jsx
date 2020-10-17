@@ -65,7 +65,7 @@ export default class Index extends Component {
       title = false,
       titleStyle= {},
       fontSize=16,
-      bgColor='#25272d',
+      bgColor='#00B799',
       isFixed=false,
     } = this.props
     console.log(this.props)

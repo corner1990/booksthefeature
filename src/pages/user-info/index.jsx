@@ -27,7 +27,6 @@ class UserInfo extends Component {
   state = {
     showGender: false,
     genderList: ['男', '女'],
-    src: 'https://ipxcdn.jfshare.com/scrape/avatars/15520.jpg',
     showCropper: false,
     showEditNickName: false
   }
@@ -42,22 +41,23 @@ class UserInfo extends Component {
   uploadImg = async (file_base_64) => {
     let { errorCode, data } = await uploadBase64Image({file_base_64})
     if (errorCode === 0) {
-      // this.upLoadAvatar(data)
+      this.updateAvatar(data)
     }
   }
   /**
    * @desc 返回上一页
    */
   backHistory = () => Taro.navigateBack()
-  // /**
-  //  * desc 设置头像
-  //  * @param {*} props 
-  //  */
-  // upLoadAvatar = avatar => {
-  //   this.updateInfo({avatar}, () =>  {
-  //     this.props.getUserINfo()
-  //   })
-  // }
+  /**
+   * desc 设置信息
+   * @param {*} props 
+   */
+  updateAvatar = avatar => {
+  
+    this.updateInfo({avatar}, () =>  {
+      this.props.getUserINfo()
+    })
+  }
   /**
    * desc 设置性别
    * @param {*} props 
@@ -134,6 +134,7 @@ class UserInfo extends Component {
    */
   cancelSetAvatar = () => {
     this.setState({
+      src: '',
       showCropper: false
     })
   }
@@ -156,7 +157,7 @@ class UserInfo extends Component {
       // base64ImgUrl.push(base64Url);   //用来显示在页面上的base64路径（数组）
     
       /// 刷新数据
-      // console.log('base64ImgUrl', base64Url)
+      console.log('base64ImgUrl', base64Url)
       self.uploadImg(base64Url)
           
     }
@@ -176,7 +177,6 @@ class UserInfo extends Component {
       });
     }
     transformBase(src)
-    
   
   }
   changeShowGender = showGender => {
@@ -236,9 +236,6 @@ class UserInfo extends Component {
     let {
       userInfo
     } = this.props
-    let  {
-      avatar= ''
-    } = userInfo
     return (<View className='UserInfoWrap'>
       <CustomNavBar
         title='个人资料'
@@ -246,7 +243,7 @@ class UserInfo extends Component {
       />       
       <Item
         title='修改头像'
-        src={avatar}
+        src={userInfo.avatar}
         click={setAvatar}
       />
       <Item

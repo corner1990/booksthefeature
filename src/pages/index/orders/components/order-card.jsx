@@ -31,6 +31,8 @@ class FilterBar extends Component{
       close_countdown
     } = this.state
     let timer =close_countdown
+    if (!close_countdown) return false
+
     if (close_countdown === 0) return false
     let countDown = ''
     if (timer > 3600) {
@@ -62,6 +64,9 @@ class FilterBar extends Component{
     let { info, submit } = this.props
     let actionKey = btnKey[info.order_status][1]
     submit(actionKey, info)
+    Taro.navigateTo({
+      url: '/pages/order-result/index'
+    })
   }
   // 取消按钮（左侧按钮侧点击触发）
   cancel = e => {
@@ -70,6 +75,7 @@ class FilterBar extends Component{
     // this.$emit('submit', actionKey)
     let { info, submit } = this.props
     let actionKey = btnKey[info.order_status][0]
+
     submit(actionKey, info)
   }
   getBtn = () => {
@@ -112,7 +118,8 @@ class FilterBar extends Component{
       main_image: '',
       product_name: '',
       format_product_price: '',
-      count: 0
+      count: 0,
+      format_pay_price: '0.00'
     }
     let create = new Date(info.created_timestamp*1000)
     let str = dayjs(create).format('YYYY-MM-DD HH:mm:ss')
@@ -136,9 +143,8 @@ class FilterBar extends Component{
         </View>
       </View>
       <View className='ProductOperationWrap'>
-  <View className='ProductSkuText'>共{product.count}件商品，共计 ¥{product.format_pay_price}</View>
-        { this.getBtn() }
-        
+      <View className='ProductSkuText'>共{info.total_product_count}件商品，共计 ¥{info.format_pay_price}</View>
+      { this.getBtn() }
       </View>
     </View>)
   }

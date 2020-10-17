@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
 import './index.scss'
 import { btnKey, btnTexts } from '../../index/orders/config'
@@ -23,6 +24,9 @@ const Footer = props => {
     e && e.stopPropagation()
     let actionKey = btnKey[order_status][1]
     submit(actionKey)
+    Taro.navigateTo({
+      url: '/pages/order-result/index'
+    })
   }
   // 取消按钮（左侧按钮侧点击触发）
   const cancel = e => {

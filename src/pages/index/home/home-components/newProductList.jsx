@@ -42,10 +42,13 @@ class NewProductList extends Component{
     })
   }
   render() {
-    let { getProduct } = this
+    let { getProduct} = this
+    let {
+      hideTitle = false
+    } = this.props
     return (
       <View className='newProductListWrap'>
-        <View className='newProductListTitle'>新品推荐</View>
+        {hideTitle ? '' : <View className='newProductListTitle'>新品推荐</View>}
         <View className='newProductList'>
           { getProduct() }
         </View>

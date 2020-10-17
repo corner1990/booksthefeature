@@ -26,6 +26,7 @@ const ProductCard = props => {
    * @desc 计算价格
    */
   const calculatePrice = async arr => {
+    if (arr.length  === 0) return false
     let product_array = arr.map(info => {
       let { item_id } = info
       return { count: info.count, item_id  }
@@ -34,7 +35,7 @@ const ProductCard = props => {
       product_array,
     })
     if (errorCode === 0) {
-      this.props.update('priceInfo', data)
+      props.update({key:'priceInfo', val: data})
     }
   }
   /**
