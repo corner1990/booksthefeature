@@ -163,7 +163,8 @@ class ConfirmOrder extends React.Component {
       priceInfo,
       anonymous
     } = this.state
-    
+    // TODO: 价格参数报错
+    // TODO: 补充一个结果页， 直接跳转
     return (<View className='ConfirmOrderWrap'>
       <CustomNavBar
         title='确认订单'

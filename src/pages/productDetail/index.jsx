@@ -60,7 +60,7 @@ class ProductDetail extends Component{
   backHistory = () => Taro.navigateBack()
   render() {
     let { info, isOpened, showJustBuy } = this.state
-    
+    // TODO: 处理规格参数
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
         title='订花'

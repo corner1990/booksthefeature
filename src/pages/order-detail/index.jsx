@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import CustomNavBar from '../../components/navbar'
 import Header from './components/header'
 import ReceiptInfo from './components/receipt-info'
@@ -23,7 +24,9 @@ class OrderDetail extends Component {
   /**
    * @desc 返回上一页
    */
-  backHistory = () => {}
+  backHistory = () => {
+    Taro.navigateBack()
+  }
   /**
    * @desc 加载数据
    */

@@ -1,9 +1,9 @@
 export default {
   pages: [
-    'pages/order-detail/index',
+    
     'pages/index/index',
     'pages/user-info/index',
-    
+    'pages/order-detail/index',
     'pages/calendar/index',
     'pages/address/index',
     'pages/addAddr/index',
