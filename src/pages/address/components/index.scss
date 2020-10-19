@@ -10,7 +10,7 @@
   margin-bottom: 20px;
   .Default{
     position: absolute;
-    background: linear-gradient(310deg,#ff0ba8,#bc22f8);
+    background: linear-gradient(310deg, $color-brand,$color-brand-light);
     font-size: $font-xs;
     padding: 6px 16px;
     color: #fff;
