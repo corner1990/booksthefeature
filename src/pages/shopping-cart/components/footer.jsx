@@ -10,23 +10,9 @@ const mapState = state => state.shoppingCart;
  */
 class Footer extends Component {
  
-  /**
-   * @desc 动态计算价格
-   */
-  getPrice = () => {
-    let { selected } = this.props
-    let price = selected.reduce((prev, next) => {
-      // 单个商品价格
-      let itemPriceI = parseFloat(next.product_price) * 100 * next.count
-      
-      return prev + itemPriceI
-    }, 0)
-    return (price/100).toFixed(2)
-  }
-  
   render() {
-    let { delProduct} = this.props
-    let { selected, toOrder } = this.props
+    let { selected, toOrder, delProduct, priceInfo } = this.props
+    console.log('priceInfo', priceInfo)
     let len = selected.length
     return (<View className='ShoppingCardFooter'>
       {
@@ -36,8 +22,8 @@ class Footer extends Component {
           onClick={() => delProduct()}
         >删除</View>) : [
           <View className='PriceWrap' key='price'>
-            <Text className='Currency'>&yen;</Text>
-            {this.getPrice()}
+            {len ? <Text className='Currency'>&yen;</Text> : ''}
+            {priceInfo.format_pay_price}
           </View>,
           <View
             circle

@@ -45,9 +45,8 @@ class Login extends Component {
    * @param { object } params 
    */
   async bindPhoneFn(params) {
-    let { errorCode, data } = await bindPhone(params)
+    let { errorCode } = await bindPhone(params)
     if (errorCode === 0) {
-      console.log('data', data)
       Taro.navigateTo({url: '/pages/index/index'})
     }
   }

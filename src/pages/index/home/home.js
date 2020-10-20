@@ -42,7 +42,7 @@ class Home extends Component {
    * @desc 动态控制是否显示navBar
    */
   getNavBar = () => {
-    let title = 'FLOWERPLUS花加'
+    let title = 'AS Flower Boutique'
     let { showNavBar } = this.state
     if(!showNavBar) return ''
     return (<CustomNavBar title={title} />)
@@ -57,7 +57,7 @@ class Home extends Component {
     this.setState({
       loading: true
     })
-    
+
     let { errorCode, data } = await getProductList(this.state.pageInfo)
     if (errorCode === 0) {
       list = data.page_info.index === 1 ? data.product_list : [...this.state.list, ...data.product_list]

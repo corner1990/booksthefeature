@@ -15,7 +15,7 @@ const initState = {
   product_array: [],
   shipping: '',
   priceInfo: {
-    format_pay_price: ''
+    format_pay_price: '0.00'
   }
 }
 /**
