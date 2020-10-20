@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import { connect } from 'react-redux'
-import ListView, { LazyBlock } from "taro-listview"
+import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import Swiper from './home-components/swiper'
 import PromotionCard from './home-components/promotionCard'
@@ -15,7 +15,7 @@ const mapState = state => state.global
 class Home extends Component {
   state = {
     list: [],
-    isTouch: false,
+    laoding: false,
     showNavBar: true,
     pageInfo: {
       index: 0,
@@ -53,37 +53,42 @@ class Home extends Component {
   loadInfo = async ()=> {
     let list = []
     let pageInfo = {}
+    if (this.state.loading) return false
+    this.setState({
+      loading: true
+    })
+    
     let { errorCode, data } = await getProductList(this.state.pageInfo)
     if (errorCode === 0) {
-      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, data.product_list]
+      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, ...data.product_list]
+      pageInfo = data.page_info
     }
     this.setState({
-      list, pageInfo
+      list,
+      pageInfo,
+      loading: false
     })
   }
   render () {
     
-    // let { touchstart } = this
-    let { isTouch, list, pageInfo } = this.state
+    let { list } = this.state
 
     return (
       <View
-        className={`home ${isTouch ? 'hidden': ''}`}
-        // onTouchStart={touchstart}
-        // onTouchMove={touchstart}
+        className='home'
       >
-        <ListView
-          hasMore={pageInfo.has_more}
+  
+        <ScrollView
+          scrollY
+          scrollWithAnimation
           onScrollToLower={this.loadInfo}
-          className='sbListView'
-          autoHeight
+          style={{ height: "100%" }}
         >
-        { this.getNavBar() }
-        <Swiper />
-        <PromotionCard />
-        <NewProductList list={list} />
-        
-        </ListView>
+          { this.getNavBar() }
+          <Swiper />
+          <PromotionCard />
+          <NewProductList list={list} />
+        </ScrollView>
       </View>
     )
   }

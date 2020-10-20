@@ -1,26 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add axios
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add taro-listview
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/bin:/Library/gradle-6.1/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Apple/usr/bin）:/usr/local/MongoDB/bin:/usr/local/flutter/bin:.
+  C:\Program Files (x86)\NetSarang\Xshell 6\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\prete\AppData\Local\Programs\Python\Python37;C:\Users\prete\AppData\Local\Programs\Python\Python37\Lib\site-packages;C:\Users\prete\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\prete\AppData\Local\Yarn\bin;C:\Users\prete\AppData\Local\Programs\Fiddler;C:\Users\prete\AppData\Local\Microsoft\WindowsApps;C:\Users\prete\AppData\Local\hyper\app-3.0.2\resources\bin;C:\fast;C:\Program Files\Java\jdk-14.0.1\bin;C:\Program Files\Java\jdk-14.0.1\jre\bin;C:\thrift;C:\Users\prete\AppData\Roaming\npm
 
 Yarn version: 
   1.22.4
 
 Node version: 
-  12.16.1
+  12.8.0
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: Client network socket disconnected before secure TLS connection was established
-      at connResetException (internal/errors.js:604:14)
-      at TLSSocket.onConnectEnd (_tls_wrap.js:1513:19)
-      at Object.onceWrapper (events.js:417:28)
-      at TLSSocket.emit (events.js:323:22)
-      at endReadableNT (_stream_readable.js:1204:12)
-      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+  Error: EPERM: operation not permitted, unlink 'D:\flower-miniprogram\node_modules\node-sass\vendor\win32-x64-72\binding.node'
 
 npm manifest: 
   {
@@ -74,7 +68,7 @@ npm manifest:
       "redux": "^4.0.5",
       "redux-logger": "^3.0.6",
       "redux-thunk": "^2.3.0",
-      "taro-listview": "^2.0.2",
+      "taro-cropper3": "^1.0.0",
       "taro-ui": "^3.0.0-alpha.3",
       "terser-webpack-plugin": "^3.0.8"
     },
@@ -12820,6 +12814,11 @@ Lockfile:
       minizlib "^2.1.0"
       mkdirp "^1.0.3"
       yallist "^4.0.0"
+  
+  taro-cropper3@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.npm.taobao.org/taro-cropper3/download/taro-cropper3-1.0.0.tgz#2b860f8c38b61b212b93484575187c253e9b4a12"
+    integrity sha1-K4YPjDi2GyErk0hFdRh8JT6bShI=
   
   taro-css-to-react-native@^2.0.4:
     version "2.2.10"

@@ -1,0 +1,15 @@
+@import '../../../scss/index.scss';
+.LogisticsCard{
+  @include shadow;
+  border-radius: 16px;
+  margin: 0 32px;
+  .line{
+    line-height: 76px;
+    font-size: $font-sm;
+    color: $black65;
+    padding: 0 24px;
+  }
+  .LogisticsCardTitle{
+    border-bottom: 2px solid #eee;
+  }
+}

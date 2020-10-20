@@ -23,8 +23,8 @@ class NewProductList extends Component{
     let { list = [] } = this.props
     let { goDetail } = this
     return list.map((info, key) => {
+      
       return (
-        // <LazyBlock current={key} key={key} >
           <View
             className='productCard'
             key={key}
