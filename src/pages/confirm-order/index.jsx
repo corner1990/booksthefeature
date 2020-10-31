@@ -16,7 +16,7 @@ import { getShippingAddressList } from '../address/api';
 import { setShipping, update } from '../../store/actions/shopping-cart'
 
 import './index.scss'
-import { calculateOrderPrice, createOrder } from './api';
+import { calculateOrderPrice, createOrder, createOrderPayInfo } from './api';
 import { removeFromCart } from '../shopping-cart/api';
 
 /**
@@ -138,10 +138,15 @@ class ConfirmOrder extends React.Component {
     })
     if (errorCode === 0) {
       console.log('12312', data)
-      Taro.navigateTo({
-        url: '/pages/order-result/index'
-      })
+      // Taro.navigateTo({
+      //   url: '/pages/order-result/index'
+      // })
+      this.toPay(data)
     }
+  }
+  async toPay(data) {
+    let res = await  createOrderPayInfo({order_id: data.order_sn, ...data})
+    console.log('res', res)
   }
   /**
    * @desc 删除购物车

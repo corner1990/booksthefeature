@@ -10,4 +10,9 @@ export const calculateOrderPrice = params => Axios.post('/order/order/calculateO
  * @param {*} params 
  */
 export const createOrder = params => Axios.post('/order/order/createOrder', params)
+/**
+ * @desc  创建支付信息
+ * @param {*} params 
+ */
+export const createOrderPayInfo = params => Axios.post('/order/order/createOrderPayInfo', params)
 
