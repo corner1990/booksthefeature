@@ -46,13 +46,18 @@ class Login extends Component {
    */
   async bindPhoneFn(params) {
     let { errorCode, data } = await bindPhone(params)
-    if (errorCode === 0) {
+    if (errorCode === 0 && data.user_id) {
       let { access_token, refresh_token, user_id } = data
-      console.log('access_token, refresh_token, user_id', access_token, refresh_token, user_id, data)
       wx.setStorageSync('token', access_token)
       wx.setStorageSync('refresh_token', refresh_token)
       wx.setStorageSync('$user_id', user_id)
-      Taro.navigateTo({url: '/pages/index/index'})
+      // 处理跳转
+      let url = '/pages/index/index'
+      let reject = wx.getStorageSync('$reject');
+      if (reject) {
+        url = reject
+      }
+      Taro.navigateTo({url})
     }
   }
   render() {
