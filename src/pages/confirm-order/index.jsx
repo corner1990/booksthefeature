@@ -137,7 +137,7 @@ class ConfirmOrder extends React.Component {
       anonymous_status
     })
     if (errorCode === 0) {
-      console.log('12312', data)
+      // console.log('12312', data)
       // Taro.navigateTo({
       //   url: '/pages/order-result/index'
       // })
@@ -145,7 +145,8 @@ class ConfirmOrder extends React.Component {
     }
   }
   async toPay(data) {
-    let res = await  createOrderPayInfo({order_id: data.order_sn, ...data})
+    
+    let res = await  createOrderPayInfo({order_id: data.order_sn, 'pay_type': 5, ...data})
     console.log('res', res)
   }
   /**

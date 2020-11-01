@@ -45,8 +45,13 @@ class Login extends Component {
    * @param { object } params 
    */
   async bindPhoneFn(params) {
-    let { errorCode } = await bindPhone(params)
+    let { errorCode, data } = await bindPhone(params)
     if (errorCode === 0) {
+      let { access_token, refresh_token, user_id } = data
+      console.log('access_token, refresh_token, user_id', access_token, refresh_token, user_id, data)
+      wx.setStorageSync('token', access_token)
+      wx.setStorageSync('refresh_token', refresh_token)
+      wx.setStorageSync('$user_id', user_id)
       Taro.navigateTo({url: '/pages/index/index'})
     }
   }
