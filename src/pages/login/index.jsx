@@ -56,6 +56,8 @@ class Login extends Component {
       let reject = wx.getStorageSync('$reject');
       if (reject) {
         url = reject
+        // 清空信息
+        wx.removeStorageSync({ key: '$reject' });
       }
       Taro.navigateTo({url})
     }
