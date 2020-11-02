@@ -144,10 +144,22 @@ class ConfirmOrder extends React.Component {
       this.toPay(data)
     }
   }
-  async toPay(data) {
+  async toPay(params) {
+    let url = `/pages/order-result/index?order_id=${params.order_sn}`
+    let { errorCode, data} = await  createOrderPayInfo({order_id: params.order_sn, 'pay_type': 5, ...params})
+    if (errorCode === 0) {
+      wx.requestPayment({
+        ...data,
+        signType: 'MD5',
+        success (res) {
+          Taro.navigateTo({ url })
+        },
+        fail (res) {
+          Taro.navigateTo({ url })
+        }
+      })
+    }
     
-    let res = await  createOrderPayInfo({order_id: data.order_sn, 'pay_type': 5, ...data})
-    console.log('res', res)
   }
   /**
    * @desc 删除购物车

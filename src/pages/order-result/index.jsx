@@ -40,8 +40,11 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    // let {} = this.props
+    let { tid: path } = this.props
+    // let path = 'pages/productDetail/index?id=269&__key_=16012089318921'
+    let { order_id } = parseQuery(path)
     // this.loadInfo()
+    console.log(order_id, 'props order_id')
   }
   /**
    * @desc 返回上一页
