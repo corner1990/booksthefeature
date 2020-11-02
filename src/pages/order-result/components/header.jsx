@@ -15,6 +15,7 @@ const OrderHeader = props => {
   const backHistory = () => {
     Taro.navigateBack()
   }
+  let { params } = Taro.Current.router
   return (<View className='OrderResultHeaderWrap'>
     <CustomNavBar
       color='#fff'
@@ -30,8 +31,8 @@ const OrderHeader = props => {
     <View class='pay-status' >
       {/* <Image src='' class='reslult-img' alt='' srcset=''> */}
       <View class='pay-info'>
-        <View class='pay-title'>支付失败</View>
-        <View class='pay-small-title'>订单24小时后关闭</View>
+        <View class='pay-title'>{params.pay_status === '1' ? '成功支付' : '等待支付'}</View>
+        <View class='pay-small-title'>{info.shipping_word}</View>
       </View>
     </View>
     <View class='line'></View>

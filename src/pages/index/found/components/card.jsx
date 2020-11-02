@@ -36,12 +36,19 @@ export default class Index extends Component {
       height
     }
   }
+  /**
+   * @desc 点击回调
+   */
+  clickHandle = () => {
+    let { info } = this.props
+    this.props.update({ info, open: true })
+  }
   render () {
     let { info } = this.props
-    let { getStyle } = this
+    let { getStyle, clickHandle } = this
     let img = info.feed_detail.image_list[0]
     return (
-      <View className='FoundCard'>
+      <View className='FoundCard' onClick={clickHandle}>
         <Image src={img.image} style={getStyle(img)} className='FoundCardImg' mode='aspectFill' />
         <View className='FoundCardDesc'>
           {info.feed_detail.description}

@@ -2,11 +2,8 @@
 import axios from 'axios'
 import Taro from '@tarojs/taro'
 import { url } from './config'
-// import qs from 'qs'
 // 时间戳
-// const NewTimeStamp = new Date().getTime()
 axios.defaults.timeout = 30000
-// axios.defaults.baseURL = 'https://ipxmallapi.jfshare.com'
 axios.defaults.baseURL = `${url}`
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.adapter = function (config) {
@@ -36,6 +33,29 @@ axios.defaults.adapter = function (config) {
     })
   })
 }
+/**
+ * @desc 处理重定向
+ * @param { Object } data 
+ */
+const reject = data => {
+  let codes = [403, /* 1201 */]
+  let { errorCode } = data
+  
+  if (codes.includes(errorCode)) {
+    wx.removeStorageSync({ key: '$user_id' });
+    wx.removeStorageSync({ key: 'token' });
+    // 处理重定向地址
+    let { path, params } = Taro.Current.router
+    let $reject = Object.keys(params).filter(key => key !== '__key_').reduce((prev, next) => {
+      return `${prev}${next}=${params[next]}`
+    }, `${path}?`)
+
+    Taro.setStorageSync({ $reject })
+    Taro.navigateTo({ url: '/pages/login/index' })
+    return false
+  }
+  return data
+}
 const request = axios.create({})
 // axios 拦截器
 // 请求拦截器
@@ -61,7 +81,8 @@ request.interceptors.response.use(function (response) {
       title: data.errorMessage
     })
   }
-  return data
+  
+  return reject(data)
 }, function (error) {
   return Promise.reject(error)
 })

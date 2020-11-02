@@ -119,11 +119,16 @@ class ConfirmOrder extends React.Component {
       date,
       anonymous
     } = this.state
-    if ( date === '请选择配送时间') {
+    
+    if ( date.includes('时间')) {
       Taro.showToast({
-        message: '请选择配送时间'
+        iconType: 'error',
+        title: '请选择配送时间'
       })
+
+      return false
     }
+
     let anonymous_status = anonymous ? 1 : 0
     product_array = product_array.map(info => {
       let { count, item_id } = info
@@ -137,10 +142,6 @@ class ConfirmOrder extends React.Component {
       anonymous_status
     })
     if (errorCode === 0) {
-      // console.log('12312', data)
-      // Taro.navigateTo({
-      //   url: '/pages/order-result/index'
-      // })
       this.toPay(data)
     }
   }
@@ -151,10 +152,12 @@ class ConfirmOrder extends React.Component {
       wx.requestPayment({
         ...data,
         signType: 'MD5',
-        success (res) {
+        success () {
+          url = `${url}&pay_status=1`
           Taro.navigateTo({ url })
         },
-        fail (res) {
+        fail () {
+          url = `${url}&pay_status=0`
           Taro.navigateTo({ url })
         }
       })

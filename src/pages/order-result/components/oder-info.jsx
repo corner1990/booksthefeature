@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import dayjs from 'dayjs'
 import './index.scss'
 /**
@@ -7,12 +8,12 @@ import './index.scss'
  */
 const OrderInfo = props => {
   let { info } = props
+  let { params } = Taro.Current.router
   let timer = info.create_timestamp === 0 ? '' :  dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
 
   return (<View className='OrderInfoWrap ReceiptInfoWrap'>
     <View class='order-status-wrap'>
-      <View class='status' >成功支付</View>
-      {/* <p class='status' v-else>等待支付</p> */}
+      <View class='status' >{params.pay_status === '1' ? '成功支付' : '等待支付'}</View>
       <View class='order-price'>
         &yen;
         <View class='large-price'>123.00</View>

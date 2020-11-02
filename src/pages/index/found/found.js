@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import ListView, { LazyBlock } from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import FoundCard from './components/card'
+import ViewDetal from './components/view-detail'
 import './index.scss'
 import { getFeedList } from './api'
 
@@ -13,6 +14,13 @@ export default class Index extends Component {
     pageInfo: {
       index: 0,
       has_more: true
+    },
+    open: false,
+    info: {
+      feed_detail: {
+        description: '',
+        image_list: [{image: ''}]
+      }
     }
   }
   
@@ -32,11 +40,20 @@ export default class Index extends Component {
     // list = [...list, ...list, ...list]
     // console.log('ist', list)
     this.setState({
-      list, pageInfo
+      list,
+      pageInfo
     })
   }
+  /**
+   * @desc 更新数据
+   * @param {*} key 
+   * @param {*} val 
+   */
+  update = params => {
+    this.setState(params)
+  }
   render () {
-    let { pageInfo, list } = this.state
+    let { pageInfo, list, open, info } = this.state
     return (
       <View className='found' >
         <CustomNavBar title='发现' />
@@ -47,10 +64,10 @@ export default class Index extends Component {
           autoHeight
         >
           <View className='FoundList'>
-            { list.map( (item, key ) => (<FoundCard info={item} key={key} />))}
+            { list.map( (item, key ) => (<FoundCard info={item} key={key} update={this.update} />))}
           </View>
         </ListView>
-        
+        <ViewDetal open={open} info={info} update={this.update} />
       </View>
     )
   }

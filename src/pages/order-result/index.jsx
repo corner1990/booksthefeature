@@ -5,8 +5,6 @@ import { AtButton } from 'taro-ui'
 import { connect } from 'react-redux'
 import Header from './components/header'
 import OrderInfo from './components/oder-info'
-import { parseQuery } from '../../utils/utils'
-
 
 import './index.scss'
 import { queryOrderDetailInfo } from './api'
@@ -40,11 +38,8 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    let { tid: path } = this.props
-    // let path = 'pages/productDetail/index?id=269&__key_=16012089318921'
-    let { order_id } = parseQuery(path)
-    // this.loadInfo()
-    console.log(order_id, 'props order_id')
+    // let { params } = Taro.Current.router
+    this.loadInfo({order_sn: '202011021212371763087'})
   }
   /**
    * @desc 返回上一页
@@ -55,13 +50,10 @@ class OrderDetail extends Component {
   /**
    * @desc 加载数据
    */
-  loadInfo = async () => {
-    // let { tid: path } = this.props
-    let path = 'pages/productDetail/index?id=2354&__key_=16012089318921'
-    let { id } = parseQuery(path)
-    let { errorCode, data: orderInfo } = await queryOrderDetailInfo({order_id: id})
+  loadInfo = async params => {
+
+    let { errorCode, data: orderInfo } = await queryOrderDetailInfo(params)
     if (errorCode === 0) {
-      // this.props.update({key: 'info', val: data.shopping_cart_product_list})
       this.setState({
         orderInfo
       })

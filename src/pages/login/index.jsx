@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Button } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 
@@ -28,11 +28,11 @@ class Login extends Component {
     let self = this
     
     if (errMsg.includes('ok')) {
-      wx.login({
+      Taro.login({
         success (res) {
           if (res.code) {
             //发起网络请求
-            self.bindPhoneFn({ code: res.code, encryptedData, iv, provider: 'wxMini' })
+            self.bindPhoneFn({ code: res.code, encryptedData, iv, provider: 'TaroMini' })
           } else {
             console.log('登录失败！' + res.errMsg)
           }
@@ -48,16 +48,16 @@ class Login extends Component {
     let { errorCode, data } = await bindPhone(params)
     if (errorCode === 0 && data.user_id) {
       let { access_token, refresh_token, user_id } = data
-      wx.setStorageSync('token', access_token)
-      wx.setStorageSync('refresh_token', refresh_token)
-      wx.setStorageSync('$user_id', user_id)
+      Taro.setStorageSync('token', access_token)
+      Taro.setStorageSync('refresh_token', refresh_token)
+      Taro.setStorageSync('$user_id', user_id)
       // 处理跳转
       let url = '/pages/index/index'
-      let reject = wx.getStorageSync('$reject');
+      let reject = Taro.getStorageSync('$reject');
       if (reject) {
         url = reject
         // 清空信息
-        wx.removeStorageSync({ key: '$reject' });
+        Taro.removeStorageSync({ key: '$reject' });
       }
       Taro.navigateTo({url})
     }
