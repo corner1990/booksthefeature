@@ -1,8 +1,9 @@
 'use strict'
-import { SETTAB, GETUSERINFO } from '../types'
+import { SETTAB, GETUSERINFO, GLOBALUPDATE } from '../types'
 
 const initState = {
-  tabIndex: 0, // 首页tabar下标
+  tabIndex: 3, // 首页tabar下标
+  order_type: 0,
   userInfo: {
     avatar: 'https://ipxcdn.jfshare.com/ipxmall/2c5871d1937274f5d04504e861817f9a.png'
   } // 用户信息
@@ -26,6 +27,11 @@ const Global = (state = initState, action) => {
       return {
         ...state,
         userInfo: action.payload
+      }
+    case GLOBALUPDATE:
+      return {
+        ...state,
+        ...action.payload
       }
     default:
       return state

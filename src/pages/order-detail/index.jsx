@@ -7,10 +7,12 @@ import ReceiptInfo from './components/receipt-info'
 import OrderInfo from './components/oder-info'
 import ProductInfo from './components/product-info'
 import Footer from './components/footer'
-import { parseQuery } from '../../utils/utils'
+// import { parseQuery } from '../../utils/utils'
 
 import './index.scss'
 import { queryOrderDetailInfo } from './api'
+import { cancelOrder, deleteOrder } from '../index/orders/api'
+import { createOrderPayInfo } from '../confirm-order/api'
 /**
  * @desc 我的信息
  */
@@ -53,9 +55,20 @@ class OrderDetail extends Component {
    */
   loadInfo = async () => {
     // let { tid: path } = this.props
-    let path = 'pages/productDetail/index?id=2354&__key_=16012089318921'
-    let { id } = parseQuery(path)
-    let { errorCode, data: orderInfo } = await queryOrderDetailInfo({order_id: id})
+    /* 
+    order_id: 2406
+  order_sn: "202011011514248868471"
+
+  order_id: 2405
+order_sn: "202011011509221621264"
+
+order_id: 2404
+order_sn: "202011011508089570764"
+    */
+    
+    let { order_sn = "202011011508089570764" } = Taro.Current.router.params
+    
+    let { errorCode, data: orderInfo } = await queryOrderDetailInfo({order_sn})
     if (errorCode === 0) {
       // this.props.update({key: 'info', val: data.shopping_cart_product_list})
       this.setState({
@@ -63,24 +76,44 @@ class OrderDetail extends Component {
       })
     }
   }
-  toPay = () => {
+  /**
+   * @desc 下单
+   * @param {*} info 
+   */
+  
+  async toPay(params) {
+    let url = `/pages/order-result/index?order_id=${params.order_sn}`
+    let { errorCode, data} = await  createOrderPayInfo({order_sn: params.order_sn, 'pay_type': 5, pay_price: params.pay_price})
+    if (errorCode === 0) {
+      Taro.requestPayment({
+        ...data,
+        signType: 'MD5',
+        success () {
+          url = `${url}&pay_status=1`
+          Taro.navigateTo({ url })
+        },
+        fail () {
+          url = `${url}&pay_status=0`
+          Taro.navigateTo({ url })
+        }
+      })
+    }
     
   }
   /**
    * @desc 调用方法
    */
-  submit = (key, ) => {
-    console.log('key', key)
+  submit = (key, info) => {
     switch(key){
       
       case 'toPay': // 去支付
-        this.toPay()
+        this.toPay(info)
         break;
       case 'cancel': // 关闭订单
-        // this.cancel()
+        this.askCancel(info)
         break;
       case 'delorder': // 关闭订单
-        // this.delOrder()
+        this.askDelete(info)
         break;
       case 'confirm': // 确认收货
         // this.confirm()
@@ -95,13 +128,91 @@ class OrderDetail extends Component {
         // this.seeEvaluation()
         break;
       case 'driver': // 催发货
-        // this.driver()
+        this.driver()
         break;
       case 'refound': // 退款
         // this.refound()
         break;
     }
       
+  }
+  askCancel = info => {
+    let self = this
+    Taro.showModal({
+      title: '提示',
+      content: '你确定要取消该订单么？',
+      success: function (res) {
+        if (res.confirm) {
+          self.cancel(info)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  }
+  /**
+   * @desc 关闭订单
+   * @param {*} info 
+   */
+  cancel = async info => {
+    let { order_sn } = info
+    let { errorCode } = await cancelOrder({ order_sn })
+    if(errorCode === 0) {
+      let list = this.state.list.map(item => {
+        if (item.order_sn !== info.order_sn) return item
+        return {
+          ...item,
+          order_status: 50
+        }
+      })
+      this.setState({ list })
+    }
+
+  }
+  askDelete = info => {
+    let self = this
+    Taro.showModal({
+      title: '提示',
+      content: '你确定要删除该订单么？',
+      success: function (res) {
+        if (res.confirm) {
+          self.delete(info)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  }
+  /**
+   * @desc 关闭订单
+   * @param {*} info 
+   */
+  delete = async info => {
+    let { order_sn } = info
+    let { errorCode } = await deleteOrder({ order_sn })
+    if(errorCode === 0) {
+      let list = this.state.list.filter(item => item.order_sn !== info.order_sn)
+      this.setState({ list })
+    }
+
+  }
+  /**
+   * @des  催发货
+   * @param {*} info 
+   */
+  driver = () => {
+    Taro.showModal({
+      title: '提示',
+      content: '已经通知老板尽快发货！',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   }
   render() {
     let {

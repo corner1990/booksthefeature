@@ -64,13 +64,10 @@ class FilterBar extends Component{
     let { info, submit } = this.props
     let actionKey = btnKey[info.order_status][1]
     submit(actionKey, info)
-    Taro.navigateTo({
-      url: '/pages/order-result/index'
-    })
   }
   // 取消按钮（左侧按钮侧点击触发）
   cancel = e => {
-    console.log('e', e)
+    // console.log('e', e)
     e && e.stopPropagation()
     // this.$emit('submit', actionKey)
     let { info, submit } = this.props

@@ -7,7 +7,11 @@ import './index.scss'
  */
 class FilterBar extends Component{
   state = {
+    // //0.全部 1.待付款2.待发货3.待收货4.已完成
     list: [
+      {
+        label: '全部',
+      },
       {
         label: '待支付'
       },
@@ -27,7 +31,8 @@ class FilterBar extends Component{
    * @desc 处理item
    */
   getFitetItem = () => {
-    let { list, active } = this.state
+    let { list } = this.state
+    let { active } = this.props
     return list.map((item, key) => (
       <View
         className={['OrderFilterBarItem', (active === key ? 'active' : '')]}
@@ -38,12 +43,15 @@ class FilterBar extends Component{
       </View>
     ))
   }
-  setAvtive = active => this.setState({ active })
+  setAvtive = active => {
+    this.props.update({active})
+    // this.setState({ active })
+  }
   getIndexTransform = () => {
-    let { active } = this.state
-      let startWith = active * 25
+    let { active } = this.props
+      let startWith = active * 20
       return {
-        'transform': `translateX(calc(calc(25vw - 16px) / 2 + ${startWith}vw))`
+        'transform': `translateX(calc(calc(20vw - 16px) / 2 + ${startWith}vw))`
       }
   }
   render() {

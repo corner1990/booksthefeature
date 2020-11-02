@@ -2,7 +2,8 @@ import {
   ADD,
   MINUS,
   SETTAB,
-  GETUSERINFO
+  GETUSERINFO,
+  GLOBALUPDATE
 } from '../types'
 import { getUserInfo } from '../../pages/index/user/api'
 /**
@@ -68,6 +69,15 @@ export const asyncMinus = () => {
     setTimeout(() => {
       dispatch(minus())
     }, 2000)
+  }
+}
+/**
+ * @desc 设置信息
+ */
+export const globaleUpdate = payload => {
+  return {
+    type: GLOBALUPDATE,
+    payload
   }
 }
 

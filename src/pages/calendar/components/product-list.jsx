@@ -9,8 +9,7 @@ import './index.scss'
  */
 const  ProductList = props =>{
   let { selected } = props
-
-  console.log('selected', selected)
+ 
   if(!selected.length) return (<View></View>)
   return (
     <View className='ProductList'>

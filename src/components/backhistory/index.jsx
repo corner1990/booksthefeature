@@ -18,7 +18,7 @@ export default class Index extends Component {
     } = this.state
     const { statusBarHeight } = wx.getSystemInfoSync()
     getHeight(navigationBarHeight+statusBarHeight)
-    console.log('did',navigationBarHeight+statusBarHeight)
+    // console.log('did',navigationBarHeight+statusBarHeight)
   }
   /**
    * @desc 处理顶部高度

@@ -13,7 +13,7 @@
   */
 export const btnKey = {
   10: ['cancel', 'toPay'],
-  20: ['refound', 'driver'],
+  20: ['driver'],
   30: ['driver', 'confirm'],
   40: ['logistics', 'confirm'],
   50: ['delorder', 'evaluation'],
@@ -23,7 +23,7 @@ export const btnKey = {
 }
 export const btnTexts = {
   10: ['取消', '去支付'],
-  20: ['申请退款', '催发货'],
+  20: ['催发货'],
   30: ['催发货'],
   40: ['物流信息', '确认收货'],
   50: ['删除订单'],

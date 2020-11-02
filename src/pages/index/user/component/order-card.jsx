@@ -2,7 +2,7 @@ import React, { Component } from  'react'
 import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import { connect } from 'react-redux'
-import { setTab } from '../../../../store/actions/global'
+import { setTab, globaleUpdate } from '../../../../store/actions/global'
 import { getOrderCount } from '../api'
 
 import '../index.scss'
@@ -18,26 +18,31 @@ const mapState = state => state.global
 class OrdersCard extends Component{
   
   state = {
+    //0.全部 1.待付款2.待发货3.待收货4.已完成
     list: [
       {
         label: '待支付',
         icon: 'money',
-        key: 'wait_pay'
+        key: 'wait_pay',
+        type: 1
       },
       {
         label: '待发货',
         icon: 'shopping-cart',
-        key: 'wait_ship'
+        key: 'wait_ship',
+        type: 2
       },
       {
         label: '待收货',
         icon: 'calendar',
-        key: 'wait_receive'
+        key: 'wait_receive',
+        type: 3
       },
       {
         label: '已完成',
         icon: 'calendar',
-        key: 'wait_review'
+        key: 'wait_review',
+        type: 4
       }
     ],
     orderInfo: {}
@@ -48,8 +53,9 @@ class OrdersCard extends Component{
   /**
    * @desc 去订单页面
    */
-  toOrderPage = () => {
-    this.props.setTab(3)
+  toOrderPage = info => {
+    this.props.globaleUpdate({order_type: info.type, tabIndex: 3})
+    // this.props.setTab(3)
   }
   /**
    * @desc 渲染页面
@@ -108,4 +114,4 @@ class OrdersCard extends Component{
   }
 }
 
-export default connect(mapState, {setTab})(OrdersCard)
+export default connect(mapState, {setTab, globaleUpdate})(OrdersCard)

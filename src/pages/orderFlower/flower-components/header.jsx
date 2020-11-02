@@ -13,14 +13,14 @@ class Header extends Component {
     tabs: [
       {
         label: '包月鲜花',
-        key: 0,
+        key: 1,
       },
       {
         label: '礼品花束',
-        key: 1
+        key: 2
       }
     ],
-    active: 0
+    active: 1
   }
   /**
    * @desc 处理tabContent
@@ -39,50 +39,7 @@ class Header extends Component {
         ))
     )
   }
-  getTabContentItem = () => {
-    let contents = [
-      {
-        label: '配送区域',
-        subLabel: '送花去哪',
-        key: 1,
-        status: -1
-      },
-      {
-        label: '配送星期',
-        subLabel: '周几收花',
-        key: 2,
-        status: -1
-      }
-    ]
-    let other = [
-      {
-        label: '产品',
-        subLabel: '选择品种',
-        key: 3,
-        status: -1
-      },
-      {
-        label: '订花周期',
-        subLabel: '订几个月',
-        key: 4,
-        status: -1
-      }
-    ]
-    let { active } = this.state
-    if (active == 0) {
-      contents = [...contents, ...other]
-    }
-    return (contents.map(item => (
-      <View
-        className='tabContentItem'
-        key={item.key}
-        onClick={() => this.showOption(item.key)}
-      >
-        <View className='tabContentItemTitle'>{item.label}</View>
-        <View className='tabContentItemSubTitle'>{ item.subLabel }</View>
-      </View>
-    )))
-  }
+
   /**
    * @desc 显示对应的操作弹框
    * @param { number } key 
@@ -101,9 +58,21 @@ class Header extends Component {
    * @desc 设置tab active
    * @param { number } active 
    */
-  setActive = active => this.setState({ active })
+  setActive = active => {
+    this.setState({ active })
+    this.props.update({
+      filterActive: active,
+      pageInfo: {
+        index: 0,
+        has_more: true
+      }
+    })
+
+    this.props.loadinfo()
+  }
   render() {
-    let { getTabHeader, getTabContentItem } = this
+    let { getTabHeader } = this
+    console.log('render', this.props)
     return (
       <View className='orderFlowerHeaderWrap'>
         <View className='tabWrap'>
@@ -111,7 +80,7 @@ class Header extends Component {
             { getTabHeader() }
           </View>
           <View className='tabContent'>
-            { getTabContentItem() }
+            等待设计出图
           </View>
         </View>
       </View>
