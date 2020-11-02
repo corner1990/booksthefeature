@@ -25,7 +25,7 @@ class CanlendarBar extends Component{
     let { list } = this.state
     let { jumpToCalendar } = this
     return list.map((item, key) => {
-      return <View key={key} className='calendarCard' onClick={() => jumpToCalendar(item.path)}>
+      return <View key={key} className='calendarCard' onClick={() => jumpToCalendar(item.path, key)}>
         <AtIcon value={item.icon} className='cardIcon' />
         <Text>{item.label}</Text>
       </View>
@@ -34,7 +34,22 @@ class CanlendarBar extends Component{
   /**
    * @desc 跳转到日历页面
    */
-  jumpToCalendar = url => {
+  jumpToCalendar = (url, key) => {
+    if (key) {
+      Taro.showModal({
+        title: '提示',
+        content: '功能正在开发中，敬请期待！',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      return false
+    }
     Taro.navigateTo({
       url
     })

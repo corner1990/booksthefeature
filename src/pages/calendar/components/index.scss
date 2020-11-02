@@ -93,7 +93,7 @@
   }
 }
 // 产品 卡片
-.ProductCardWrap{
+.CalendarProductCardWrap{
   @include flex(space-between, center);
   padding: 0 24px;
   border-bottom: 1px solid #eee;
@@ -111,13 +111,13 @@
     flex: 1;
   }
   .ProductName{
-    @include textHide(2);
+    // @include textHide(2);
     font-size: $font-sm;
     color: $black65;
     max-width: 450px;
     line-height: 32px;
-    min-height: 64px;
-    max-height: 64px;
+    // min-height: 64px;
+    // max-height: 64px;
   }
 
   .ProductSkuInfo{

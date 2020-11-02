@@ -10,7 +10,7 @@ const Footer = props => {
   return (<View className='ShoppingCardFooter'>
     <View className='PriceWrap'>
       <Text className='Currency'>需要支付：&yen;</Text>
-      { info.pay_price }
+      { info.format_pay_price }
     </View>
     <View
       circle

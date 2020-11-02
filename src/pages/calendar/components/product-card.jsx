@@ -11,7 +11,7 @@ const ProductCard = props => {
   const viewDetail = () => {
     Taro.navigateTo({ url: `/pages/productDetail/index?id=${info.item_id}`})
   }
-  return (<View className='ProductCardWrap' onClick={viewDetail}>
+  return (<View className='CalendarProductCardWrap' onClick={viewDetail}>
     <Image
       src={info.prodcut_image}
       className='ProductImg'
