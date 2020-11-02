@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import ListView, { LazyBlock } from "taro-listview"
+import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import FoundCard from './components/card'
 import ViewDetal from './components/view-detail'

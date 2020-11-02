@@ -4,8 +4,9 @@ import Taro from '@tarojs/taro'
 import CustomNavBar from '../../components/navbar'
 import Header from './components/header'
 import Calendar from './components/calendar'
-import './index.scss'
+import ProductList from './components/product-list'
 import { getUserFlowerCalendar } from './api'
+import './index.scss'
 
 
 /**
@@ -14,7 +15,8 @@ import { getUserFlowerCalendar } from './api'
 class CalendarWrap extends Component {
   state = {
     list: [],
-    title: `${new Date().getFullYear()}.${new Date().getMonth()+1}`
+    title: `${new Date().getFullYear()}.${new Date().getMonth()+1}`,
+    selected: ''
   }
   componentDidMount() {
     this.loadInfo()
@@ -32,7 +34,6 @@ class CalendarWrap extends Component {
       this.setState({
         list: data.calendar_list
       })
-      console.log('list', this.state.list)
     }
   }
   /**
@@ -46,9 +47,16 @@ class CalendarWrap extends Component {
       title
     })
   }
+  /**
+   * @desc 更新数据
+   * @param {*} params 
+   */
+  update = params => {
+    this.setState(params)
+  }
   render() {
     let { setDate } = this
-    let { title } = this.state
+    let { title, list, selected } = this.state
     return (<View className='CalendarWrap'>
       <CustomNavBar
         title='收花日历'
@@ -59,7 +67,10 @@ class CalendarWrap extends Component {
       />
       <Calendar
         setDate={setDate}
+        update={this.update}
+        list={list}
       />
+      <ProductList selected={selected} />
       {/* // TODO: 需要添加一个tag提示 */}
     </View>)
   }

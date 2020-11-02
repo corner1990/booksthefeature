@@ -7,7 +7,7 @@ import './index.scss'
 import { useState } from 'react'
 
 const CalendarComponent = props => {
-  let { setDate } = props
+  let { setDate, list, update } = props
   let m = (new Date().getMonth() + 1)
   let [ month, setMonth ] = useState(m)
   /**
@@ -20,13 +20,18 @@ const CalendarComponent = props => {
     setDate(date)
   }
   const dayClick = info => {
-    console.log('info', info)
+    let { value } = info
+    value = value.replace(/\-/g, '/')
+    let selected = list.find(item => item.date === value)
+    if  (selected) {
+      selected = selected.product_list
+    } else {
+      selected = []
+    }
+    update({ selected })
   }
-  const marks = [
-    {
-      value: '2020/10/10'
-    },
-  ]
+  const marks = list.map(info => ({value: info.date}))
+
   return (<View className='CalendarComponent'>
     <View className='BgCount'>{month}</View>
     <AtCalendar

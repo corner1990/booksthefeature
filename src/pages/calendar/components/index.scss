@@ -44,6 +44,7 @@
         font-size: 48px;
       }
     }
+  
     .flex__item--marks{
       &::after{
         content: "";
@@ -71,5 +72,62 @@
       flex: 1;
       width: calc(100%/3) !important;
     }
+  }
+}
+.ProductList{
+  top: -260px;
+  position: relative;
+  z-index: 3;
+ 
+  .ProductListTitle{
+    line-height: 64px;
+    height: 64px;
+    background-color: $white;
+    text-indent: 24px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  .CardWrap{
+    max-height: 336px;
+    overflow: auto;
+  }
+}
+// 产品 卡片
+.ProductCardWrap{
+  @include flex(space-between, center);
+  padding: 0 24px;
+  border-bottom: 1px solid #eee;
+  height: 164px;
+
+  .ProductImg{
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    background-color: #eee;
+  }
+  .ProductInfoWrap{
+    margin-left: 14px;
+    flex: 1;
+  }
+  .ProductName{
+    @include textHide(2);
+    font-size: $font-sm;
+    color: $black65;
+    max-width: 450px;
+    line-height: 32px;
+    min-height: 64px;
+    max-height: 64px;
+  }
+
+  .ProductSkuInfo{
+    @include flex(space-between, center);
+    margin-top: 8px;
+    font-size: $font-xs;
+    color: $black65;
+  }
+  .ProductPrice{
+    font-size: $font-sm;
+    color: $black;
   }
 }
