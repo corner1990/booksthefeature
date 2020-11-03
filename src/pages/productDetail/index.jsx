@@ -11,7 +11,6 @@ import Footer from './components/footer'
 import AddShopCart from './components/addShopcart'
 import JustBuyComponent from './components/justBuy'
 
-import { parseQuery } from '../../utils/utils'
 import { getProductDetail } from './api'
 
 import './index.scss'
@@ -26,11 +25,8 @@ class ProductDetail extends Component{
     showJustBuy: false
   }
   componentWillMount () {
-    // let { tid: path } = this.props
-    // let path = 'pages/productDetail/index?id=269&__key_=16012089318921'
-    // let { id } = parseQuery(path)
-    // this.loadInfo(parseInt(id))
-    this.loadInfo(284)
+    let { id } = Taro.Current.router.params
+    this.loadInfo(id)
   }
   /**
    * @desc 加载数据

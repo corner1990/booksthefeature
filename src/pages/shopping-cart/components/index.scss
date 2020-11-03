@@ -110,3 +110,33 @@
     font-weight: 400;
   }
 }
+
+// tab
+.CustomTab{
+  @include shadow;
+  .TabHead{
+    @include flex(space-around, center);
+    height: 84px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .HeadItem{
+    height: 84px;
+    line-height: 84px;
+    &.active{
+      color: $primary;
+      position: relative;
+      &::before{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 48px;
+        height: 4px;
+        transform: translateX(-50%);
+        background-color: $primary;
+      }
+    }
+  }
+}

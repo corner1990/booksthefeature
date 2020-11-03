@@ -1,6 +1,6 @@
 export default {
   pages: [
-    'pages/orderFlower/index',
+    
     'pages/index/index',
     'pages/user-info/index',
     'pages/login/index',
@@ -13,7 +13,7 @@ export default {
     'pages/confirm-order/index',
     'pages/productDetail/index',
     'pages/shopping-cart/index',
-    
+    'pages/orderFlower/index',
   ],
   window: {
     navigationStyle: 'custom',

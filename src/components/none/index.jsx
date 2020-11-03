@@ -6,9 +6,10 @@ const None = props => {
   let {
     src='https://ipxcdn.jfshare.com/ipxmall/4969f9618cf7187a8974c14bbeaf21c4',
     size = 160,
-    text = '暂无相关数据'
+    text = '暂无相关数据',
+    style = {}
   } = props
-  return (<View className='NoneWrap'>
+  return (<View className='NoneWrap' style={{...style}}>
     <Image
       src={src}
       mode='scaleToFill'

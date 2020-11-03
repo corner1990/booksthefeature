@@ -24,15 +24,15 @@ const Footer = props => {
     e && e.stopPropagation()
     let actionKey = btnKey[order_status][1]
     submit(actionKey)
-    Taro.navigateTo({
-      url: '/pages/order-result/index'
-    })
+    // Taro.navigateTo({
+    //   url: '/pages/order-result/index'
+    // })
   }
   // 取消按钮（左侧按钮侧点击触发）
   const cancel = e => {
-    console.log('e', e)
+    // console.log('e', e)
     e && e.stopPropagation()
-    let actionKey = btnKey[order_status][1]
+    let actionKey = btnKey[order_status][0]
     submit(actionKey)
   }
   /**

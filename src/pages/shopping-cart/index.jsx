@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
 import ProductList from './components/product-list'
 import Footer from './components/footer'
+import None from '../../components/none'
+import CustomTab from './components/tab'
 import { getUserShoppingCartDetail, removeFromCart } from './api'
 import { update, select, setProductArray } from '../../store/actions/shopping-cart'
 
@@ -17,7 +19,8 @@ const mapState= state => state.shoppingCart
  */
 class ShoppingCart extends Component {
   state = {
-    isEdit: false
+    isEdit: false,
+    product_type: 1
   }
   componentDidMount() {
     this.loadInfo()
@@ -32,7 +35,8 @@ class ShoppingCart extends Component {
    * @desc 加载数据
    */
   loadInfo = async () => {
-    let { errorCode, data } = await getUserShoppingCartDetail()
+    let { product_type } = this.state
+    let { errorCode, data } = await getUserShoppingCartDetail({ product_type })
     if (errorCode === 0) {
       this.props.update({key: 'info', val: data.shopping_cart_product_list})
     }
@@ -79,15 +83,28 @@ class ShoppingCart extends Component {
       })
     }, 100)
   }
+  changeType = product_type => {
+    this.setState({ product_type })
+    this.loadInfo()
+  }
   render() {
-    let { isEdit } = this.state
-    let { updateState, delProduct, toOrder } = this
+    let { isEdit, product_type } = this.state
+    let { info } = this.props
+    let { updateState, delProduct, toOrder, changeType } = this
+
     return (<View className='ShoppingCardWrap'>
       <CustomNavBar
         title='购物车'
         clickLeft={this.backHistory}
       />
-      <ProductList isEdit={isEdit} update={updateState} />
+      <View className='CustomTabWrap'>
+        <CustomTab  update={changeType} active={product_type} />
+      </View>
+      {
+        info.length ?
+          <ProductList isEdit={isEdit} update={updateState} />
+          : <None style={{paddingTop: 80}} text='暂无任何商品' /> 
+      }
       <Footer
         isEdit={isEdit}
         update={updateState}

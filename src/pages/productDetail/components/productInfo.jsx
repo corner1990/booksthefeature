@@ -26,7 +26,7 @@ const ProductInfo = props => {
     </View>
     <View className='OperationWrap'>
       <Addr change={addrChnage} />
-      <View className='OperationCard'>
+      {/* <View className='OperationCard'>
         <View className='OperationTitle'>配送区域</View>
         <View className='OperationVal'>
           <Text className={(addr ? '' : 'Placehoder' )}>{(addr ? addr : '请选择行政区域')}</Text>
@@ -39,7 +39,7 @@ const ProductInfo = props => {
           2020.08.12
           <AtIcon value='chevron-down' size='20' color='#d8d8d8'></AtIcon>
         </View>
-      </View>
+      </View> */}
     </View>
   </View>)
 }

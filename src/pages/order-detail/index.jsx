@@ -103,7 +103,9 @@ order_sn: "202011011508089570764"
   /**
    * @desc 调用方法
    */
-  submit = (key, info) => {
+  submit = (key) => {
+    let { orderInfo: info} = this.state
+    console.log('12312', key)
     switch(key){
       
       case 'toPay': // 去支付
@@ -158,14 +160,13 @@ order_sn: "202011011508089570764"
     let { order_sn } = info
     let { errorCode } = await cancelOrder({ order_sn })
     if(errorCode === 0) {
-      let list = this.state.list.map(item => {
-        if (item.order_sn !== info.order_sn) return item
-        return {
-          ...item,
+      
+      this.setState({
+        orderInfo: {
+          ...info,
           order_status: 50
         }
-      })
-      this.setState({ list })
+       })
     }
 
   }
@@ -184,15 +185,14 @@ order_sn: "202011011508089570764"
     })
   }
   /**
-   * @desc 关闭订单
+   * @desc 删除订单
    * @param {*} info 
    */
   delete = async info => {
     let { order_sn } = info
     let { errorCode } = await deleteOrder({ order_sn })
     if(errorCode === 0) {
-      let list = this.state.list.filter(item => item.order_sn !== info.order_sn)
-      this.setState({ list })
+      Taro.navigateBack()
     }
 
   }
