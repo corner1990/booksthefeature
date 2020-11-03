@@ -48,7 +48,7 @@ class Index extends Component {
 
     return (
       <View className='my-center'>
-        <CustomNavBar title='FLOWERPLUS 花加' bgColor='#fff' />
+        <CustomNavBar title='AS Flower Boutique' bgColor='#fff' />
         <UserInfo />
         <CalendarBar />
         <OrdersCard />

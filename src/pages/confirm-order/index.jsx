@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro';
+import { AtTextarea } from 'taro-ui'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
 import ItemWrap from './components/item-card'
@@ -30,9 +31,10 @@ class ConfirmOrder extends React.Component {
       pay_price: '',
       product_total_price: '',
       shipping_price: '',
-      voucher_code: '',
-      anonymous: false
-    }
+      anonymous: false,
+      bless: ''
+    },
+    voucher_code: ''
   }
   componentDidMount() {
 
@@ -117,7 +119,7 @@ class ConfirmOrder extends React.Component {
     let {
       voucher_code,
       date,
-      anonymous
+      anonymous,
     } = this.state
     
     if ( date.includes('时间')) {
@@ -176,12 +178,20 @@ class ConfirmOrder extends React.Component {
       this.props.update({key: '', val: []})
     }
   }
+  /**
+   * @desc 设置优惠码
+   * @param {*} voucher_code 
+   */
+  setConpon = voucher_code => {
+    this.setState({ voucher_code })
+  }
   render() {
     let {
       backHistory,
       switchChange,
       dateChange,
-      crateOrderFn
+      crateOrderFn,
+      setConpon
     } = this
     let {
       product_array: list
@@ -211,11 +221,17 @@ class ConfirmOrder extends React.Component {
         <View className='ProductList'>
           { list.map((info, key) => (<ProductCard key={key} info={info} />)) }
         </View>
-        <UseCoupon />
-        <ItemWrap
-          title='祝福卡类型'
-          subTitle='钢铁直男型'
-        />
+        <UseCoupon setConpon={setConpon} />
+        <View className='BlessCard'>
+          <View className='BlessTitle'>祝福卡</View>
+          <AtTextarea
+            className='BlessTextarea'
+            maxLength={50}
+            count={false}
+            value={this.state.priceInfo.bless}
+            placeholder='给ta说点什么把！'
+          />
+        </View>
         <Switch
           title='匿名送达'
           checked={anonymous}

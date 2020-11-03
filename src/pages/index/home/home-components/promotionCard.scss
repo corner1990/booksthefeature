@@ -10,15 +10,28 @@
     line-height: 160px;
     padding: 0 24px;
     box-sizing: border-box;
-    background-color: $black10;
+    background-color: $white;
+    font-size: $font-sm;
+    color: $black;
   }
   .allMonthFlower{
     border-radius: 16px 0 0 16px;
     width: 300px;
   }
   .giftFlowerGroup{
-    text-align: right;
+    // text-align: right;
     width: 396px;
     border-radius: 0 16px 16px 0;
+  }
+  .icon-img{
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+    margin-right: 8px;
+    
+  }
+ .gift-img{
+    width: 48px;
+    height: 48px;
   }
 }

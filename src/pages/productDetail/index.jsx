@@ -26,10 +26,11 @@ class ProductDetail extends Component{
     showJustBuy: false
   }
   componentWillMount () {
-    let { tid: path } = this.props
+    // let { tid: path } = this.props
     // let path = 'pages/productDetail/index?id=269&__key_=16012089318921'
-    let { id } = parseQuery(path)
-    this.loadInfo(parseInt(id))
+    // let { id } = parseQuery(path)
+    // this.loadInfo(parseInt(id))
+    this.loadInfo(284)
   }
   /**
    * @desc 加载数据

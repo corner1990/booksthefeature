@@ -68,7 +68,7 @@ export default class Index extends Component {
       bgColor='#00B799',
       isFixed=false,
     } = this.props
-    console.log(this.props)
+    
     return (
       <View className={['custom-backhistory-wrap',(isFixed?'fixed':'')]} style={{ backgroundColor: bgColor }}>
         <View className='white-swpace' style={{height: statusBarHeight}}></View>

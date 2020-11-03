@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import { connect } from 'react-redux'
-import ListView from "taro-listview"
+import Taro from '@tarojs/taro'
 import Backhistory from '../../components/backhistory'
 import Header from './flower-components/header'
 import FilterBar from './flower-components/filterBar'
@@ -28,6 +28,10 @@ class OrderFlower extends Component {
   componentWillMount () { }
 
   componentDidMount () {
+    let {
+      type: filterActive
+    } = Taro.Current.router.params
+    this.setState({ filterActive })
     this.loadInfo()
   }
 
@@ -60,26 +64,25 @@ class OrderFlower extends Component {
     })
   }
   render () {
-    let { filterActive, priceSort, list, pageInfo } = this.state
+    let { filterActive, priceSort, list } = this.state
     let { update } = this
     return (
       <View className='orderFlowerWrap'>
-        <ListView
-          hasMore={pageInfo.has_more}
+        <ScrollView
+          scrollY
+          scrollWithAnimation
           onScrollToLower={this.loadInfo}
-          className='sbListView'
-          autoHeight
+          style={{ height: "100%" }}
         >
           <Backhistory title='订花' color='#fff' />
           {/* 头部 */}
-          <Header update={update} loadinfo={this.loadInfo} />
+          <Header update={update} loadinfo={this.loadInfo} active={filterActive} />
           {/* 过滤器 */}
           {filterActive === 1 ? <FilterBar active={filterActive} update={update} priceSort={priceSort} /> : ''}
           {/* 鲜花列表 */}
           <NewProductList list={list} hideTitle />
           {/* 选择地址 */}
-        </ListView>
-  
+        </ScrollView>
       </View>
     )
   }

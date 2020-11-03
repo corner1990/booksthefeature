@@ -19,24 +19,25 @@ class Header extends Component {
         label: '礼品花束',
         key: 2
       }
-    ],
-    active: 1
+    ]
   }
   /**
    * @desc 处理tabContent
    */
   getTabHeader = () => {
-    let { active, tabs } = this.state
+    let { tabs } = this.state
     let { setActive } = this
+    let { active } = this.props
+    console.log('tabs', typeof active)
     return (tabs.map(item => (
-          <View
-            className={['tabHeadItem', (active === item.key ? 'active' : '')]}
-            onClick={() => {setActive(item.key)}}
-            key={item.key}
-          >
-            {item.label}
-          </View>
-        ))
+        <View
+          className={['tabHeadItem', (active == item.key ? 'active' : '')]}
+          onClick={() => {setActive(item.key)}}
+          key={item.key}
+        >
+          {item.label}
+        </View>
+      ))
     )
   }
 
@@ -59,7 +60,7 @@ class Header extends Component {
    * @param { number } active 
    */
   setActive = active => {
-    this.setState({ active })
+   
     this.props.update({
       filterActive: active,
       pageInfo: {
@@ -72,7 +73,6 @@ class Header extends Component {
   }
   render() {
     let { getTabHeader } = this
-    console.log('render', this.props)
     return (
       <View className='orderFlowerHeaderWrap'>
         <View className='tabWrap'>
