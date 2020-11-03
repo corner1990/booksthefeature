@@ -14,6 +14,7 @@ import {
 
 import './index.scss'
 import { getShippingAddressList, deleteShippingAddress } from './api'
+import None from '../../components/none'
 
 /**
  * @desc 合并参数
@@ -34,6 +35,11 @@ class UserAddress extends Component {
     }
     
   }
+  shouldComponentUpdate(props) {
+    console.log('shouldComponentUpdate', props, this)
+    return true
+  }
+ 
   /**
    * @desc 更新数据
    * @param {*} key 
@@ -56,6 +62,15 @@ class UserAddress extends Component {
     let { errorCode, data } = await getShippingAddressList(pageInfo)
 
     if (errorCode === 0) {
+      if (!data.page_info) {
+        this.props.updateAddrList({pageInfo: {
+          index: 0,
+          has_more: false
+        },
+        list: []
+      })
+        return false
+      }
       list =  [...list, ...data.shipping_address_list]
       pageInfo = data.page_info
     }
@@ -67,6 +82,9 @@ class UserAddress extends Component {
   getAddressCard = () => {
     // let { list } = this.state
     let { list } = this.props
+    if (list.length <= 0) {
+      return (<None text='请添加收货地址' style={{paddingTop: 100}} />)
+    }
     return list.map((info, key) => (<AddressCard
       info={info}
       key={key}

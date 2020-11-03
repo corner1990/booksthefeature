@@ -38,7 +38,7 @@ axios.defaults.adapter = function (config) {
  * @param { Object } data 
  */
 const reject = data => {
-  let codes = [403, /* 1201 */]
+  let codes = [403, 401 /* 1201 */]
   let { errorCode } = data
   
   if (codes.includes(errorCode)) {

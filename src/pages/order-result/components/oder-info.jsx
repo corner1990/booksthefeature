@@ -16,12 +16,12 @@ const OrderInfo = props => {
       <View class='status' >{params.pay_status === '1' ? '成功支付' : '等待支付'}</View>
       <View class='order-price'>
         &yen;
-        <View class='large-price'>123.00</View>
+        <View class='large-price'>{info.format_pay_price}</View>
       </View>
     </View>
     <View class='order-info'>
       <View>订单号</View>
-      <View>202003045067667</View>
+      <View>{info.order_sn}</View>
     </View>
     <View class='order-info'>
       <View>下单时间</View>

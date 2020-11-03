@@ -32,7 +32,7 @@ class UserInfo extends Component {
   }
   componentDidMount() {
     this.props.getUserINfo()
-
+  
     // this.uploadImg()
   }
   /**
@@ -157,7 +157,7 @@ class UserInfo extends Component {
       // base64ImgUrl.push(base64Url);   //用来显示在页面上的base64路径（数组）
     
       /// 刷新数据
-      console.log('base64ImgUrl', base64Url)
+      // console.log('base64ImgUrl', base64Url)
       self.uploadImg(base64Url)
           
     }
@@ -172,7 +172,7 @@ class UserInfo extends Component {
           getBase64ImageUrl(file, suffix)
          
           self.cancelSetAvatar()
-          console.log('234', file)
+          // console.log('234', file)
         }
       });
     }
@@ -260,6 +260,10 @@ class UserInfo extends Component {
       <Item
         title='生日'
         subTitle={this.getBrithday()}
+      />
+      <Item
+        title='收货地址'
+        click={() => Taro.navigateTo({url: '/pages/address/index'})}
       />
       <EditGender
         setGender={setGender}

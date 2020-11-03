@@ -30,10 +30,10 @@ class ConfirmOrder extends React.Component {
       discount_price: '',
       pay_price: '',
       product_total_price: '',
-      shipping_price: '',
-      anonymous: false,
-      bless: ''
+      shipping_price: ''
     },
+    anonymous: false,
+    bless: '',
     voucher_code: ''
   }
   componentDidMount() {
@@ -120,11 +120,12 @@ class ConfirmOrder extends React.Component {
       voucher_code,
       date,
       anonymous,
+      bless
     } = this.state
     
     if ( date.includes('时间')) {
       Taro.showToast({
-        iconType: 'error',
+        icon: 'none',
         title: '请选择配送时间'
       })
 
@@ -141,6 +142,7 @@ class ConfirmOrder extends React.Component {
       voucher_code,
       shipping_id: shipping.id,
       delivery_timestamp: date,
+      bless,
       anonymous_status
     })
     if (errorCode === 0) {
@@ -148,10 +150,11 @@ class ConfirmOrder extends React.Component {
     }
   }
   async toPay(params) {
-    let url = `/pages/order-result/index?order_id=${params.order_sn}`
+    let url = `/pages/order-result/index?order_sn=${params.order_sn}`
+  
     let { errorCode, data} = await  createOrderPayInfo({order_id: params.order_sn, 'pay_type': 5, ...params})
     if (errorCode === 0) {
-      wx.requestPayment({
+      Taro.requestPayment({
         ...data,
         signType: 'MD5',
         success () {
@@ -184,6 +187,9 @@ class ConfirmOrder extends React.Component {
    */
   setConpon = voucher_code => {
     this.setState({ voucher_code })
+  }
+  blessChange = bless => {
+    this.setState({ bless })
   }
   render() {
     let {
@@ -228,7 +234,8 @@ class ConfirmOrder extends React.Component {
             className='BlessTextarea'
             maxLength={50}
             count={false}
-            value={this.state.priceInfo.bless}
+            value={this.state.bless}
+            onChange={this.blessChange}
             placeholder='给ta说点什么把！'
           />
         </View>

@@ -17,12 +17,13 @@ const mapState = state => state.global
 class OrderFlower extends Component {
   state = {
     filterActive: 1,
-    priceSort: 0,
     list: [],
     pageInfo: {
       index: 0,
       has_more: true
-    }
+    },
+    sort_type: 1,
+    order_type: 0
   }
   componentWillMount () { }
 
@@ -45,16 +46,37 @@ class OrderFlower extends Component {
    * @param { any } val 任何值
    */
   update = params => {
-    this.setState(params)
+    this.setState({
+      ...params,
+      list: [],
+      pageInfo: {
+        index: 0,
+        has_more: true
+      }
+    })
+    this.loadInfo()
   }
+  
   /**
    * @desc 加载数据
    */
   loadInfo = async ()=> {
     let list = []
     let pageInfo = {}
-    let { filterActive } = this.state
-    let { errorCode, data } = await getProductList({...this.state.pageInfo, product_type: filterActive })
+    let { filterActive, sort_type, order_type } = this.state
+    let params = {...this.state.pageInfo, product_type: filterActive }
+
+    console.log('loadInfo')
+    if (filterActive == 1) {
+      params = {
+        ...params,
+        sort_type
+      }
+      if (sort_type == 2) {
+        params.order_type = order_type
+      }
+    }
+    let { errorCode, data } = await getProductList(params)
     if (errorCode === 0) {
       list = data.page_info.index === 1 ? data.product_list : [...this.state.list, data.product_list]
     }
@@ -62,8 +84,9 @@ class OrderFlower extends Component {
       list, pageInfo
     })
   }
+
   render () {
-    let { filterActive, priceSort, list } = this.state
+    let { filterActive, order_type, list, sort_type } = this.state
     let { update } = this
     return (
       <View className='orderFlowerWrap'>
@@ -71,13 +94,13 @@ class OrderFlower extends Component {
           scrollY
           scrollWithAnimation
           onScrollToLower={this.loadInfo}
-          style={{ height: "100%" }}
+          style={{ height: "100vh" }}
         >
           <Backhistory title='订花' color='#fff' />
           {/* 头部 */}
           <Header update={update} loadinfo={this.loadInfo} active={filterActive} />
           {/* 过滤器 */}
-          {filterActive === 1 ? <FilterBar active={filterActive} update={update} priceSort={priceSort} /> : ''}
+          {filterActive == 1 ? <FilterBar active={sort_type} update={update} order_type={order_type} /> : ''}
           {/* 鲜花列表 */}
           {
             list.length ? <NewProductList list={list} hideTitle /> :  <None />

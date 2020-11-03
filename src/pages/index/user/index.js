@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 // import { AtIcon, AtToast } from 'taro-ui'
 import { connect } from 'react-redux'
+import Taro from '@tarojs/taro'
 import CustomNavBar from '../../../components/navbar'
 import { setTab, getUseInfo } from '../../../store/actions/global'
 import UserInfo from './component/user-info'
@@ -21,30 +22,49 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    let { getUseInfo } = this.props
-    getUseInfo()
-  }
-
-  componentDidMount() { }
-
-  componentWillUnmount() { }
-
-  componentDidShow() { 
+    // let { getUseInfo } = this.props
+    this.props.getUseInfo()
     
   }
 
+  componentDidMount() { }
+  shouldComponentUpdate() {
+    // let { userInfo } = props
+    // if (!userInfo.avatar) {
+    //   this.getInfo()
+    // }
+    return true
+  }
+  componentWillUnmount() { }
+  
+  componentDidShow() {
+  }
   componentDidHide() { }
 
   toEndorsement = () => {
     this.props.setTab(3)
   }
-  
+  getInfo = () => {
+    let success = this.questInfo
+    Taro.login({
+      success
+    })
+  }
+  /**
+   * @desc 获取信息
+   */
+  questInfo = () => {
+    Taro.getUserInfo({
+      success: (...args) => {
+        console.log('questInfo', args)
+      }
+    })
+  }
   handleToast=()=>{
     // this.setState({ isOpened:true })
   }
   
   render() {
-
 
     return (
       <View className='my-center'>

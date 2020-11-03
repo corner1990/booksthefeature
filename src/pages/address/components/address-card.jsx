@@ -15,6 +15,7 @@ const AddressCard = props => {
    */
   const setEditInfo = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setInfo(info)
     Taro.navigateTo({
       url: '/pages/addAddr/index'
@@ -26,6 +27,7 @@ const AddressCard = props => {
    */
   const delAddr = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     let { update } = props
     update('delInfo', info)
     update('showDel', true)

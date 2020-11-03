@@ -38,8 +38,8 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    // let { params } = Taro.Current.router
-    this.loadInfo({order_sn: '202011021212371763087'})
+    let { order_sn } = Taro.Current.router.params
+    this.loadInfo({order_sn})
   }
   /**
    * @desc 返回上一页

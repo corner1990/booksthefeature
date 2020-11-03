@@ -22,6 +22,8 @@
     margin: 0;
   }
   .userInfoName{
+    @include textHide(2);
+    max-width: 368px;
     font-family: Avenir-Heavy;
     font-size: 44px;
     color: $black;

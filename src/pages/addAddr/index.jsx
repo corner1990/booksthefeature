@@ -5,7 +5,7 @@ import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
 import Address from '../../components/address'
-import { addShippingAddress, updateShippingAddress } from '../address/api'
+import { addShippingAddress, getShippingAddressList, updateShippingAddress } from '../address/api'
 import { setEditAddrInfo, updateAddrList} from '../../store/actions/addr'
 
 import './index.scss';
@@ -48,6 +48,24 @@ class AddAddr extends Component {
     this.state = {
       ...params
     }
+  }
+  /**
+   * @desc 加载数据
+   */
+  loadInfo = async () => {
+    let {list} = this.props
+    let pageInfo = { index: 0 }
+    let { errorCode, data } = await getShippingAddressList(pageInfo)
+
+    if (errorCode === 0) {
+    
+      list =  data.shipping_address_list
+      pageInfo = data.page_info
+    }
+    this.props.updateAddrList({pageInfo, list})
+    Taro.navigateBack({
+      update: 1
+    })
   }
   /**
    * @desc 收货人
@@ -152,26 +170,24 @@ class AddAddr extends Component {
     let { errorCode } = await addShippingAddress(params)
     if (errorCode === 0) {
       // 返回页面 
-      Taro.navigateBack()
+      this.loadInfo()
+      // Taro.navigateBack({
+      //   update: 1
+      // })
     }
   }
   updateAddress = async params => {
     let { id } = this.state
-    let { list, updateAddrList, setEditAddrInfo } = this.props
     params = {...params, id}
     let { errorCode } = await updateShippingAddress(params)
     if (errorCode === 0) {
-      setEditAddrInfo(null)
+      this.props.setEditAddrInfo(null)
       // 更新数据
-      list = list.map(item => {
-        if (item.id !== id) return item
-        return params
-      })
-      updateAddrList({ list })
+      this.loadInfo()
       // 返回页面 
-      Taro.navigateBack({
-        update: 1
-      })
+      // Taro.navigateBack({
+      //   update: 1
+      // })
 
     }
   }

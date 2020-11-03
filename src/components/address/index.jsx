@@ -12,8 +12,8 @@ import './index.scss'
 class Address extends Component{
   state = {
     province: '100000',
-    city: '110000',
-    area: '110100',
+    city: '310000',
+    area: '310100',
     selected: ''
   }
   pickerChange = e => {

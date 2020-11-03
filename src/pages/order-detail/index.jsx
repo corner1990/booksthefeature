@@ -66,7 +66,7 @@ order_id: 2404
 order_sn: "202011011508089570764"
     */
     
-    let { order_sn = "202011011508089570764" } = Taro.Current.router.params
+    let { order_sn } = Taro.Current.router.params
     
     let { errorCode, data: orderInfo } = await queryOrderDetailInfo({order_sn})
     if (errorCode === 0) {

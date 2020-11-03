@@ -22,17 +22,20 @@ const FilterBar = props => {
    * @desc 切换active
    * @param {*} item 
    */
-  const setActive = (key) => {
-    let { update, active, priceSort } = props
+  const setActive = key => {
+    let { update, active, order_type } = props
+    console.log('afdad', key, active, order_type)
+    let params = {}
     if (key !== active) {
-      update('filterActive', key)
-      return false
+      params = {'sort_type':  key}
     }
+    // console.log('key', key)
     // 处理价格箭头
     if (key === 2) {
-      let sort = priceSort === 0 ? 1 : 0
-      update('priceSort', sort)
+      params.order_type = order_type === 0 ? 1 : 0
+      
     }
+    update(params)
     
   }
   /**
@@ -42,10 +45,10 @@ const FilterBar = props => {
   const getIcon = item => {
     if(item.key !== 2) return ''
     // 处理价格三角箭头的class
-    let { priceSort, active } = props
+    let { order_type, active } = props
     let priceClass = ''
     if (active === 2) {
-      priceClass = priceSort ? 'down' : 'up'
+      priceClass = order_type ? 'down' : 'up'
     }
     return (<View
       className={[
@@ -64,7 +67,7 @@ const FilterBar = props => {
       <View
         className={['filterBarItem', (item.key === active ? 'active' : '')]}
         key={item.key}
-        onClick={() =>setActive(item.key) }
+        onClick={() => setActive(item.key)}
       >
         {item.label}
         { getIcon(item) }
