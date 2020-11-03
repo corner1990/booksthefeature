@@ -27,8 +27,7 @@ class Header extends Component {
   getTabHeader = () => {
     let { tabs } = this.state
     let { setActive } = this
-    let { active } = this.props
-    console.log('tabs', typeof active)
+    let { active=1 } = this.props
     return (tabs.map(item => (
         <View
           className={['tabHeadItem', (active == item.key ? 'active' : '')]}

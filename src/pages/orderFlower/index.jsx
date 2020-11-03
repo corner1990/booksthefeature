@@ -6,8 +6,7 @@ import Backhistory from '../../components/backhistory'
 import Header from './flower-components/header'
 import FilterBar from './flower-components/filterBar'
 import NewProductList from '../index/home/home-components/newProductList'
-
-
+import None from '../../components/none'
 import './index.scss'
 import { getProductList } from '../index/home/api'
 
@@ -80,7 +79,9 @@ class OrderFlower extends Component {
           {/* 过滤器 */}
           {filterActive === 1 ? <FilterBar active={filterActive} update={update} priceSort={priceSort} /> : ''}
           {/* 鲜花列表 */}
-          <NewProductList list={list} hideTitle />
+          {
+            list.length ? <NewProductList list={list} hideTitle /> :  <None />
+          }
           {/* 选择地址 */}
         </ScrollView>
       </View>
