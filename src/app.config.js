@@ -2,6 +2,7 @@ export default {
   pages: [
     
     'pages/index/index',
+    'pages/shopping-cart/index',
     'pages/user-info/index',
     'pages/login/index',
     'pages/logistics/index',
@@ -12,7 +13,6 @@ export default {
     'pages/addAddr/index',
     'pages/confirm-order/index',
     'pages/productDetail/index',
-    'pages/shopping-cart/index',
     'pages/orderFlower/index',
   ],
   window: {

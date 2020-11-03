@@ -47,21 +47,42 @@ class ShoppingCart extends Component {
    * @param { any } val 任何数据
    */
   updateState = (key, val) => {
-    
     this.setState({ [key]: val })
+  }
+  askDelete = () => {
+    let self = this
+    console.log('askDelete')
+    Taro.showModal({
+      title: '提示',
+      content: '你确定要删除已选中的商品么？',
+      success: function (res) {
+        if (res.confirm) {
+          self.delProduct()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   }
   // 删除
   delProduct = async () => {
-    let { selected } = this.props
+    let { selected, info } = this.props
     if (selected.length === 0) {
       return Taro.showToast('请先选择商品')
     }
     let items = selected.map(item => item.item_id)
+    info = info.filter(item => {
+      return !items.includes(item.item_id)
+    })
     let { errorCode } = await removeFromCart({item_id: items})
     if (errorCode === 0) {
       // 清空已选择列表
       this.props.select([])
-      return Taro.showToast('删除成功')
+      this.props.update({key: 'info', val: info})
+      return Taro.showToast({
+        title: '删除成功',
+        icon: 'none'
+      })
     }
   }
   /**
@@ -90,7 +111,7 @@ class ShoppingCart extends Component {
   render() {
     let { isEdit, product_type } = this.state
     let { info } = this.props
-    let { updateState, delProduct, toOrder, changeType } = this
+    let { updateState, askDelete, toOrder, changeType } = this
 
     return (<View className='ShoppingCardWrap'>
       <CustomNavBar
@@ -108,7 +129,7 @@ class ShoppingCart extends Component {
       <Footer
         isEdit={isEdit}
         update={updateState}
-        delProduct={delProduct}
+        delProduct={askDelete}
         toOrder={toOrder}
       />
     </View>)

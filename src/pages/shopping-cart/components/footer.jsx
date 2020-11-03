@@ -12,14 +12,14 @@ class Footer extends Component {
  
   render() {
     let { selected, toOrder, delProduct, priceInfo } = this.props
-    console.log('priceInfo', priceInfo)
+    
     let len = selected.length
     return (<View className='ShoppingCardFooter'>
       {
         this.props.isEdit ? (<View
           circle
           className='button del'
-          onClick={() => delProduct()}
+          onClick={delProduct}
         >删除</View>) : [
           <View className='PriceWrap' key='price'>
             {len ? <Text className='Currency'>&yen;</Text> : ''}

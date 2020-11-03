@@ -10,11 +10,11 @@ import {
 } from '../types'
 // 初始化状态
 const initState = {
-  info: [],
+  info: [], // 所有数据
   selected: [], // 选中的列表
   product_array: [],
-  shipping: '',
-  priceInfo: {
+  shipping: '', // 地址
+  priceInfo: { // 价格
     format_pay_price: '0.00'
   }
 }
