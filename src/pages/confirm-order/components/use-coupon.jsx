@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, Input } from '@tarojs/components'
 
 import './index.scss'
@@ -6,10 +6,10 @@ import './index.scss'
  * @desc UseCoupon
  */
 const UseCoupon = props => {
-  const { val, setVal } = useState('')
   let {
     title = '优惠码',
-    setConpon = () => {}
+    setConpon = () => {},
+    coupon= ''
   } = props
   /**
    * @desc 内容切换
@@ -17,7 +17,6 @@ const UseCoupon = props => {
    */
   const change = e => {
     let { detail } = e
-    setVal(detail.value)
     setConpon(detail.value)
   }
   return (<View className='UseCouponWrap'>
@@ -26,13 +25,9 @@ const UseCoupon = props => {
       <Input
         type='text'
         placeholder='请输入优惠码'
-        value={val}
+        value={coupon}
         onInput={change}
       />
-      {/* <View
-        circle
-        className='button'
-      >兑换</View> */}
     </View>
   </View>)
 }

@@ -41,7 +41,8 @@ class ConfirmOrder extends React.Component {
     this.loadAddress()
     this.calculatePrice()
   }
-   backHistory = () => Taro.navigateBack()
+  timer = 0
+  backHistory = () => Taro.navigateBack()
   /**
    * @desc switch change
    * @param  {...any} args 
@@ -187,6 +188,9 @@ class ConfirmOrder extends React.Component {
    */
   setConpon = voucher_code => {
     this.setState({ voucher_code })
+    clearTimeout(this.timer)
+    this.timer = setTimeout( this.calculatePrice, 800)
+    // this.calculatePrice()
   }
   blessChange = bless => {
     this.setState({ bless })
@@ -206,7 +210,8 @@ class ConfirmOrder extends React.Component {
     let {
       date,
       priceInfo,
-      anonymous
+      anonymous,
+      voucher_code
     } = this.state
     // TODO: 价格参数报错
     // TODO: 补充一个结果页， 直接跳转
@@ -227,7 +232,7 @@ class ConfirmOrder extends React.Component {
         <View className='ProductList'>
           { list.map((info, key) => (<ProductCard key={key} info={info} />)) }
         </View>
-        <UseCoupon setConpon={setConpon} />
+        <UseCoupon setConpon={setConpon} coupon={voucher_code} />
         <View className='BlessCard'>
           <View className='BlessTitle'>祝福卡</View>
           <AtTextarea
