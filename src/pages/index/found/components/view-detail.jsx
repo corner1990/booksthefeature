@@ -23,7 +23,7 @@ const  ViewDetail = props =>{
           class='detail-img'
           mode='scaleToFill'
         />
-        <View>{ info.feed_detail.description }</View>
+        <View className='DetailText'>{ info.feed_detail.description }</View>
       </AtModalContent>
     </AtModal>
     </View>

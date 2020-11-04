@@ -32,20 +32,20 @@ export const setEditAddrInfo = payload => {
     payload
   }
 }
-export const addShoppingCart = () => {
+// export const addShoppingCart = () => {
 
-  return async dispatch => {
+//   return async dispatch => {
     
-    setTimeout(() => {
-      dispatch(update())
-    }, 2000)
-  }
-}
-// 删除
-export const delShoppingCart = () => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(update())
-    }, 2000)
-  }
-}
+//     setTimeout(() => {
+//       dispatch(update())
+//     }, 2000)
+//   }
+// }
+// // 删除
+// export const delShoppingCart = () => {
+//   return dispatch => {
+//     setTimeout(() => {
+//       dispatch(update())
+//     }, 2000)
+//   }
+// }

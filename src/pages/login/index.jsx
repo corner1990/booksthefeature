@@ -32,7 +32,7 @@ class Login extends Component {
         success (res) {
           if (res.code) {
             //发起网络请求
-            self.bindPhoneFn({ code: res.code, encryptedData, iv, provider: 'TaroMini' })
+            self.bindPhoneFn({ code: res.code, encryptedData, iv, provider: 'wxMin' })
           } else {
             console.log('登录失败！' + res.errMsg)
           }

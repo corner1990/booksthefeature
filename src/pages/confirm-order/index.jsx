@@ -71,11 +71,11 @@ class ConfirmOrder extends React.Component {
    * 
    */
   loadAddress = async () => {
-    let { errorCode, data: { shipping_address_list:list  }} = await getShippingAddressList()
+    let { errorCode, data: { shipping_address_list:list=[]  }} = await getShippingAddressList()
     
     if (errorCode === 0) { 
       let addr = list.find(item => item.is_default === '1') || list[0]
-      this.props.setShipping(addr)
+      if (addr) this.props.setShipping(addr)
     }
   }
   getAddr = () => {
@@ -123,8 +123,15 @@ class ConfirmOrder extends React.Component {
       anonymous,
       bless
     } = this.state
-    
-    if ( date.includes('时间')) {
+    if ( !shipping || !shipping.id) {
+      Taro.showToast({
+        icon: 'none',
+        title: '请选择收获地址'
+      })
+
+      return false
+    }
+    if (date.includes('时间')) {
       Taro.showToast({
         icon: 'none',
         title: '请选择配送时间'
@@ -132,6 +139,7 @@ class ConfirmOrder extends React.Component {
 
       return false
     }
+    
 
     let anonymous_status = anonymous ? 1 : 0
     product_array = product_array.map(info => {

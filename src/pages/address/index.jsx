@@ -113,6 +113,7 @@ class UserAddress extends Component {
         showDel: false,
         delInfo: null
       })
+      this.loadInfo()
     }
   }
   render() {
