@@ -96,7 +96,7 @@ class OrderFlower extends Component {
           onScrollToLower={this.loadInfo}
           style={{ height: "100vh" }}
         >
-          <Backhistory title='订花' color='#fff' />
+          <Backhistory title='订花' color='rgba(0, 0, 0, .85)' bgColor='#fff' />
           {/* 头部 */}
           <Header update={update} loadinfo={this.loadInfo} active={filterActive} />
           {/* 过滤器 */}

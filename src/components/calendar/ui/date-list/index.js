@@ -25,10 +25,16 @@ export default class AtCalendarList extends React.Component {
     hasMarks = item => {
         const { marks } = this.props;
         let val = item.value.replace(/\-/g, '/')
-        return marks.findIndex(item => item.value == val) !== -1
+        return marks.findIndex(subItem => subItem.value == val) !== -1
+    }
+    hasGreyMarks = item => {
+        const { marks } = this.props;
+        let val = item.value.replace(/\-/g, '/')
+        let mark = marks.find(subItem => subItem.value == val)
+        return mark && mark.status === 0
     }
     render() {
-        const { list, marks } = this.props;
+        const { list, } = this.props;
         if (!list || list.length === 0)
             return null;
         return (React.createElement(View, { className: 'at-calendar__list flex' }, list.map((item) => (React.createElement(View, { key: `list-item-${item.value}`, onClick: this.handleClick.bind(this, item), onLongPress: this.handleLongClick.bind(this, item), className: classnames('flex__item', `flex__item--${MAP[item.type]}`, {
@@ -38,6 +44,7 @@ export default class AtCalendarList extends React.Component {
                 'flex__item--selected-head': item.isSelectedHead,
                 'flex__item--selected-tail': item.isSelectedTail,
                 'flex__item--marks': this.hasMarks(item),
+                'flex__item--marks-grey': this.hasGreyMarks(item),
                 'flex__item--blur': item.isDisabled ||
                     item.type === constant.TYPE_PRE_MONTH ||
                     item.type === constant.TYPE_NEXT_MONTH

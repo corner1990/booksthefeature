@@ -30,7 +30,7 @@ const CalendarComponent = props => {
     }
     update({ selected })
   }
-  const marks = list.map(info => ({value: info.date}))
+  const marks = list.map(info => ({value: info.date, status: info.status}))
 
   return (<View className='CalendarComponent'>
     <View className='BgCount'>{month}</View>

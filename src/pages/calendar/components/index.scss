@@ -1,27 +1,29 @@
 @import '../../../scss/index.scss';
 .CalendarHeader{
   width: 100vw;
-  height: 320px;
-  background-image: linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
+  // height: 320px;
+  // background-image: linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
   color: $white;
-  padding: 24px;
+  padding-bottom: 24px;
   box-sizing: border-box;
   .DateStr{
-    margin: 40px 0 0 24px;
+    margin-left: 24px;
     font-size: 48px;
-    color: $white;
+    color: $black65;
   }
 }
 .CalendarComponent{
+  @include shadow;
   margin: 0 24px;
   border-radius: 16px;
-  height: 640px;
+  height: 510px;
   background-color: $white;
-  transform: translateY(-160px);
+  // margin-top: -160px;
+  // transform: translateY(-160px);
   .BgCount{
     position: absolute;
     width: calc(100vw - 48px);
-    line-height: 640px;
+    line-height: 510px;
     text-align: center;
     font-size: 400px;
     opacity: 0.1;
@@ -59,6 +61,11 @@
         transform: translateX(-50%);
       }
     }
+    .flex__item--marks-grey{
+      &::after{
+        background-color: #888;
+      }
+    }
     .flex__item--selected{
       &::after{
         background-color: $white;
@@ -75,7 +82,7 @@
   }
 }
 .ProductList{
-  top: -260px;
+  // top: -260px;
   position: relative;
   z-index: 3;
  
@@ -88,7 +95,7 @@
     border-bottom: 1px solid #eee;
   }
   .CardWrap{
-    max-height: 336px;
+    max-height: 416px;
     overflow: auto;
   }
 }

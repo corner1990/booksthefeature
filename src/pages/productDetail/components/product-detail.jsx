@@ -25,8 +25,8 @@ const MainProductdetail = props => {
    */
   const getDetail = () => {
     if (!info.detail) return ''
-
-    let tems = info.detail.detail_list.map((item, key) => {
+    let list = info.detail.detail_list || []
+    let tems = list.map((item, key) => {
       if(item.type === 'text') {
         return (<View className='textContent' key={key}>{ item.content }</View>)
       }

@@ -70,6 +70,14 @@ class CalendarWrap extends Component {
         update={this.update}
         list={list}
       />
+      <View className='StatusWrap'>
+        <View className='StatusItem'>
+          配送完成
+        </View>
+        <View className='StatusItem'>
+          收花日
+        </View>
+      </View>
       <ProductList selected={selected} />
       {/* // TODO: 需要添加一个tag提示 */}
     </View>)
