@@ -18,17 +18,17 @@ class GetUserInfo extends Component {
   }
 
   componentDidMount() {
-    let self = this
     let syncInfo = Taro.getStorageSync('$syncInfo')
     if (!syncInfo) {
       Taro.getSetting({
-        success(res) {
+        success: res => {
           let {
             errMsg,
             authSetting
           } = res
           if (errMsg === 'getSetting:ok' && !authSetting["scope.userInfo"]) {
-            self.getUserInfo()
+            \
+            this.setState({ open: true })
           }
         }
       })
@@ -42,18 +42,15 @@ class GetUserInfo extends Component {
   /**
    * @desc 获取用户信息
    */
-  getUserInfo = () => {
-    this.setState({ open: true })
-    // let self = this
+  cancel = () => {
+    
     Taro.getUserInfo({
       success: (res) => {
         let userInfo = res.userInfo
+        this.setState({ open: false })
         this.updateInfo(userInfo)
       }
     })
-  }
-  cancel = () => {
-    this.setState({ open: false })
   }
   /**
    * @desc 更新用户信息
