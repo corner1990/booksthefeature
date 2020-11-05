@@ -9,6 +9,7 @@ import { setTab, getUseInfo } from '../../../store/actions/global'
 import UserInfo from './component/user-info'
 import CalendarBar from './component/calendar-bar'
 import OrdersCard from  './component/order-card'
+import GetUserInfo from './component/getUserInfo'
 
 import './index.scss'
 
@@ -72,6 +73,7 @@ class Index extends Component {
         <UserInfo />
         <CalendarBar />
         <OrdersCard />
+        <GetUserInfo loadInfo={this.props.getUseInfo} />
       </View>
     )
   }
