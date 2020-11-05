@@ -59,7 +59,7 @@ class AddAddr extends Component {
 
     if (errorCode === 0) {
     
-      list =  data.shipping_address_list
+      list = data.shipping_address_list
       pageInfo = data.page_info
     }
     this.props.updateAddrList({pageInfo, list})

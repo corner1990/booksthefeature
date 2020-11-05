@@ -61,7 +61,6 @@ const Footer = props => {
     </View>)
     
   }
-  console.log('1112', 225552)
   return (<View className='ShoppingCardFooter'>
     <View className='PriceWrap'>
       <Text className='Currency'>&yen; </Text>

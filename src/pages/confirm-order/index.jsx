@@ -230,7 +230,6 @@ class ConfirmOrder extends React.Component {
       />
       <View className='ConfirmOrderContentWrap'>
         {/* <Address title='添加收获地址' /> */}
-        
         { this.getAddr() }
         <PickerDate change={dateChange} />
         <ItemWrap

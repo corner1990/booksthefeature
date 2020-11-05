@@ -15,6 +15,7 @@ const MainProductdetail = props => {
   const [care_instructions, setcare_instructions] = useState(false)
   // logistics_desc
   const [logistics_desc, setlogistics_desc] = useState(false)
+  const [purchase_note, setpurchase_note] = useState(false)
   // logistics_desc
   const [after_sale_instructions, setafter_sale_instructions] = useState(false)
   const handleClick = () => {
@@ -79,6 +80,17 @@ const MainProductdetail = props => {
     </AtAccordion>
     <AtAccordion
       hasBorder={false}
+      open={purchase_note}
+      className='InfoAccordion'
+      onClick={() => setafter_sale_instructions(!purchase_note)}
+      title='购买须知字段'
+    >
+      <View className='wrap'>
+        {info.purchase_note}
+      </View>
+    </AtAccordion>
+    <AtAccordion
+      hasBorder={false}
       open={care_instructions}
       className='InfoAccordion'
       onClick={() => setcare_instructions(!care_instructions)}
@@ -92,7 +104,7 @@ const MainProductdetail = props => {
       hasBorder={false}
       open={logistics_desc}
       className='InfoAccordion'
-      onClick={() => setlogistics_desc(!logistics_desc)}
+      onClick={() => setpurchase_note(!logistics_desc)}
       title='运输说明'
     >
       <View className='wrap'>
