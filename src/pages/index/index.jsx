@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
+// import Taro from '@tarojs/taro'
 import Tabbar from '../../components/tabbar'
 import Home from './home/home' // 首页
 import Found from './found/found' // 发现
@@ -16,7 +17,9 @@ class Index extends Component {
     // 如Endorsement下标为3, 我需要他展示我的，那么我需要3 配置到{ title: '我的', iconType: 'user', active: [ 2, 3]} 中
     components: [Home, Found, User, MyOrders]
   }
-  componentWillMount () { }
+  componentWillMount () { 
+    
+  }
 
   componentDidMount () { }
 

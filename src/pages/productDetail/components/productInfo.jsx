@@ -4,7 +4,7 @@ import { AtIcon } from 'taro-ui'
 import Addr from '../../../components/address'
 import './index.scss'
 /**
- * @desc 花束信息
+ * @desc 花礼信息
  */
 const ProductInfo = props => {
   let [addr, setAddr] = useState('')

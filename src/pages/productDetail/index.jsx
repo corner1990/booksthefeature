@@ -25,7 +25,8 @@ class ProductDetail extends Component{
     showJustBuy: false
   }
   componentWillMount () {
-    let { id } = Taro.Current.router.params
+    // let { id } = Taro.Current.router.params
+    let { id=289 } = Taro.Current.router.params
     this.loadInfo(id)
   }
   /**

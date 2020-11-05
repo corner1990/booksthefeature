@@ -27,7 +27,6 @@ class GetUserInfo extends Component {
             authSetting
           } = res
           if (errMsg === 'getSetting:ok' && !authSetting["scope.userInfo"]) {
-            \
             this.setState({ open: true })
           }
         }

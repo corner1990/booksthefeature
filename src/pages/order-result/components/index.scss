@@ -2,14 +2,14 @@
 
 .OrderResultHeaderWrap{
   height: 480px;
-  background:  linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
+  // background:  linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
   .van-nav-bar{
-    background:  linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
+    // background:  linear-gradient(180deg, #00B799 0%, #FFFFFF 81%);
     &::after{
       display: none;
     }
     .van-icon-arrow-left{
-      color: $white;
+      color: $black85;
     }
   }
   .pay-status{
@@ -22,7 +22,7 @@
     }
     .pay-info{
       margin-left: 24px;
-      color:$white;
+      color:$black85;
     }
     .pay-title{
       font-size: $font-lg;

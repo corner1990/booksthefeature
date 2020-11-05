@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Image } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { statusObj } from '../../index/orders/config'
 import CustomNavBar from '../../../components/navbar'
 import './index.scss'
 /**
@@ -18,7 +17,8 @@ const OrderHeader = props => {
   let { params } = Taro.Current.router
   return (<View className='OrderResultHeaderWrap'>
     <CustomNavBar
-      color='#fff'
+      color='rgba(0, 0, 0, .85)'
+      title='支付详情'
       clickLeft={backHistory}
     />
     {/* <View class='pay-status flex'>

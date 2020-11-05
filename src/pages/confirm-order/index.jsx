@@ -8,6 +8,7 @@ import ItemWrap from './components/item-card'
 // import Address from '../../components/address'
 import AddressCard from './components/address-card'
 import PickerDate from '../../components/picker-date'
+import PickerTime from '../../components/picker-time'
 import ProductCard from './components/product-card'
 import Switch from '../../components/switch'
 import UseCoupon from './components/use-coupon'
@@ -25,7 +26,7 @@ import { removeFromCart } from '../shopping-cart/api';
  */
 class ConfirmOrder extends React.Component {
   state = {
-    date: '请选择配送时间',
+    date: '请选择配送日期',
     priceInfo: {
       discount_price: '',
       pay_price: '',
@@ -34,7 +35,9 @@ class ConfirmOrder extends React.Component {
     },
     anonymous: false,
     bless: '',
-    voucher_code: ''
+    voucher_code: '',
+    delivery_time_range: '请选择配送时间',
+    timeList: []
   }
   componentDidMount() {
 
@@ -65,6 +68,17 @@ class ConfirmOrder extends React.Component {
   dateChange = date => {
     this.setState({
       date: date.detail.value
+    })
+  }
+  /**
+   * @desc 时间变化
+   * @param {string} date 
+   */
+  timeChange = (time) => {
+    let { value } = time.detail
+    let {  timeList } = this.state
+    this.setState({
+      delivery_time_range: timeList[value]
     })
   }
   /**
@@ -107,7 +121,8 @@ class ConfirmOrder extends React.Component {
     })
     if (errorCode === 0) {
       this.setState({
-        priceInfo: data
+        priceInfo: data,
+        timeList: data.delivery_time_range_list
       })
     }
   }
@@ -121,7 +136,8 @@ class ConfirmOrder extends React.Component {
       voucher_code,
       date,
       anonymous,
-      bless
+      bless,
+      delivery_time_range
     } = this.state
     if ( !shipping || !shipping.id) {
       Taro.showToast({
@@ -131,7 +147,15 @@ class ConfirmOrder extends React.Component {
 
       return false
     }
-    if (date.includes('时间')) {
+    if (date.includes('日期')) {
+      Taro.showToast({
+        icon: 'none',
+        title: '请选择配送日期'
+      })
+
+      return false
+    }
+    if (delivery_time_range.includes('时间')) {
       Taro.showToast({
         icon: 'none',
         title: '请选择配送时间'
@@ -152,7 +176,8 @@ class ConfirmOrder extends React.Component {
       shipping_id: shipping.id,
       delivery_timestamp: date,
       bless,
-      anonymous_status
+      anonymous_status,
+      delivery_time_range
     })
     if (errorCode === 0) {
       this.toPay(data)
@@ -208,6 +233,7 @@ class ConfirmOrder extends React.Component {
       backHistory,
       switchChange,
       dateChange,
+      timeChange,
       crateOrderFn,
       setConpon
     } = this
@@ -219,7 +245,9 @@ class ConfirmOrder extends React.Component {
       date,
       priceInfo,
       anonymous,
-      voucher_code
+      voucher_code,
+      delivery_time_range,
+      timeList
     } = this.state
     // TODO: 价格参数报错
     // TODO: 补充一个结果页， 直接跳转
@@ -233,8 +261,13 @@ class ConfirmOrder extends React.Component {
         { this.getAddr() }
         <PickerDate change={dateChange} />
         <ItemWrap
-          title='配送时间'
+          title='配送日期'
           subTitle={date}
+        />
+        <PickerTime change={timeChange} list={timeList} />
+        <ItemWrap
+          title='配送时间'
+          subTitle={delivery_time_range}
         />
         <View className='ProductList'>
           { list.map((info, key) => (<ProductCard key={key} info={info} />)) }

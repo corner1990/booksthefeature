@@ -83,7 +83,7 @@ const MainProductdetail = props => {
       open={purchase_note}
       className='InfoAccordion'
       onClick={() => setafter_sale_instructions(!purchase_note)}
-      title='购买须知字段'
+      title='购买须知'
     >
       <View className='wrap'>
         {info.purchase_note}

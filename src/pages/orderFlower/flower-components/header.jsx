@@ -16,7 +16,7 @@ class Header extends Component {
         key: 1,
       },
       {
-        label: '礼品花束',
+        label: '礼品花礼',
         key: 2
       }
     ]

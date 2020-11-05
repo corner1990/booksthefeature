@@ -31,8 +31,12 @@ class OrderFlower extends Component {
     let {
       type: filterActive
     } = Taro.Current.router.params
-    this.setState({ filterActive })
-    this.loadInfo()
+    filterActive -= 0
+    console.log('filterActive', filterActive)
+    this.setState({ filterActive }, () => {
+      console.log('12312 loadInfo', filterActive)
+      this.loadInfo(filterActive)
+    })
   }
 
   componentWillUnmount () { }

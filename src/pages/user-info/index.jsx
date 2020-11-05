@@ -254,7 +254,7 @@ class UserInfo extends Component {
       <Item
         title='性别'
         subTitle={this.getGender()}
-        click={ () => changeShowGender(true)}
+        click={() => changeShowGender(true)}
       />
       <DatePicker change={setBrithday} />
       <Item
