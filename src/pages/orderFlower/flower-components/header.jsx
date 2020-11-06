@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import { connect } from 'react-redux'
 
 import './header.scss'
@@ -27,7 +27,8 @@ class Header extends Component {
   getTabHeader = () => {
     let { tabs } = this.state
     let { setActive } = this
-    let { active=1 } = this.props
+    let { active = 1 } = this.props
+    
     return (tabs.map(item => (
         <View
           className={['tabHeadItem', (active == item.key ? 'active' : '')]}
@@ -72,6 +73,7 @@ class Header extends Component {
   }
   render() {
     let { getTabHeader } = this
+    let { list } = this.props
     return (
       <View className='orderFlowerHeaderWrap'>
         <View className='tabWrap'>
@@ -79,7 +81,9 @@ class Header extends Component {
             { getTabHeader() }
           </View>
           <View className='tabContent'>
-            等待设计出图
+            {
+              list.map(item => (<Image src={item.image} key={item.id} mode='aspectFill'  />))
+            }
           </View>
         </View>
       </View>

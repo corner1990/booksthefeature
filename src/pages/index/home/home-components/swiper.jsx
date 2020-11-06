@@ -82,7 +82,8 @@ class SwiperComponent extends Component {
    * @desc 加载数据
    */
   async loadInfo() {
-    let { errorCode, data } = await getAdvertisingList()
+    // space_id=1是周花 =2是礼品 =0是首页
+    let { errorCode, data } = await getAdvertisingList({space_id: 0})
     if (errorCode === 0) {
       this.setState({
         banner: data.advertising_list

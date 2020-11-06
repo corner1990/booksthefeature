@@ -8,7 +8,7 @@ import FilterBar from './flower-components/filterBar'
 import NewProductList from '../index/home/home-components/newProductList'
 import None from '../../components/none'
 import './index.scss'
-import { getProductList } from '../index/home/api'
+import { getAdvertisingList, getProductList } from '../index/home/api'
 
 const mapState = state => state.global
 /**
@@ -23,7 +23,8 @@ class OrderFlower extends Component {
       has_more: true
     },
     sort_type: 1,
-    order_type: 0
+    order_type: 0,
+    bannerList: []
   }
   componentWillMount () { }
 
@@ -32,10 +33,10 @@ class OrderFlower extends Component {
       type: filterActive
     } = Taro.Current.router.params
     filterActive -= 0
-    console.log('filterActive', filterActive)
+    // let filterActive = 0
     this.setState({ filterActive }, () => {
-      console.log('12312 loadInfo', filterActive)
       this.loadInfo(filterActive)
+      this.loadBanner(filterActive)
     })
   }
 
@@ -44,6 +45,17 @@ class OrderFlower extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+  /**
+   * @desc 加载banner
+   */
+  loadBanner = async (space_id) => {
+    let { errorCode, data } = await getAdvertisingList({ space_id })
+    if (errorCode === 0) {
+      this.setState({
+        bannerList: data.advertising_list
+      })
+    }
+  }
   /**
    * @desc 更新数据
    * @param { string } key 需要更新的属性key
@@ -59,6 +71,9 @@ class OrderFlower extends Component {
       }
     })
     this.loadInfo()
+    if (params.filterActive) {
+      this.loadBanner(params.filterActive)
+    }
   }
   
   /**
@@ -70,7 +85,6 @@ class OrderFlower extends Component {
     let { filterActive, sort_type, order_type } = this.state
     let params = {...this.state.pageInfo, product_type: filterActive }
 
-    console.log('loadInfo')
     if (filterActive == 1) {
       params = {
         ...params,
@@ -90,7 +104,7 @@ class OrderFlower extends Component {
   }
 
   render () {
-    let { filterActive, order_type, list, sort_type } = this.state
+    let { filterActive, order_type, list, sort_type, bannerList } = this.state
     let { update } = this
     return (
       <View className='orderFlowerWrap'>
@@ -102,9 +116,21 @@ class OrderFlower extends Component {
         >
           <Backhistory title='订花' color='rgba(0, 0, 0, .85)' bgColor='#fff' />
           {/* 头部 */}
-          <Header update={update} loadinfo={this.loadInfo} active={filterActive} />
+          <Header
+            update={update}
+            loadinfo={this.loadInfo}
+            active={filterActive}
+            list={bannerList}
+          />
           {/* 过滤器 */}
-          {filterActive == 1 ? <FilterBar active={sort_type} update={update} order_type={order_type} /> : ''}
+          {
+            filterActive == 1 ? 
+            <FilterBar
+              active={sort_type}
+              update={update}
+              order_type={order_type}
+            /> : ''
+          }
           {/* 鲜花列表 */}
           {
             list.length ? <NewProductList list={list} hideTitle /> :  <None />

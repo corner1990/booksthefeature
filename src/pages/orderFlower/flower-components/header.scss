@@ -52,6 +52,8 @@
   .tabContent{
     padding: 24px;
     @include flex;
-    
+    image{
+      height: 320px;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, ScrollView } from '@tarojs/components'
 import { connect } from 'react-redux'
-import ListView from "taro-listview"
+// import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import Swiper from './home-components/swiper'
 import PromotionCard from './home-components/promotionCard'
@@ -15,7 +15,7 @@ const mapState = state => state.global
 class Home extends Component {
   state = {
     list: [],
-    laoding: false,
+    // laoding: false,
     showNavBar: true,
     pageInfo: {
       index: 0,
