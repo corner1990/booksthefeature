@@ -17,7 +17,8 @@
     letter-spacing: 0;
 
     .calendarCard{
-      background-image: linear-gradient(180deg, rgba(0,183,153,0.20) 0%, rgba(255,255,255,0.00) 100%);
+      // background-image: linear-gradient(180deg, rgba(0,183,153,0.20) 0%, rgba(255,255,255,0.00) 100%);
+      @include shadow;
       border-radius: 16px;
       @include flex;
       padding: 0 26px;
