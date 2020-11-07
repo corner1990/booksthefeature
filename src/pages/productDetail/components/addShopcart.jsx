@@ -18,7 +18,7 @@ const AddShopCart = props => {
   // const addrChnage = selectAddr => {
   //   setAddr(selectAddr)
   // }
-  console.log('AddShopCart', props)
+  // console.log('AddShopCart', props)
   /**
    * @desc 从购物车删除
    */

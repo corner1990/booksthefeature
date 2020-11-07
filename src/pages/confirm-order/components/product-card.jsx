@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
 import './index.scss'
 
@@ -7,9 +8,16 @@ import './index.scss'
  * @desc 商品card
  */
 const ProductCard = props => {
-
   let { info } = props
-  return (<View className='ProductCardWrap'>
+  /**
+   * @desc 跳转到详情
+   */
+  const toDetail = () => {
+    let  id = info.item_id
+    // eslint-disable-next-line no-undef
+    Taro.navigateTo({ url: `/pages/productDetail/index?id=${id}`})
+  }
+  return (<View className='ProductCardWrap' onClick={toDetail}>
     <Image
       src={info.main_image}
       className='ProductImg'

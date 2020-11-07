@@ -20,6 +20,7 @@ const mapState = state => state.global
 class Index extends Component {
 
   state = {
+    serverPhone: '13681924547'
   }
 
   componentWillMount() {
@@ -61,8 +62,13 @@ class Index extends Component {
       }
     })
   }
-  handleToast=()=>{
-    // this.setState({ isOpened:true })
+  /**
+   * @desc 拨打电话
+   */
+  tel = () => {
+    Taro.makePhoneCall({
+      phoneNumber: this.state.serverPhone
+    })
   }
   
   render() {
@@ -73,6 +79,10 @@ class Index extends Component {
         <UserInfo />
         <CalendarBar />
         <OrdersCard />
+        <View className='serveInfo'>
+          <View className='serveTitle'>客服电话</View>
+          <View className='servePhone' onClick={this.tel}>{this.state.serverPhone}</View>
+        </View>
         <GetUserInfo loadInfo={this.props.getUseInfo} />
       </View>
     )

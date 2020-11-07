@@ -37,7 +37,8 @@ class OrderDetail extends Component {
         province: '',
         receiver: '',
       }
-    }
+    },
+    serverPhone: '13681924547'
   }
 
   componentDidMount() {
@@ -66,7 +67,7 @@ order_id: 2404
 order_sn: "202011011508089570764"
     */
     
-    let { order_sn } = Taro.Current.router.params
+    let { order_sn = '202011011514248868471' } = Taro.Current.router.params
     
     let { errorCode, data: orderInfo } = await queryOrderDetailInfo({order_sn})
     if (errorCode === 0) {
@@ -214,6 +215,14 @@ order_sn: "202011011508089570764"
       }
     })
   }
+  /**
+   * @desc 拨打电话
+   */
+  tel = () => {
+    Taro.makePhoneCall({
+      phoneNumber: this.state.serverPhone
+    })
+  }
   render() {
     let {
       backHistory
@@ -231,6 +240,10 @@ order_sn: "202011011508089570764"
       <OrderInfo info={orderInfo} />
       <ProductInfo info={orderInfo} />
       <Footer info={orderInfo} submit={this.submit} />
+      <View className='serveInfo'>
+        <View className='serveTitle'>客服电话</View>
+        <View className='servePhone' onClick={this.tel}>{this.state.serverPhone}</View>
+      </View>
     </View>
     
     </View>)

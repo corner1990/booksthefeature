@@ -1,7 +1,20 @@
 @import '../../scss/index.scss';
 .OrderDetailWrap{
-  padding-bottom: 120px;
+  padding-bottom: 160px;
   .OrderDetailContent{
     margin: -160px 40px 0;
+  }
+  .serveInfo{
+    @include flex(space-between, center);
+    @include shadow;
+    align-items: center;
+    height: 84px;
+    font-size: $font-md;
+    color: $black85;
+    border-radius: 16px;
+    padding: 0 24px;
+    .servePhone{
+      color: $black65;
+    }
   }
 }

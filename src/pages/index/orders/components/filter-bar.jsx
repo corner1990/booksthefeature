@@ -24,8 +24,7 @@ class FilterBar extends Component{
       {
         label: '已完成'
       }
-    ],
-    active: 0
+    ]
   }
   /**
    * @desc 处理item
@@ -48,8 +47,8 @@ class FilterBar extends Component{
     // this.setState({ active })
   }
   getIndexTransform = () => {
-    let { active } = this.props
-      let startWith = active * 20
+    let { active = 0 } = this.props
+      let startWith = active  * 20
       return {
         'transform': `translateX(calc(calc(20vw - 16px) / 2 + ${startWith}vw))`
       }

@@ -103,8 +103,8 @@ class FilterBar extends Component{
     
   }
   toDetail = () => {
-    let id = this.props.info.order_id
-    let url = `/pages/order-detail/index?id=${id}`
+    let order_sn = this.props.info.order_sn
+    let url = `/pages/order-detail/index?order_sn=${order_sn}`
     Taro.navigateTo({ url })
   }
   render() {

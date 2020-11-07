@@ -66,6 +66,7 @@ class ProductDetail extends Component{
    * @desc 返回上一页
    */
   backHistory = () => Taro.navigateBack()
+  
   render() {
     let { info, isOpened, showJustBuy } = this.state
     // TODO: 处理规格参数

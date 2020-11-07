@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import CustomNavBar from '../../../components/navbar'
 import { setTab, globaleUpdate } from '../../../store/actions/global'
 import FilterBar from './components/filter-bar'
+import None from '../../../components/none'
 import OrderCard from './components/order-card'
 import { getOrderList, cancelOrder, deleteOrder } from './api'
 import { setProductArray } from '../../../store/actions/shopping-cart'
@@ -26,7 +27,13 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    this.loadInfo()
+    let { order_type: active } = this.props
+    this.setState({
+      active
+    }, () => {
+      this.loadInfo()
+    })
+    
   }
 
   componentDidMount() { }
@@ -94,7 +101,7 @@ class Index extends Component {
    */
   getCard = () => {
     let { list } = this.state
-    if (list.length === 0) return []
+    if (list.length === 0) return (<None text='暂无相关订单信息' />)
     return list.map((info, key) => (<OrderCard info={info} key={key} submit={this.submit} />))
   }
   /**
