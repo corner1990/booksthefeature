@@ -1,16 +1,26 @@
 import React, { Component } from  'react'
 import { View, Image } from '@tarojs/components'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton, AtIcon, AtBadge } from 'taro-ui'
 import { connect } from 'react-redux'
 import Taro from '@tarojs/taro'
 import './user-info.scss'
+import { getUserShoppingCartCount } from '../../../productDetail/api'
+import { update } from '../../../../store/actions/shopping-cart'
 
-const mapState = state => state.global
+const mapState = state => {
+  return {
+    ...state.global,
+    productCount: state.shoppingCart.productCount
+  }
+}
 /**
  * @desc 用户信息
  */
 class UserInfo extends Component{
   state = {}
+  componentDidMount() {
+    this.loadCartCount()
+  }
   /**
    * @desc 跳转到个人资料
    */
@@ -28,11 +38,21 @@ class UserInfo extends Component{
     })
   }
   /**
+   * @desc 获取购物车数量
+   */
+  loadCartCount = async() => {
+    let { errorCode, data } = await getUserShoppingCartCount()
+    if (errorCode === 0) {
+      this.props.update({key: 'productCount', val: data})
+    }
+  }
+  /**
    * @desc 跳转到日历页面
    */
   render() {
     let {
-      userInfo
+      userInfo,
+      productCount
     } = this.props
     
     return(<View className='userInfo'>
@@ -46,10 +66,12 @@ class UserInfo extends Component{
         className='myInfoBtn'
         onClick={this.jumpToShopCartPage}
       >
-        <AtIcon value='shopping-cart' size='22' color='#FFF' style={{marginTop: '-2px'}}></AtIcon> 购物车
+        <AtBadge value={productCount} maxValue={99}>
+          <AtIcon value='shopping-cart' size='22' color='#FFF' style={{marginTop: '-2px'}}></AtIcon>
+        </AtBadge>
       </AtButton>
     </View>)
   }
 }
 
-export default connect(mapState)(UserInfo)
+export default connect(mapState, { update })(UserInfo)

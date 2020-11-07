@@ -71,7 +71,7 @@ class Index extends Component {
    */
   
   async toPay(params) {
-    let url = `/pages/order-result/index?order_id=${params.order_sn}`
+    let url = `/pages/order-result/index?order_sn=${params.order_sn}`
     let { errorCode, data} = await  createOrderPayInfo({order_sn: params.order_sn, 'pay_type': 5, pay_price: params.pay_price})
     if (errorCode === 0) {
       Taro.requestPayment({

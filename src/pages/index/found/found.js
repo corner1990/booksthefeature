@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
-import ListView from "taro-listview"
+import { View, ScrollView } from '@tarojs/components'
+// import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
 import FoundCard from './components/card'
 import ViewDetal from './components/view-detail'
@@ -36,6 +36,7 @@ export default class Index extends Component {
     let { errorCode, data } = await getFeedList(this.state.pageInfo)
     if (errorCode === 0) {
       list = data.page_info.index === 1 ? data.feed_info_list : [...this.state.list, ...data.feed_info_list]
+      pageInfo = data.page_info
     }
     // list = [...list, ...list, ...list]
     // console.log('ist', list)
@@ -57,16 +58,16 @@ export default class Index extends Component {
     return (
       <View className='found' >
         <CustomNavBar title='发现' />
-        <ListView
-          hasMore={pageInfo.has_more}
+        <ScrollView
+          scrollY
+          scrollWithAnimation
           onScrollToLower={this.loadInfo}
-          className='sbListView'
-          autoHeight
+          style={{ height: "100%" }}
         >
           <View className='FoundList'>
             { list.map( (item, key ) => (<FoundCard info={item} key={key} update={this.update} />))}
           </View>
-        </ListView>
+        </ScrollView>
         <ViewDetal open={open} info={info} update={this.update} />
       </View>
     )

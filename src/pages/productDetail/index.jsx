@@ -10,8 +10,8 @@ import Detail from './components/product-detail'
 import Footer from './components/footer'
 import AddShopCart from './components/addShopcart'
 import JustBuyComponent from './components/justBuy'
-
-import { getProductDetail } from './api'
+import { getProductDetail, getUserShoppingCartCount } from './api'
+import { update } from '../../store/actions/shopping-cart'
 
 import './index.scss'
 
@@ -28,6 +28,16 @@ class ProductDetail extends Component{
     // let { id } = Taro.Current.router.params
     let { id=289 } = Taro.Current.router.params
     this.loadInfo(id)
+    this.loadCartCount()
+  }
+  /**
+   * @desc 获取购物车数量
+   */
+  loadCartCount = async() => {
+    let { errorCode, data } = await getUserShoppingCartCount()
+    if (errorCode === 0) {
+      this.props.update({key: 'productCount', val: data})
+    }
   }
   /**
    * @desc 加载数据
@@ -90,4 +100,4 @@ class ProductDetail extends Component{
 
 export default connect(state => {
   return state.shoppingCart
-}, {})(ProductDetail)
+}, { update })(ProductDetail)

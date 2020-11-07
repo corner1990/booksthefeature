@@ -1,6 +1,19 @@
 @import '../../../../scss/index.scss';
 .getUserInfo{
+  font-size: $font-sm;
+  color: $black85;
   .getUserInfoBtn{
     margin: 10px auto;
+    
+  }
+  .getUserInfoTitle{
+    line-height: 72px;
+    padding: 0 24px;;
+  }
+  .getUserInfoTipText{
+    color: $black65;
+    line-height: 40px;
+    padding: 0 24px;
+    margin-bottom: 20px;
   }
 }

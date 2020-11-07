@@ -1,7 +1,8 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
+import { AtIcon, AtBadge } from 'taro-ui'
 import Taro from '@tarojs/taro'
+import { connect } from 'react-redux'
 
 const ProuductFooter = props => {
   /**
@@ -27,14 +28,17 @@ const ProuductFooter = props => {
     // })
     props.update('showJustBuy', true)
   }
+  
   return <View class='ProuductFooter'>
-    <AtIcon
-      value='shopping-cart'
-      size='30'
-      color='#101010'
-      className='ShoppingCart'
-      onClick={jumpToShopCartPage}
-    ></AtIcon>
+    <AtBadge value={props.productCount} maxValue={99}>
+      <AtIcon
+        value='shopping-cart'
+        size='30'
+        color='#101010'
+        className='ShoppingCart'
+        onClick={jumpToShopCartPage}
+      ></AtIcon>
+    </AtBadge>
     <View className='BtnWrap'>
       <View
         circle
@@ -50,4 +54,6 @@ const ProuductFooter = props => {
   </View>
 }
 
-export default ProuductFooter
+export default connect(state => {
+  return state.shoppingCart
+})(ProuductFooter)

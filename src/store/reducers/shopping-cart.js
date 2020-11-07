@@ -16,7 +16,8 @@ const initState = {
   shipping: '', // 地址
   priceInfo: { // 价格
     format_pay_price: '0.00'
-  }
+  },
+  productCount: 0  // 商品总数
 }
 /**
  * @desc 购物车store

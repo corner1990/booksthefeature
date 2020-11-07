@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { AtModal, AtModalHeader, AtModalContent, AtModalAction, AtButton } from "taro-ui"
+import { AtModal, AtModalAction, AtButton } from "taro-ui"
 
 import './index.scss'
 import { updateUserInfo } from '../api'
@@ -32,6 +32,7 @@ class GetUserInfo extends Component {
         }
       })
     }
+    
   }
   componentWillUnmount() { }
   
@@ -82,10 +83,8 @@ class GetUserInfo extends Component {
         <AtModal
           isOpened={this.state.open}
         >
-          <AtModalHeader>同步提醒</AtModalHeader>
-          <AtModalContent>
-            为了更好地体验，请同步你的头像和昵称！
-          </AtModalContent>
+          <View className='getUserInfoTitle'>温馨提示</View>
+          <View className='getUserInfoTipText'>需要您的授权，才能为你提供更好的服务。</View>
           <AtModalAction>
             <AtButton
               type='secondary'

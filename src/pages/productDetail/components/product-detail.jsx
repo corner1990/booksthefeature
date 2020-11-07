@@ -82,7 +82,7 @@ const MainProductdetail = props => {
       hasBorder={false}
       open={purchase_note}
       className='InfoAccordion'
-      onClick={() => setafter_sale_instructions(!purchase_note)}
+      onClick={() => setpurchase_note(!purchase_note)}
       title='购买须知'
     >
       <View className='wrap'>
@@ -104,7 +104,7 @@ const MainProductdetail = props => {
       hasBorder={false}
       open={logistics_desc}
       className='InfoAccordion'
-      onClick={() => setpurchase_note(!logistics_desc)}
+      onClick={() => setlogistics_desc(!logistics_desc)}
       title='运输说明'
     >
       <View className='wrap'>

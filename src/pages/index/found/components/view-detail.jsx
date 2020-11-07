@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
-import { AtModal, AtModalContent, AtModalAction, AtButton } from "taro-ui"
+import { AtModal, AtModalContent } from "taro-ui"
 import './index.scss'
 
 /**
@@ -12,11 +12,13 @@ const  ViewDetail = props =>{
   const hide = () => {
     update({ info: {}, open: false })
   }
-  console.log('info', info)
   
   return (
     <View className='ViewDetail'>
-      <AtModal isOpened={open}>
+      <AtModal
+        isOpened={open}
+        onCancel={hide}
+      >
       <AtModalContent>
         <Image
           src={info.feed_detail.image_list[0].image}

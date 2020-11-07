@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 import './index.scss'
 
 export default class Index extends Component {
@@ -45,13 +46,20 @@ export default class Index extends Component {
   }
   render () {
     let { info } = this.props
-    let { getStyle, clickHandle } = this
+    let { clickHandle } = this
     let img = info.feed_detail.image_list[0]
     return (
       <View className='FoundCard' onClick={clickHandle}>
-        <Image src={img.image} style={getStyle(img)} className='FoundCardImg' mode='aspectFill' />
+        <Image src={img.image}  className='FoundCardImg' mode='aspectFill' />
         <View className='FoundCardDesc'>
           {info.feed_detail.description}
+        </View>
+        <View class='ViewInfo'>
+          <View>{info.author_info.nick_name} &nbsp; {info.feed_base_info.publish_time_str}</View>
+          <View>
+            <AtIcon value='eye' size='18' color='#999'></AtIcon>
+            &nbsp;{info.feed_base_info.view_num_str}
+          </View>
         </View>
       </View>
     )

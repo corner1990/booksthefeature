@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text } from '@tarojs/components'
-import { AtIcon, AtInputNumber, AtButton } from 'taro-ui'
+import { View } from '@tarojs/components'
+import {  AtInputNumber, AtButton } from 'taro-ui'
 import { connect } from 'react-redux'
 import ProductCard from './product-card'
-import Addr from '../../../components/address'
-import { addShoppingCart } from '../../../store/actions/shopping-cart'
+// import Addr from '../../../components/address'
+import { addShoppingCart, update as updateCount } from '../../../store/actions/shopping-cart'
 import './index.scss'
 import { asyncAdd } from '../../../store/actions/global'
 import { updateCart } from '../../shopping-cart/api'
@@ -12,12 +12,13 @@ import { updateCart } from '../../shopping-cart/api'
  * @desc 加入购物车
  */
 const AddShopCart = props => {
-  let [addr, setAddr] = useState('')
+  // let [addr, setAddr] = useState('')
   let [count, setCount] = useState(1)
   
-  const addrChnage = selectAddr => {
-    setAddr(selectAddr)
-  }
+  // const addrChnage = selectAddr => {
+  //   setAddr(selectAddr)
+  // }
+  console.log('AddShopCart', props)
   /**
    * @desc 从购物车删除
    */
@@ -31,9 +32,10 @@ const AddShopCart = props => {
     // 
     let { product } = props
     let { item_id } = product.base_info
-    let { errorCode } = await updateCart({item_id, count})
+    let { errorCode, data } = await updateCart({item_id,  new_num: count})
     if (errorCode === 0) {
       hideShopCart()
+      updateCount({key: 'productCount', val: data})
     }
     // 添加到购物
     // addShoppingCart(item_id, count, hideShopCart)
@@ -42,7 +44,7 @@ const AddShopCart = props => {
   return (<View className='AddShopCartWrap'>
     <ProductCard info={props.product} />
     <View className='OperationWrap'>
-      <Addr change={addrChnage} />
+      {/* <Addr change={addrChnage} /> */}
       {/* <View className='OperationCard'>
         <View className='OperationTitle'>配送区域</View>
         <View className='OperationVal'>
@@ -80,5 +82,6 @@ export default connect(state => {
   return state.shoppingCart
 }, {
   addShoppingCart,
-  asyncAdd
+  asyncAdd,
+  updateCount
 })(AddShopCart)

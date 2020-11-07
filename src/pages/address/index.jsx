@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import ListView from "taro-listview"
+// import ListView from "taro-listview"
 import { connect } from 'react-redux'
 import { AtModal } from 'taro-ui'
 import CustomNavBar from '../../components/navbar'
@@ -121,21 +121,22 @@ class UserAddress extends Component {
       backHistory,
       getAddressCard
     } = this
-    let { pageInfo } = this.props
     return (<View className='UserAddressWrap'>
       <CustomNavBar
         title='收货地址'
         clickLeft={backHistory}
       />
-      <ListView
-        hasMore={pageInfo.has_more}
+      <ScrollView
+        scrollY
+        scrollWithAnimation
         onScrollToLower={this.loadInfo}
-        className='AddressListView'
+        style={{ height: "100%" }}
       >
         <View className='AddressList'>
           { getAddressCard() }
         </View>
-      </ListView>
+      </ScrollView>
+
       <AddBtn />
       <AtModal
         isOpened={this.state.showDel}

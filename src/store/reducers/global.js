@@ -5,7 +5,8 @@ const initState = {
   tabIndex: 0, // 首页tabar下标
   order_type: 0,
   userInfo: {
-    avatar: 'https://ipxcdn.jfshare.com/ipxmall/2c5871d1937274f5d04504e861817f9a.png'
+    avatar: 'https://ipxcdn.jfshare.com/system/admin/acf6f273c1cd77066b4541308f782a88.png',
+    nick_name: ''
   } // 用户信息
 }
 /**

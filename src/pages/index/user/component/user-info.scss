@@ -20,6 +20,13 @@
   }
   .myInfoBtn{
     margin: 0;
+    width: 120px;
+    height: 64px;
+    .at-badge__num{
+      font-size: 20px;
+      right: -6px;
+      top: -2px;
+    }
   }
   .userInfoName{
     @include textHide(2);
@@ -30,4 +37,5 @@
     letter-spacing: 0.35px;
     margin-left: 24px;
   }
+  
 }
