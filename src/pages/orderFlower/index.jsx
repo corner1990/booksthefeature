@@ -22,7 +22,7 @@ class OrderFlower extends Component {
       index: 0,
       has_more: true
     },
-    sort_type: 1,
+    sort_type: 0,
     order_type: 0,
     bannerList: []
   }
@@ -85,7 +85,7 @@ class OrderFlower extends Component {
     let { filterActive, sort_type, order_type } = this.state
     let params = {...this.state.pageInfo, product_type: filterActive }
 
-    if (filterActive == 1) {
+    if (filterActive == 2) {
       params = {
         ...params,
         sort_type
@@ -124,7 +124,7 @@ class OrderFlower extends Component {
           />
           {/* 过滤器 */}
           {
-            filterActive == 1 ? 
+            filterActive == 2 ? 
             <FilterBar
               active={sort_type}
               update={update}

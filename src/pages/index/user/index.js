@@ -71,7 +71,19 @@ class Index extends Component {
       phoneNumber: this.state.serverPhone
     })
   }
-  
+  pasteWx = () => {
+    let phone = this.state.serverPhone
+    // Taro.questInfosetClipboardData
+    Taro.setClipboardData({
+      data: phone,
+      success: function () {
+        Taro.showToast({
+          icon: 'none', 
+          title: '微信号复制成功'
+        })
+      }
+    })
+  }
   render() {
 
     return (
@@ -82,9 +94,16 @@ class Index extends Component {
         <OrdersCard />
         <View className='serveInfo'>
           <Item
-            title='客服电话'
+            title='联系我们'
             click={this.tel}
-            subTitle='联系我们'
+            subTitle='客服电话'
+          />
+        </View>
+        <View className='serveInfo'>
+          <Item
+            title='客服微信'
+            click={this.pasteWx}
+            subTitle={this.state.serverPhone}
           />
         </View>
         <GetUserInfo loadInfo={this.props.getUseInfo} />

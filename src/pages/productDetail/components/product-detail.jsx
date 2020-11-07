@@ -36,7 +36,7 @@ const MainProductdetail = props => {
       return (<Image
         src={item.content}
         key={key}
-        mode='aspectFit'
+        mode='widthFix'
         className='DetailImage'
       />)
     })
