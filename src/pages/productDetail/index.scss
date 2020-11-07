@@ -1,8 +1,9 @@
 @import '../../scss/index.scss';
 .ProductDetailWrap{
-  position: relative;
-  height: 100vh;
+  // position: relative;
+  height: calc(100vh - 132px);
   overflow: auto;
+  background-color: #f8f8f8;
   .ProductContentWrap{
     margin-top: -34px;
     position: relative;

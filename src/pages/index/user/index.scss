@@ -72,4 +72,14 @@
       }
     }
   }
+  .serveInfo{
+    @include shadow;
+    background-color: $white;
+    border-radius: 16px;
+    margin: 0 32px;
+    .MainItemWrap{
+      border: none;
+      height: 96px;
+    }
+  }
 }

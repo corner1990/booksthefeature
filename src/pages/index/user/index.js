@@ -10,6 +10,7 @@ import UserInfo from './component/user-info'
 import CalendarBar from './component/calendar-bar'
 import OrdersCard from  './component/order-card'
 import GetUserInfo from './component/getUserInfo'
+import Item from '../../../components/item'
 
 import './index.scss'
 
@@ -80,8 +81,11 @@ class Index extends Component {
         <CalendarBar />
         <OrdersCard />
         <View className='serveInfo'>
-          <View className='serveTitle'>客服电话</View>
-          <View className='servePhone' onClick={this.tel}>{this.state.serverPhone}</View>
+          <Item
+            title='客服电话'
+            click={this.tel}
+            subTitle='联系我们'
+          />
         </View>
         <GetUserInfo loadInfo={this.props.getUseInfo} />
       </View>

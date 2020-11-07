@@ -6,7 +6,9 @@ import './index.scss'
  * @desc 头部
  */
 const MainProductdetail = props => {
-  let { info = {} } = props
+  let { info = {
+    care_instructions: ''
+  } } = props
   let { specifications=[] } = info
   const [open, setOpen] = useState(false)
   // brand_story
@@ -75,7 +77,11 @@ const MainProductdetail = props => {
       title='品牌故事'
     >
       <View className='wrap'>
-        {info.brand_story}
+        {
+          info.brand_story ? info.brand_story.split('\n').map((item, key) => {
+            return (<View key={key}>{item}</View>)
+          }) : ''
+        }
       </View>
     </AtAccordion>
     <AtAccordion
@@ -86,7 +92,11 @@ const MainProductdetail = props => {
       title='购买须知'
     >
       <View className='wrap'>
-        {info.purchase_note}
+        {
+          info.purchase_note ? info.purchase_note.split('\n').map((item, key) => {
+            return (<View key={key}>{item}</View>)
+          }) : ''
+        }
       </View>
     </AtAccordion>
     <AtAccordion
@@ -97,7 +107,11 @@ const MainProductdetail = props => {
       title='保养说明'
     >
       <View className='wrap'>
-        {info.care_instructions}
+        {
+          info.care_instructions ? info.care_instructions.split('\n').map((item, key) => {
+            return (<View key={key}>{item}</View>)
+          }) : ''
+        }
       </View>
     </AtAccordion>
     <AtAccordion
@@ -108,7 +122,10 @@ const MainProductdetail = props => {
       title='运输说明'
     >
       <View className='wrap'>
-        {info.logistics_desc}
+        {info.logistics_desc ? info.logistics_desc.split('\n').map((item, key) => {
+            return (<View key={key}>{item}</View>)
+          }) : ''
+        }
       </View>
     </AtAccordion>
     <AtAccordion
@@ -119,7 +136,11 @@ const MainProductdetail = props => {
       title='退换货说明'
     >
       <View className='wrap'>
-        {info.after_sale_instructions}
+        {
+        info.after_sale_instructions ? info.after_sale_instructions.split('\n').map((item, key) => {
+          return (<View key={key}>{item}</View>)
+        }) : ''
+        }
       </View>
     </AtAccordion>
   </View>)
