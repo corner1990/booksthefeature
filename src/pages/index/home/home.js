@@ -6,6 +6,7 @@ import CustomNavBar from '../../../components/navbar'
 import Swiper from './home-components/swiper'
 import PromotionCard from './home-components/promotionCard'
 import NewProductList from './home-components/newProductList'
+import Welcome from './home-components/welcome'
 
 import './home.scss'
 import { getProductList } from '../api'
@@ -77,7 +78,7 @@ class Home extends Component {
       <View
         className='home'
       >
-  
+        <Welcome />
         <ScrollView
           scrollY
           scrollWithAnimation
