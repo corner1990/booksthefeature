@@ -20,6 +20,7 @@ import { setShipping, update } from '../../store/actions/shopping-cart'
 import './index.scss'
 import { calculateOrderPrice, createOrder, createOrderPayInfo } from './api';
 import { removeFromCart } from '../shopping-cart/api';
+import { dateFormat } from '../../utils/utils'
 
 /**
  * @desc 确认订单
@@ -77,6 +78,7 @@ class ConfirmOrder extends React.Component {
   timeChange = (time) => {
     let { value } = time.detail
     let {  timeList } = this.state
+
     this.setState({
       delivery_time_range: timeList[value]
     })
@@ -92,6 +94,9 @@ class ConfirmOrder extends React.Component {
       if (addr) this.props.setShipping(addr)
     }
   }
+  /**
+   * @desc 处理地址
+   */
   getAddr = () => {
     let {
       shipping
@@ -163,6 +168,14 @@ class ConfirmOrder extends React.Component {
 
       return false
     }
+    if (this.execDate(date, delivery_time_range)) {
+      Taro.showToast({
+        icon: 'none',
+        title: '送达时间不能早于下单时间'
+      })
+
+      return false
+    }
     
 
     let anonymous_status = anonymous ? 1 : 0
@@ -170,7 +183,10 @@ class ConfirmOrder extends React.Component {
       let { count, item_id } = info
       return { count, item_id  }
     })
-    let { errorCode, data } = await createOrder({
+    
+    date = this.getDate(date, delivery_time_range)
+
+    let params = {
       product_array,
       voucher_code,
       shipping_id: shipping.id,
@@ -178,11 +194,14 @@ class ConfirmOrder extends React.Component {
       bless,
       anonymous_status,
       delivery_time_range
-    })
+    }
+   
+    let { errorCode, data } = await createOrder(params)
     if (errorCode === 0) {
       this.toPay(data)
     }
   }
+
   async toPay(params) {
     let url = `/pages/order-result/index?order_sn=${params.order_sn}`
   
@@ -202,6 +221,51 @@ class ConfirmOrder extends React.Component {
       })
     }
     
+  }
+  /**
+   * @desc 判断送货时间是否小于下单时间
+   * @param {*} date 
+   * @param {*} timeStr 
+   */
+  execDate(date, timeStr) {
+    let time = new Date(date + ' ' + timeStr.split('-')[1]).getTime()
+    let current = new Date().getTime()
+    return current > time
+  }
+  /**
+   * @desc 处理日期
+   * @param {*} date 
+   * @param {*} timeStr 
+   */
+  getDate = (date, timeStr) => {
+    let time = new Date(date + ' ' + timeStr.split('-')[1])
+    let timeOrigin = new Date(date)
+    // 设置时间为18:00
+    let deathLine = new Date()
+    deathLine.setHours(18)
+    deathLine.setMinutes(0)
+    deathLine.setSeconds(0)
+    deathLine.setMilliseconds(0)
+
+    let deathLineTime = deathLine.getTime()
+    let timer = time.getTime()
+    let today = new Date(new Date().toLocaleDateString())
+    let day = 86400000 * 2
+    // 如果货时间选择的后天 不需要修改时间
+    if (today.getTime + day === timeOrigin.getTime) {
+      console.log('正常发货')
+      return date
+    } 
+    // 松后时间是当前18点之前  顺延一天
+    let d = 0
+    if (timer > deathLineTime) {
+      // 如果son过时间是今天， 
+      d = 1
+    }
+    time = time.setDate(time.getDate() + d)
+    
+    let res = dateFormat(time, 'YYYYmmdd')
+    return res
   }
   /**
    * @desc 删除购物车
@@ -249,6 +313,8 @@ class ConfirmOrder extends React.Component {
       delivery_time_range,
       timeList
     } = this.state
+    let start = new Date()
+    start = start.setDate(start.getDate() + 1)
     // TODO: 价格参数报错
     // TODO: 补充一个结果页， 直接跳转
     return (<View className='ConfirmOrderWrap'>
@@ -259,7 +325,7 @@ class ConfirmOrder extends React.Component {
       <View className='ConfirmOrderContentWrap'>
         {/* <Address title='添加收获地址' /> */}
         { this.getAddr() }
-        <PickerDate change={dateChange} />
+        <PickerDate change={dateChange} start={dateFormat(start, 'YYYY-mm-dd')} value={start} />
         <ItemWrap
           title='配送日期'
           subTitle={date}

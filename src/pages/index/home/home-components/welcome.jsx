@@ -23,13 +23,13 @@ class Welcome extends React.Component {
         styleStr: 'hide'
       })
       Taro.setStorageSync('$well', '1')
-    }, 3000)
+    }, 4000)
     setTimeout(() => {
       this.setState({
         styleStr: 'hide clear'
       })
       Taro.setStorageSync('$well', '1')
-    }, 4000)
+    }, 5000)
   }
   render() {
     let { styleStr } = this.state

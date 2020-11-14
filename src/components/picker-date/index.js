@@ -14,7 +14,7 @@ const DatePicker = props => {
     change(date)
   }
   return(<View className='DatePickerWRap'>
-    <Picker mode='date' onChange={dateChange}>
+    <Picker mode='date' onChange={dateChange} {...props}>
         <AtList>
           <AtListItem title='请选择日期'  />
         </AtList>
