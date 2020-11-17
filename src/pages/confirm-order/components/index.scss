@@ -96,6 +96,7 @@
   .UseCouponTitle{
     font-size: $font-sm;
     color: $black85;
+    font-family: PingFangSC-Semibold;
   }
 
   .InputWrap{
@@ -126,8 +127,13 @@
     @include flex(space-between, center);
     line-height: 42px;
     font-size: $font-md;
-    color: $black;
+    color: rgba(7,7,7,0.85);
     padding: 24px;
+  }
+  .PriceDetailLineTitle{
+    font-size: $font-sm;
+    color: rgba(7,7,7,0.85);
+    font-family: PingFangSC-Semibold;
   }
   .Currency{
     font-size: $font-xs;

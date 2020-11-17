@@ -35,7 +35,7 @@ const AddShopCart = props => {
     let { errorCode, data } = await updateCart({item_id,  new_num: count})
     if (errorCode === 0) {
       hideShopCart()
-      updateCount({key: 'productCount', val: data})
+      props.updateCount({key: 'productCount', val: data})
     }
     // 添加到购物
     // addShoppingCart(item_id, count, hideShopCart)

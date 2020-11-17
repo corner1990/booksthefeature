@@ -22,9 +22,10 @@ class ShoppingCart extends Component {
     isEdit: false,
     product_type: 1
   }
-  componentDidMount() {
+  componentWillMount() {
     this.loadInfo()
   }
+  
   /**
    * @desc 返回
    */
@@ -51,7 +52,6 @@ class ShoppingCart extends Component {
   }
   askDelete = () => {
     let self = this
-    console.log('askDelete')
     Taro.showModal({
       title: '提示',
       content: '你确定要删除已选中的商品么？',

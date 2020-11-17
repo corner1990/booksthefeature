@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import { View, Image } from '@tarojs/components'
 import { AtIcon, AtInputNumber } from 'taro-ui'
 import { connect } from 'react-redux'
@@ -12,20 +12,33 @@ const mapState = state => state.shoppingCart;
 /**
  * @desc 商品
  */
-const ProductCard = props => {
-  let { product, selected, changeSelected, isEdit } = props
-  let [count, setCount] = useState(product.count)
-  let active = selected.find(item => item.item_id === product.item_id) ? 'active' : ''
+class ProductCard extends Component {
+  constructor(props) {
+    super()
+    let { product } = props
+    this.state = {
+      count: product.count
+    }
+  }
+  shouldComponentUpdate(props) {
+    let { product: { count } } = props
+    if (count !== this.state.count) {
+      this.setState({ count })
+    }
+    return true
+  }
   // 切换选中状态
-  const changeStatus = () => {
+  changeStatus = () => {
+    let { product, selected } = this.props
+    let active = selected.find(item => item.item_id === product.item_id) ? 'active' : ''
     let arr = active ? selected.filter(item => item.item_id !== product.item_id) : [...selected, product]
-    changeSelected(arr)
-    calculatePrice(arr)
+    this.props.changeSelected(arr)
+    this.calculatePrice(arr)
   }
   /**
    * @desc 计算价格
    */
-  const calculatePrice = async arr => {
+  calculatePrice = async arr => {
     if (arr.length  === 0) return false
     let product_array = arr.map(info => {
       let { item_id } = info
@@ -35,20 +48,35 @@ const ProductCard = props => {
       product_array,
     })
     if (errorCode === 0) {
-      props.update({key:'priceInfo', val: data})
+      this.props.update({key:'priceInfo', val: data})
     }
   }
   /**
    * @desc 跟新购物商品数量
    * @param { number } count 购物车商品数量
    */
-  const editProuctInfo = async num => {
-    let { errorCode } = await updateCart({item_id: product.item_id, count: num})
+  editProuctInfo = async num => {
+    let { product, info } = this.props
+    let { errorCode, data } = await updateCart({item_id: product.item_id, count: num})
     if (errorCode === 0 ) {
-      setCount(num)
+      this.setState({ count: num })
+      
+      info = info.map(item => {
+        if (item.item_id !== product.item_id) return item
+        return {
+          ...product,
+          count: num
+        }
+      })
+      this.props.update({key: 'info', val: info})
+      this.props.update({key: 'productCount', val: data})
     }
   }
-  return (<View className='ProductCard' onClick={changeStatus} >
+  render() {
+    let { count } = this.state
+    let { product, selected, isEdit } = this.props
+    let active = selected.find(item => item.item_id === product.item_id) ? 'active' : ''
+    return (<View className='ProductCard' onClick={this.changeStatus} >
     <AtIcon
       value='check'
       size='14'
@@ -79,7 +107,7 @@ const ProductCard = props => {
                 max={999}
                 step={1}
                 value={count}
-                onChange={editProuctInfo}
+                onChange={this.editProuctInfo}
               />
             </View>
           ) : (<View className='ProductCount'>x{count}</View>)
@@ -88,6 +116,7 @@ const ProductCard = props => {
       </View>
     </View>
   </View>)
+  }
 }
 
 export default connect(mapState, { update })(ProductCard)

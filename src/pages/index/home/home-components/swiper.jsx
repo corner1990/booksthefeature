@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import { connect } from 'react-redux'
+import Taro from '@tarojs/taro'
 // import Article from './article' // 文章列表页
 import './swiper.scss'
 import { getAdvertisingList } from '../api'
@@ -42,13 +43,29 @@ class SwiperComponent extends Component {
    */
   getItem = () => {
     let { banner } = this.state
-    return banner.map((item, key) => ( <SwiperItem key={key}>
+    return banner.map((item, key) => ( <SwiperItem
+      key={key}
+      onClick={() => {this.toProduct(item)}}
+    >
       <Image
         src={item.image}
         className='home-swiper-img'
         mode='aspectFill'
       />
     </SwiperItem>))
+  }
+  /**
+   * @desc 跳转商品页面
+   * @param {*} info 
+   */
+  toProduct = info => {
+    let { link: url } = info
+    let reg = /\/pages\/productDetail\/index\?id=\d+/
+    if (url &&  reg.test(url)) {
+      Taro.navigateTo({
+        url
+      })
+    }
   }
   /**
    * @desc 处理banner下标
