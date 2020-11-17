@@ -76,7 +76,7 @@ class FilterBar extends Component{
     submit(actionKey, info)
   }
   getBtn = () => {
-    let { info: { order_status } } = this.props
+    let { info: { order_status = 10 } } = this.props
     let btns = btnTexts[order_status]
     
     if (btns.length ===  2) {
@@ -109,15 +109,20 @@ class FilterBar extends Component{
   }
   render() {
     let { info } = this.props
+    let {
+      product_list = [
+        {
+          main_image: '',
+          product_name: '',
+          format_product_price: '',
+          count: 0,
+          format_pay_price: '0.00'
+        }
+      ]
+    } = info
     // this.showLeft()
     
-    let product = info.product_list[0] || {
-      main_image: '',
-      product_name: '',
-      format_product_price: '',
-      count: 0,
-      format_pay_price: '0.00'
-    }
+    let product = product_list[0]
     let create = new Date(info.created_timestamp*1000)
     let str = dayjs(create).format('YYYY-MM-DD HH:mm:ss')
     return (<View className='OrderCard' onClick={this.toDetail}>

@@ -12,6 +12,7 @@ import { setProductArray } from '../../../store/actions/shopping-cart'
 
 import './components/index.scss'
 import { createOrderPayInfo } from '../../confirm-order/api'
+import Event from '../../../utils/event'
 
 const mapState = state => state.global
 
@@ -33,15 +34,28 @@ class Index extends Component {
     }, () => {
       this.loadInfo()
     })
-    
+    Event.listen('ordersLoad', () => {
+      this.setState({
+        active: 0,
+        pageInfo: {
+          index: 0,
+          has_more: true
+        }
+      }, () => {
+        this.loadInfo()
+      })
+      this.loadInfo()
+    })
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+  }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {
+  }
 
-  componentDidShow() { }
-
+  componentDidShow() {
+  }
   componentDidHide() { }
 
   toEndorsement = () => {
@@ -175,10 +189,11 @@ class Index extends Component {
    */
   cancel = async info => {
     let { order_sn } = info
+   
     let { errorCode } = await cancelOrder({ order_sn })
     if(errorCode === 0) {
       let list = this.state.list.map(item => {
-        if (item.order_sn !== info.order_sn) return item
+        if (item.order_sn !== order_sn) return item
         return {
           ...item,
           order_status: 50
@@ -208,9 +223,10 @@ class Index extends Component {
    */
   delete = async info => {
     let { order_sn } = info
+   
     let { errorCode } = await deleteOrder({ order_sn })
     if(errorCode === 0) {
-      let list = this.state.list.filter(item => item.order_sn !== info.order_sn)
+      let list = this.state.list.filter(item => item.order_sn !== order_sn)
       this.setState({ list })
     }
 

@@ -13,6 +13,7 @@ import './index.scss'
 import { queryOrderDetailInfo } from './api'
 import { cancelOrder, deleteOrder } from '../index/orders/api'
 import { createOrderPayInfo } from '../confirm-order/api'
+import Event from '../../utils/event'
 /**
  * @desc 我的信息
  */
@@ -44,6 +45,13 @@ class OrderDetail extends Component {
   componentDidMount() {
     // let {} = this.props
     this.loadInfo()
+    
+  }
+  /**
+   * @desc 触发订单页面刷新数据
+   */
+  triggerLoad = () => {
+    Event.trigger('ordersLoad')
   }
   /**
    * @desc 返回上一页
@@ -90,6 +98,7 @@ order_sn: "202011011508089570764"
         ...data,
         signType: 'MD5',
         success () {
+          this.triggerLoad()
           url = `${url}&pay_status=1`
           Taro.navigateTo({ url })
         },
@@ -106,7 +115,7 @@ order_sn: "202011011508089570764"
    */
   submit = (key) => {
     let { orderInfo: info} = this.state
-    console.log('12312', key)
+    
     switch(key){
       
       case 'toPay': // 去支付
@@ -161,7 +170,7 @@ order_sn: "202011011508089570764"
     let { order_sn } = info
     let { errorCode } = await cancelOrder({ order_sn })
     if(errorCode === 0) {
-      
+      this.triggerLoad()
       this.setState({
         orderInfo: {
           ...info,
@@ -193,6 +202,7 @@ order_sn: "202011011508089570764"
     let { order_sn } = info
     let { errorCode } = await deleteOrder({ order_sn })
     if(errorCode === 0) {
+      this.triggerLoad()
       Taro.navigateBack()
     }
 
