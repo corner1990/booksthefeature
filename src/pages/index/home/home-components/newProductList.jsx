@@ -32,6 +32,7 @@ class NewProductList extends Component{
           >
             <Image
               src={info.base_info.main_image}
+              mode='aspectFill'
               className='productImg'
             />
             <View className='productTitle'>{info.base_info.product_name}</View>

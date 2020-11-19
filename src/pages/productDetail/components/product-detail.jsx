@@ -46,6 +46,11 @@ const MainProductdetail = props => {
     if (!Array.isArray(specifications)) {
       specifications = JSON.parse(specifications)
     }
+    // 处理报错
+    if (!specifications) {
+      specifications = []
+    }
+    
     return specifications.map((item, key) => {
       let itemKey = Object.keys(item)[0]
       return (<View className='line' key={key}>
