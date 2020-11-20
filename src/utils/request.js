@@ -76,6 +76,7 @@ request.interceptors.response.use(function (response) {
   }
   // 处理错误提示
   if (data.errorCode !== 0) {
+    console.log('处理错误提示', data)
     Taro.showToast({
       icon: 'none',
       title: data.errorMessage

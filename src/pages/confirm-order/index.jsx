@@ -176,8 +176,6 @@ class ConfirmOrder extends React.Component {
 
       return false
     }
-    
-
     let anonymous_status = anonymous ? 1 : 0
     product_array = product_array.map(info => {
       let { count, item_id } = info
@@ -185,7 +183,7 @@ class ConfirmOrder extends React.Component {
     })
     
     date = this.getDate(date, delivery_time_range)
-
+    
     let params = {
       product_array,
       voucher_code,
@@ -195,6 +193,7 @@ class ConfirmOrder extends React.Component {
       anonymous_status,
       delivery_time_range
     }
+    console.log('suhmit', params)
    
     let { errorCode, data } = await createOrder(params)
     if (errorCode === 0) {
