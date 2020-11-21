@@ -114,7 +114,7 @@ const MainProductdetail = props => {
       <View className='wrap'>
         {
           info.care_instructions ? info.care_instructions.split('\n').map((item, key) => {
-            return (<View key={key}>{item}</View>)
+            return (<View className='line' key={key}>{item}</View>)
           }) : ''
         }
       </View>
@@ -128,7 +128,7 @@ const MainProductdetail = props => {
     >
       <View className='wrap'>
         {info.logistics_desc ? info.logistics_desc.split('\n').map((item, key) => {
-            return (<View key={key}>{item}</View>)
+            return (<View className='line' key={key}>{item}</View>)
           }) : ''
         }
       </View>
@@ -143,7 +143,7 @@ const MainProductdetail = props => {
       <View className='wrap'>
         {
         info.after_sale_instructions ? info.after_sale_instructions.split('\n').map((item, key) => {
-          return (<View key={key}>{item}</View>)
+          return (<View className='line' key={key}>{item}</View>)
         }) : ''
         }
       </View>

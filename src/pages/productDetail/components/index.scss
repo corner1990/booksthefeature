@@ -62,9 +62,9 @@
   
   .DetailTitle{
     line-height: 60px;
-    font-size: $font-lg;
+    font-size: $font-md;
     color: $black85;
-    font-weight: 700;
+    // font-weight: 700;
     margin-bottom: 20px;
   }
   .textContent{
@@ -84,9 +84,9 @@
     border-radius: 16px;
   }
   .at-accordion__info__title{
-    font-size: $font-md;
+    font-size: $font-sm;
     color: $black85;
-    font-weight: 700;
+    // font-weight: 700;
   }
   .at-accordion__content{
     transition: height .3s cubic-bezier(.47,0,.745,.715);
@@ -101,11 +101,8 @@
     padding: 24px;
     font-size: $font-sm;
     color: $black85;
-    View{
+    .line{
       margin-bottom: 20px;
-      &::last-child{
-        margin-bottom: 0;
-      }
     }
   }
 }

@@ -54,7 +54,7 @@ export default class Index extends Component {
     this.setState(params)
   }
   render () {
-    let { pageInfo, list, open, info } = this.state
+    let { list, open, info } = this.state
     return (
       <View className='found' >
         <CustomNavBar title='发现' />
