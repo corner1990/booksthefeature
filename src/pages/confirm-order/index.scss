@@ -12,7 +12,7 @@
   .ProductList{
     @include shadow;
     border-radius: 16px;
-    margin: 40px 0 20px;
+    margin: 20px 0 20px;
   }
   .BlessCard{
     @include shadow;
@@ -34,7 +34,7 @@
     right: 48px;
   }
   .TimeTip{
-    font-size: $font-xs;
+    font-size: 22px;
     color: $black65;
     padding: 20px 0;
     margin-top: -20px;

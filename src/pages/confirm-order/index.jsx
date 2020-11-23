@@ -451,35 +451,6 @@ class ConfirmOrder extends React.Component {
       因鲜花商品的特殊属性，将不接受退货，如有质量问题，请在收货后24小时联系客服。
 
 
-      // JavaScript Document
-
-
-
-calendar = new Date();
-month = calendar.getMonth();
-date = calendar.getDate();
-
-if ((month == 0) && (date == 1)) document.write("元旦");
-if ((month == 1) && (date ==13 )) document.write("除夕");
-if ((month == 1) && (date ==14 )) document.write("春节/情人节");
-if ((month == 2) && (date == 1)) document.write("国际海豹日");
-if ((month == 2) && (date == 8)) document.write("国际劳动妇女节/中国保护母亲河日");
-if ((month == 2) && (date == 12)) document.write("植树节");
-
-if ((month == 3) && (date == 1)) document.write("愚人节");
-if ((month == 3) && (date == 5)) document.write("清明节");
-if ((month == 4) && (date == 1)) document.write("国际劳动节");
-if ((month == 4) && (date == 9)) document.write("母亲节");
-
-if ((month == 5) && (date == 1)) document.write("国际儿童节");
-if ((month == 5) && (date == 26)) document.write("国际禁毒日");
-
-if ((month == 7) && (date == 1)) document.write("建军节");
-if ((month == 7) && (date == 15)) document.write("日本无条件投降日/世纪婚纱日");
-if ((month == 7) && (date == 16)) document.write("七夕情人节");
-
-
-
     */
     return (<View className='ConfirmOrderWrap'>
       <CustomNavBar
@@ -508,7 +479,7 @@ if ((month == 7) && (date == 16)) document.write("七夕情人节");
           
         </AtAccordion> */}
         <View className='TimeTip'>
-        我们的花礼采用新鲜花材，采购、运输、制作、配送均需时间，
+        {/* 我们的花礼采用新鲜花材，采购、运输、制作、配送均需时间， */}
         为保证新鲜美好的花礼完美的送到您手上，
         请提前预定下单。正常12:00之前的订单可预约次日送达，
         12:00之后的订单后天送达，下单前请先联系客服确定是否有货，
