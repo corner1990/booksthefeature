@@ -68,6 +68,26 @@ class ConfirmOrder extends React.Component {
    * @param {string} date 
    */
   dateChange = date => {
+    let value = date.detail.value
+    // let value = '2020-12-22'
+    if (this.isHoliday(value)) {
+      let target = new Date(`${value} 0:00:00`)
+      let now = new Date('2020-12-22')
+      now.setHours(0)
+      now.setDate(now.getDate() + 3)
+      now.setMinutes(0)
+      now.setSeconds(0)
+      now.setMilliseconds(0)
+      // 判断时间
+      if (target < now) {
+        Taro.showToast({
+          icon: 'none',
+          title: '节假日需要提前三天预定鲜花'
+        })
+        return false
+      }
+    }
+  
     this.setState({
       date: date.detail.value
     })
@@ -79,7 +99,7 @@ class ConfirmOrder extends React.Component {
   timeChange = (time) => {
     let { value } = time.detail
     let {  timeList } = this.state
-
+    
     this.setState({
       delivery_time_range: timeList[value]
     })
@@ -312,6 +332,66 @@ class ConfirmOrder extends React.Component {
     time.setDate(time.getDate() + num)
     return time
   }
+  /**
+   * @desc 判断是否是节假日
+   * @param { string } str date string
+   * @return { boolean } true | false
+   */
+  isHoliday(str) {
+    let time = new Date(str)
+    let month = time.getMonth()
+    let date = time.getDate()
+    let res = false
+    if ((month == 0) && (date == 1)) {
+      res = true
+      console.log("元旦");
+    }
+    if ((month == 1) && (date ==13 )) {
+      res = true
+      console.log("除夕");
+    }
+    if ((month == 1) && (date ==14 )) {
+      res = true
+      console.log("春节/情人节");
+    }
+    // if ((month == 2) && (date == 1)) console.log("国际海豹日");
+    // if ((month == 2) && (date == 8)) {
+    //   res = true
+    //   console.log("国际劳动妇女节/中国保护母亲河日");
+    // }
+    if ((month == 4) && (date == 20)) {
+      res = true
+      console.log("5 20");
+    }
+    // if ((month == 2) && (date == 12)) console.log("植树节");
+    
+    // if ((month == 3) && (date == 1)) console.log("愚人节");
+    // if ((month == 3) && (date == 5)) console.log("清明节");
+    // if ((month == 4) && (date == 1)) console.log("国际劳动节");
+    if ((month == 4) && (date == 9)) {
+      res = true
+      console.log("母亲节");
+    }
+    
+    // if ((month == 5) && (date == 1)) console.log("国际儿童节");
+    // if ((month == 5) && (date == 26)) console.log("国际禁毒日");
+    
+    // if ((month == 7) && (date == 1)) console.log("建军节");
+    // if ((month == 7) && (date == 15)) console.log("日本无条件投降日/世纪婚纱日");
+    if ((month == 7) && (date == 16)) {
+      res = true
+      console.log("七夕情人节");
+    }
+    if ((month == 11) && (date == 24)) {
+      res = true
+      console.log("平安夜");
+    }
+    if ((month == 11) && (date == 25)) {
+      res = true
+      console.log("圣诞节");
+    }
+    return res
+  }
   render() {
     let {
       backHistory,
@@ -369,6 +449,37 @@ class ConfirmOrder extends React.Component {
       退换货说明
 
       因鲜花商品的特殊属性，将不接受退货，如有质量问题，请在收货后24小时联系客服。
+
+
+      // JavaScript Document
+
+
+
+calendar = new Date();
+month = calendar.getMonth();
+date = calendar.getDate();
+
+if ((month == 0) && (date == 1)) document.write("元旦");
+if ((month == 1) && (date ==13 )) document.write("除夕");
+if ((month == 1) && (date ==14 )) document.write("春节/情人节");
+if ((month == 2) && (date == 1)) document.write("国际海豹日");
+if ((month == 2) && (date == 8)) document.write("国际劳动妇女节/中国保护母亲河日");
+if ((month == 2) && (date == 12)) document.write("植树节");
+
+if ((month == 3) && (date == 1)) document.write("愚人节");
+if ((month == 3) && (date == 5)) document.write("清明节");
+if ((month == 4) && (date == 1)) document.write("国际劳动节");
+if ((month == 4) && (date == 9)) document.write("母亲节");
+
+if ((month == 5) && (date == 1)) document.write("国际儿童节");
+if ((month == 5) && (date == 26)) document.write("国际禁毒日");
+
+if ((month == 7) && (date == 1)) document.write("建军节");
+if ((month == 7) && (date == 15)) document.write("日本无条件投降日/世纪婚纱日");
+if ((month == 7) && (date == 16)) document.write("七夕情人节");
+
+
+
     */
     return (<View className='ConfirmOrderWrap'>
       <CustomNavBar
