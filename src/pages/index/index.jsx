@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { connect } from 'react-redux'
-// import Taro from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import Tabbar from '../../components/tabbar'
 import Home from './home/home' // 首页
 import Found from './found/found' // 发现
@@ -28,6 +28,21 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+  onLoad() {
+    Taro.showShareMenu({
+      withShareTicket:true,
+      menus:['shareAppMessage','shareTimeline']
+    })
+  }
+  // onShareAppMessage() {
+  //   let res = {
+  //     title: 'product_name',
+  //     path: '/pages/productDetail/index',  // 自定义的分享路径，点击分享的卡片之后会跳转这里定义的路由
+  //     imageUrl: 'http://ipxmall.oss-cn-zhangjiakou.aliyuncs.com/ipxmall/e7ac283d6dd0dd1b000423d6d123aec8' // 图片路径
+  //   }
+  //   console.log('res', res)
+  //   return res;
+  // }
   render () {
     let { tabIndex } = this.props
     let { components } = this.state

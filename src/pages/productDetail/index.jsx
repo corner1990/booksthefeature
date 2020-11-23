@@ -21,6 +21,7 @@ import './index.scss'
 class ProductDetail extends Component{
   state = {
     info: {},
+    title: '',
     isOpened: false,
     showJustBuy: false
   }
@@ -29,6 +30,24 @@ class ProductDetail extends Component{
     let { id=289 } = Taro.Current.router.params
     this.loadInfo(id)
     this.loadCartCount()
+  }
+  onLoad() {
+    Taro.showShareMenu({
+      withShareTicket:true,
+      menus:['shareAppMessage','shareTimeline']
+    })
+  }
+  onShareAppMessage() {
+    console.log('123', 'onShareAppMessage')
+    let { info } = this.state
+    let { product_name, item_id, main_image } = info.base_info
+    let res = {
+      title: product_name,
+      path: `/pages/productDetail/index?id=${item_id}`,  // 自定义的分享路径，点击分享的卡片之后会跳转这里定义的路由
+      imageUrl: main_image // 图片路径
+    }
+    console.log('res', res)
+    return res;
   }
   /**
    * @desc 获取购物车数量
@@ -46,7 +65,8 @@ class ProductDetail extends Component{
     let { errorCode, data } = await getProductDetail({item_id})
     if (errorCode === 0) {
       this.setState({
-        info: data
+        info: data,
+        title: data.base_info.product_name
       })
     }
     
@@ -65,14 +85,23 @@ class ProductDetail extends Component{
   /**
    * @desc 返回上一页
    */
-  backHistory = () => Taro.navigateBack()
+  backHistory = () => {
+    Taro.navigateBack({
+      fail() {
+        Taro.redirectTo({
+          url: '/pages/index/index'
+        })
+      }
+    })
+    
+  }
   
   render() {
-    let { info, isOpened, showJustBuy } = this.state
+    let { info, isOpened, showJustBuy, title } = this.state
     // TODO: 处理规格参数
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
-        title='订花'
+        title={title}
         clickLeft={this.backHistory}
       />
       <MainImage info={info} />
