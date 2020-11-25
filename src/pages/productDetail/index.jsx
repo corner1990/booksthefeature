@@ -10,7 +10,7 @@ import Detail from './components/product-detail'
 import Footer from './components/footer'
 import AddShopCart from './components/addShopcart'
 import JustBuyComponent from './components/justBuy'
-import { getProductDetail, getUserShoppingCartCount } from './api'
+import { getProductDetail, getUserShoppingCartCount, getSystemConfigList } from './api'
 import { update } from '../../store/actions/shopping-cart'
 
 import './index.scss'
@@ -23,13 +23,15 @@ class ProductDetail extends Component{
     info: {},
     title: '',
     isOpened: false,
-    showJustBuy: false
+    showJustBuy: false,
+    config: {} // 站点配置
   }
   componentWillMount () {
     // let { id } = Taro.Current.router.params
     let { id=289 } = Taro.Current.router.params
     this.loadInfo(id)
     this.loadCartCount()
+    this.loadInfoConfig()
   }
   onLoad() {
     Taro.showShareMenu({
@@ -38,7 +40,6 @@ class ProductDetail extends Component{
     })
   }
   onShareAppMessage() {
-    console.log('123', 'onShareAppMessage')
     let { info } = this.state
     let { product_name, item_id, main_image } = info.base_info
     let res = {
@@ -71,7 +72,22 @@ class ProductDetail extends Component{
     }
     
   }
-  
+  /**
+   * @desc 加载配置
+   */
+  loadInfoConfig = async item_id => {
+    let { errorCode, data } = await getSystemConfigList()
+    if (errorCode === 0) {
+      let config = data.reduce((prev, next) => {
+        let { config_key, config_value } = next
+        prev[config_key] = config_value
+        return prev
+      }, {})
+      // 外部
+      this.setState({ config })
+    }
+    
+  }
   /**
    * @desc 更新数据
    * @param { string } key 数据键
@@ -97,7 +113,7 @@ class ProductDetail extends Component{
   }
   
   render() {
-    let { info, isOpened, showJustBuy, title } = this.state
+    let { info, isOpened, showJustBuy, title, config } = this.state
     // TODO: 处理规格参数
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
@@ -109,7 +125,7 @@ class ProductDetail extends Component{
         <ProductInfo info={info} />
         <Detail info={info} />
       </View>
-      <Footer update={this.update} />
+      <Footer update={this.update} config={config}  />
       <AtActionSheet
         isOpened={isOpened}
         className='ShopCartActionSheet'
@@ -122,7 +138,10 @@ class ProductDetail extends Component{
         className='ShopCartActionSheet'
         onClose={() => this.update('showJustBuy', false)}
       >
-        <JustBuyComponent update={this.update} product={info} />
+        <JustBuyComponent
+          update={this.update}
+          product={info}
+        />
       </AtActionSheet>
     </View>)
   }

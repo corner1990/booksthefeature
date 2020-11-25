@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from '@tarojs/components'
-import { AtIcon, AtBadge } from 'taro-ui'
+import { AtIcon, AtBadge } from "taro-ui"
 import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 
 const ProuductFooter = props => {
+  const [open, setOpen] = useState(false)
   /**
    * @desc 添加到购物车
    */
@@ -26,6 +27,15 @@ const ProuductFooter = props => {
     // Taro.navigateTo({
     //   url: '/pages/confirm-order/index'
     // })
+    let { config } = props
+    // 判断是
+    if (config.holiday == '1') {
+      Taro.showToast({
+        title: '节假日订单比较多，请在个人中心联系客服',
+        icon: 'none'
+      })
+      return false
+    }
     props.update('showJustBuy', true)
   }
   
