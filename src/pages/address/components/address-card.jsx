@@ -4,6 +4,7 @@ import { AtIcon } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { setShipping } from '../../../store/actions/shopping-cart'
+import Event from '../../../utils/event'
 import './index.scss'
 /**
  * @desc 地址
@@ -37,6 +38,7 @@ const AddressCard = props => {
    */
   const setAddr = () => {
     props.setShipping(info)
+    Event.trigger('calculatePrice')
     Taro.navigateBack()
   }
   return (<View className='AddressCardWrap' onClick={setAddr}>
