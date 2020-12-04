@@ -23,7 +23,7 @@ class Footer extends Component {
         >删除</View>) : [
           <View className='PriceWrap' key='price'>
             {len ? <Text className='Currency'>&yen;</Text> : ''}
-            {priceInfo.format_pay_price}
+            { len ? priceInfo.format_pay_price : ''}
           </View>,
           <View
             circle
