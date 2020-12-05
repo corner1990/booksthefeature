@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import { AtActionSheet } from "taro-ui"
+import { AtActionSheet, AtModal, AtModalHeader, AtModalContent, AtModalAction, AtButton } from "taro-ui"
 import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 import CustomNavBar from '../../components/navbar'
@@ -12,7 +12,7 @@ import AddShopCart from './components/addShopcart'
 import JustBuyComponent from './components/justBuy'
 import { getProductDetail, getUserShoppingCartCount, getSystemConfigList } from './api'
 import { update } from '../../store/actions/shopping-cart'
-
+import Item from '../../components/item'
 import './index.scss'
 
 /**
@@ -24,6 +24,7 @@ class ProductDetail extends Component{
     title: '',
     isOpened: false,
     showJustBuy: false,
+    showServerHone: false,
     config: {} // 站点配置
   }
   componentWillMount () {
@@ -111,9 +112,19 @@ class ProductDetail extends Component{
     })
     
   }
-  
+  /**
+   * @desc 拨打电话
+   */
+  tel = () => {
+    Taro.makePhoneCall({
+      phoneNumber: '13681924547'
+    })
+    this.setState({
+      showServerHone: false
+    })
+  }
   render() {
-    let { info, isOpened, showJustBuy, title, config } = this.state
+    let { info, isOpened, showJustBuy, title, config, showServerHone } = this.state
     // TODO: 处理规格参数
     return (<View className='ProductDetailWrap'>
       <CustomNavBar
@@ -143,6 +154,19 @@ class ProductDetail extends Component{
           product={info}
         />
       </AtActionSheet>
+    
+      <AtModal isOpened={showServerHone} className='TipModal'>
+        <AtModalHeader className='TipModalTitle'>订单提醒</AtModalHeader>
+        <AtModalContent>
+          节假日订单较多，下单前请先联系客服确认
+        </AtModalContent>
+        <AtModalAction className='BtnWrap'>
+            <AtButton onClick={() => this.setState({
+          showServerHone: false
+        })}>取消</AtButton>
+            <AtButton onClick={this.tel} type='primary'>确定</AtButton> 
+        </AtModalAction>
+      </AtModal>
     </View>)
   }
 }

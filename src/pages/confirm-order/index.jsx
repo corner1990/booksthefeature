@@ -415,7 +415,7 @@ class ConfirmOrder extends React.Component {
       // showTimeTip
     } = this.state
     let start = this.getStart()
-    // TODO: 价格参数报错
+   
     // TODO: 补充一个结果页， 直接跳转
     /*
       品牌故事

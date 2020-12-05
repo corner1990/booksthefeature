@@ -30,10 +30,11 @@ const ProuductFooter = props => {
     let { config } = props
     // 判断是
     if (config.holiday == '1') {
-      Taro.showToast({
-        title: '节假日订单比较多，请在个人中心联系客服',
-        icon: 'none'
-      })
+      props.update('showServerHone', true)
+      // Taro.showToast({
+      //   title: '节假日订单比较多，请在个人中心联系客服',
+      //   icon: 'none'
+      // })
       return false
     }
     props.update('showJustBuy', true)

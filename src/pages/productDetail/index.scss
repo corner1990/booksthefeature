@@ -19,4 +19,16 @@
     }
     
   }
+
+  .TipModal{
+    .TipModalTitle{
+      font-size: $font-sm;
+    }
+    .BtnWrap{
+      padding: 20px 0;
+    }
+    .at-button{
+      width: 120px;
+    }
+  }
 }
