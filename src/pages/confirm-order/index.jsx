@@ -21,6 +21,7 @@ import './index.scss'
 import { calculateOrderPrice, createOrder, createOrderPayInfo } from './api';
 import { removeFromCart } from '../shopping-cart/api';
 import { dateFormat } from '../../utils/utils'
+import Event from '../../utils/event'
 
 /**
  * @desc 确认订单
@@ -44,8 +45,13 @@ class ConfirmOrder extends React.Component {
   componentDidMount() {
 
     this.loadAddress()
-    this.calculatePrice()
+    // 重新选择地址后更新价格
+    Event.listen('calculatePrice', () => {
+      this.calculatePrice()
+    })
+    // this.calculatePrice()
   }
+
   timer = 0
   backHistory = () => Taro.navigateBack()
   /**
@@ -114,6 +120,8 @@ class ConfirmOrder extends React.Component {
       let addr = list.find(item => item.is_default === '1') || list[0]
       if (addr) this.props.setShipping(addr)
     }
+    // 计算价格 依赖地址信息 
+    this.calculatePrice()
   }
   /**
    * @desc 处理地址
@@ -135,7 +143,7 @@ class ConfirmOrder extends React.Component {
    * @desc 计算价格
    */
   calculatePrice = async () => {
-    let { product_array } = this.props
+    let { product_array, shipping } = this.props
     let { voucher_code } = this.state
     product_array = product_array.map(info => {
       let { count, item_id } = info
@@ -143,7 +151,8 @@ class ConfirmOrder extends React.Component {
     })
     let { errorCode, data } = await calculateOrderPrice({
       product_array,
-      voucher_code
+      voucher_code,
+      shipping_id: shipping.id
     })
     if (errorCode === 0) {
       this.setState({
@@ -364,7 +373,6 @@ class ConfirmOrder extends React.Component {
       console.log("5 20");
     }
     // if ((month == 2) && (date == 12)) console.log("植树节");
-    
     // if ((month == 3) && (date == 1)) console.log("愚人节");
     // if ((month == 3) && (date == 5)) console.log("清明节");
     // if ((month == 4) && (date == 1)) console.log("国际劳动节");
@@ -375,7 +383,6 @@ class ConfirmOrder extends React.Component {
     
     // if ((month == 5) && (date == 1)) console.log("国际儿童节");
     // if ((month == 5) && (date == 26)) console.log("国际禁毒日");
-    
     // if ((month == 7) && (date == 1)) console.log("建军节");
     // if ((month == 7) && (date == 15)) console.log("日本无条件投降日/世纪婚纱日");
     if ((month == 7) && (date == 16)) {
@@ -404,7 +411,6 @@ class ConfirmOrder extends React.Component {
     let {
       product_array: list
     } = this.props
-    
     let {
       date,
       priceInfo,

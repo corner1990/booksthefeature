@@ -107,6 +107,10 @@ class ShoppingCart extends Component {
   changeType = product_type => {
     this.setState({ product_type })
     this.loadInfo()
+    this.props.update({
+      val: [],
+      key: 'selected'
+    })
   }
   render() {
     let { isEdit, product_type } = this.state

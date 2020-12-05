@@ -3,9 +3,11 @@ import { View, Text } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import { connect } from 'react-redux'
 import ProductCard from './product-card'
-import { select } from '../../../store/actions/shopping-cart'
+import { select, update as updateStore } from '../../../store/actions/shopping-cart'
+import { calculateOrderPrice } from '../../confirm-order/api'
 
 import './index.scss'
+
 const mapState = state => state.shoppingCart
 /**
  * @desc 购物侧
@@ -16,6 +18,7 @@ const ProductList = props => {
   const selectAll = () => {
     let arr = list.length === selected.length ? [] : list
     props.select(arr)
+    calculatePrice(arr)
   }
   // 切换选中状态
   const changeSelected = arr => props.select(arr)
@@ -23,6 +26,22 @@ const ProductList = props => {
   const editHanler = isEdit => {
     props.select([])
     props.update('isEdit', isEdit)
+  }
+  /**
+   * @desc 计算价格
+   */
+  const calculatePrice = async arr => {
+    if (arr.length  === 0) return false
+    let product_array = arr.map(info => {
+      let { item_id } = info
+      return { count: info.count, item_id  }
+    })
+    let { errorCode, data } = await calculateOrderPrice({
+      product_array,
+    })
+    if (errorCode === 0) {
+      props.updateStore({key:'priceInfo', val: data})
+    }
   }
   return (<View className='ProductList'>
     <View className='OperatonWrap'>
@@ -58,4 +77,4 @@ const ProductList = props => {
   </View>)
 }
 
-export default connect(mapState, { select })(ProductList)
+export default connect(mapState, { select, updateStore })(ProductList)
