@@ -82,6 +82,15 @@
     margin-top: 16px;
     @include shadow;
     border-radius: 16px;
+    overflow: hidden;
+    .line{
+      height: auto;
+      padding: 0;
+    }
+    .wrap{
+      padding: 0 24px 0 0;
+
+    }
   }
   .at-accordion__info__title{
     font-size: $font-sm;
@@ -89,7 +98,10 @@
     // font-weight: 700;
   }
   .at-accordion__content{
-    transition: height .3s cubic-bezier(.47,0,.745,.715);
+    // transition: height .3s cubic-bezier(.47,0,.745,.715);
+    padding: 24px;
+    width: calc(100vw - 82px);
+    transition: height 500ms linear;
   }
   .line{
     @include flex(space-between, center);

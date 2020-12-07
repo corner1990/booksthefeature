@@ -93,6 +93,9 @@ class FilterBar extends Component{
         >{btns[1]}</AtButton>
       </View>)
     }
+    // if (order_status >= 40) {
+    //   return (<View className='BtnWrap'></View>)
+    // }
     return (<View className='BtnWrap'>
       <AtButton
         type='secondary'

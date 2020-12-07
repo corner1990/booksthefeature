@@ -14,8 +14,8 @@
 export const btnKey = {
   10: ['cancel', 'toPay'],
   20: ['driver'],
-  30: ['driver', 'confirm'],
-  40: ['logistics', 'confirm'],
+  30: ['driver'],
+  40: ['confirm'],
   50: ['delorder', 'evaluation'],
   60: ['delorder'],
   70: ['delorder', 'evaluation'],
@@ -25,11 +25,12 @@ export const btnTexts = {
   10: ['取消', '去支付'],
   20: ['催发货'],
   30: ['催发货'],
-  40: ['物流信息', '确认收货'],
+  40: ['确认收货'],
+  // 40: ['物流信息', '确认收货'],
   50: ['删除订单'],
   60: ['删除订单'],
-  70: ['删除订单', '去评价'],
-  80: ['删除订单', '查看评价']
+  70: ['删除订单'],
+  80: ['删除订单']
 }
 export const statusObj = {
   10:'待付款',

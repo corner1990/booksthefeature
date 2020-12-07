@@ -7,7 +7,7 @@ import { setTab, globaleUpdate } from '../../../store/actions/global'
 import FilterBar from './components/filter-bar'
 import None from '../../../components/none'
 import OrderCard from './components/order-card'
-import { getOrderList, cancelOrder, deleteOrder } from './api'
+import { getOrderList, cancelOrder, deleteOrder, confirmReceipt } from './api'
 import { setProductArray } from '../../../store/actions/shopping-cart'
 
 import './components/index.scss'
@@ -134,7 +134,7 @@ class Index extends Component {
         this.askDelete(info)
         break;
       case 'confirm': // 确认收货
-        // this.confirm()
+        this.askCconfirm(info)
         break;
       case 'evaluation': // 确认收货
         // this.evaluation()
@@ -191,6 +191,44 @@ class Index extends Component {
     let { order_sn } = info
    
     let { errorCode } = await cancelOrder({ order_sn })
+    if(errorCode === 0) {
+      let list = this.state.list.map(item => {
+        if (item.order_sn !== order_sn) return item
+        return {
+          ...item,
+          order_status: 50
+        }
+      })
+      this.setState({ list })
+    }
+
+  }
+  /**
+   * @desc 确认收货
+   * @param {*} info 
+   */
+  askCconfirm = info => {
+    let self = this
+    Taro.showModal({
+      title: '提示',
+      content: '您确定收到鲜花了？',
+      success: function (res) {
+        if (res.confirm) {
+          self.confirm(info)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  }
+  /**
+   * @desc 关闭订单
+   * @param {*} info 
+   */
+  confirm = async info => {
+    let { order_sn } = info
+   
+    let { errorCode } = await confirmReceipt({ order_sn })
     if(errorCode === 0) {
       let list = this.state.list.map(item => {
         if (item.order_sn !== order_sn) return item

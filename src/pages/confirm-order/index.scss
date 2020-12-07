@@ -16,6 +16,7 @@
   }
   .BlessCard{
     @include shadow;
+    position: relative;
     border-radius: 16px;
     margin: 20px 0 20px;
     padding: 24px;

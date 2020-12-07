@@ -11,7 +11,7 @@ import Footer from './components/footer'
 
 import './index.scss'
 import { queryOrderDetailInfo } from './api'
-import { cancelOrder, deleteOrder } from '../index/orders/api'
+import { cancelOrder, deleteOrder, confirmReceipt } from '../index/orders/api'
 import { createOrderPayInfo } from '../confirm-order/api'
 import Event from '../../utils/event'
 /**
@@ -128,7 +128,7 @@ order_sn: "202011011508089570764"
         this.askDelete(info)
         break;
       case 'confirm': // 确认收货
-        // this.confirm()
+        this.askCconfirm(info)
         break;
       case 'evaluation': // 确认收货
         // this.evaluation()
@@ -169,6 +169,42 @@ order_sn: "202011011508089570764"
   cancel = async info => {
     let { order_sn } = info
     let { errorCode } = await cancelOrder({ order_sn })
+    if(errorCode === 0) {
+      this.triggerLoad()
+      this.setState({
+        orderInfo: {
+          ...info,
+          order_status: 50
+        }
+       })
+    }
+
+  }
+  /**
+   * @desc 确认收货
+   * @param {*} info 
+   */
+  askCconfirm = info => {
+    let self = this
+    Taro.showModal({
+      title: '提示',
+      content: '您确定收到鲜花了？',
+      success: function (res) {
+        if (res.confirm) {
+          self.confirm(info)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  }
+  /**
+   * @desc 确认收货
+   * @param {*} info 
+   */
+  confirm = async info => {
+    let { order_sn } = info
+    let { errorCode } = await confirmReceipt({ order_sn })
     if(errorCode === 0) {
       this.triggerLoad()
       this.setState({

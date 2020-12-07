@@ -8,3 +8,5 @@ export const getOrderList = params => Axios.post('/order/order/getOrderList', pa
 export const cancelOrder = params => Axios.post('/order/order/cancelOrder', params)
 // 删除订单
 export const deleteOrder = params => Axios.post('/order/order/deleteOrder', params)
+// 确认收货
+export const confirmReceipt = params => Axios.post('/order/order/confirmReceipt', params)
