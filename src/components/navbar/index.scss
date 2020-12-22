@@ -10,12 +10,13 @@
     transform: translateY(12px);
   }
   .nav-bar-title{
+    @include textHide;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: $font-lg;
-    line-height: 28px;
+    line-height: 40px;
     max-width: 480px;
   }
 }

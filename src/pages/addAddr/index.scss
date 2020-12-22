@@ -11,10 +11,17 @@
   .at-input__container{
     height: 52px;
   }
+  
   .at-input__title{
     font-size: $font-sm;
     color: $black85;
     width: 120px;
+  }
+  .at-textarea__textarea{
+    font-size: $font-sm;
+  }
+  .at-input input{
+    font-size: $font-sm;
   }
   .addrAreaWrap{
     padding:  0 24px;

@@ -7,6 +7,7 @@
 
   .allMonthFlower, .giftFlowerGroup{
     height: 100%;
+    width: calc(50% - 6px);
     line-height: 160px;
     padding: 0 24px;
     box-sizing: border-box;
@@ -16,11 +17,11 @@
   }
   .allMonthFlower{
     border-radius: 16px 0 0 16px;
-    width: 300px;
+    // width: 300px;
   }
   .giftFlowerGroup{
     // text-align: right;
-    width: 396px;
+    // width: 396px;
     border-radius: 0 16px 16px 0;
   }
   .icon-img{
