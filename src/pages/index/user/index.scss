@@ -82,5 +82,13 @@
       border: none;
       height: 96px;
     }
+    .OpenContact{
+      position: absolute;
+      z-index: 10;
+      width: calc(100vw - 364px);
+      opacity: 0;
+      margin-left: 300px;
+      height: 96px;
+    }
   }
 }

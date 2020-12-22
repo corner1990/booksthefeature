@@ -10,16 +10,16 @@ const MainProductdetail = props => {
     care_instructions: ''
   } } = props
   let { specifications=[] } = info
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   // brand_story
-  const [brand_story, setbrand_story] = useState(false)
+  const [brand_story, setbrand_story] = useState(true)
   // care_instructions
-  const [care_instructions, setcare_instructions] = useState(false)
+  const [care_instructions, setcare_instructions] = useState(true)
   // logistics_desc
-  const [logistics_desc, setlogistics_desc] = useState(false)
-  const [purchase_note, setpurchase_note] = useState(false)
+  const [logistics_desc, setlogistics_desc] = useState(true)
+  const [purchase_note, setpurchase_note] = useState(true)
   // logistics_desc
-  const [after_sale_instructions, setafter_sale_instructions] = useState(false)
+  const [after_sale_instructions, setafter_sale_instructions] = useState(true)
   const handleClick = () => {
     setOpen(!open)
   }

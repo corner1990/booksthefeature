@@ -125,7 +125,7 @@ class AddAddr extends Component {
         title: '请请输入收货人姓名'
       })
     }
-    if(!/^1(3|4|5|7|8)[0-9]{9}$$/.test(phone)){
+    if(!/^1[0-9]{10}$$/.test(phone)){
       return Taro.showToast({
         icon: 'none',
         title: '请输入正确的手机号码'

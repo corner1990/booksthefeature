@@ -334,9 +334,9 @@ class ConfirmOrder extends React.Component {
     deathLine.setMinutes(0)
     deathLine.setSeconds(0)
     deathLine.setMilliseconds(0)
-    let num = 1
+    let num = 2
     if (time.getTime() > deathLine.getTime()) {
-      num = 2
+      num = 3
     }
     time.setDate(time.getDate() + num)
     return time

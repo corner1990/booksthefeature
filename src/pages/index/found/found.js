@@ -4,6 +4,7 @@ import { View, ScrollView } from '@tarojs/components'
 import CustomNavBar from '../../../components/navbar'
 import FoundCard from './components/card'
 import ViewDetal from './components/view-detail'
+import None from '../../../components/none'
 import './index.scss'
 import { getFeedList } from './api'
 
@@ -66,7 +67,9 @@ export default class Index extends Component {
         >
           <View className='FoundList'>
             { list.map( (item, key ) => (<FoundCard info={item} key={key} update={this.update} />))}
+            { list.length > 0 ? '' : <None text='哇！这里啥也没有呀' /> }
           </View>
+          
         </ScrollView>
         <ViewDetal open={open} info={info} update={this.update} />
       </View>

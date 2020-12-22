@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Button, View } from '@tarojs/components'
 // import { AtIcon, AtToast } from 'taro-ui'
 import { connect } from 'react-redux'
 import Taro from '@tarojs/taro'
@@ -100,11 +100,12 @@ class Index extends Component {
           />
         </View>
         <View className='serveInfo'>
+          <Button openType='contact' className='OpenContact'></Button>
           <Item
-            title='客服微信'
-            click={this.pasteWx}
-            subTitle={this.state.serverPhone}
+            title='在线客服'
+            // subTitle={this.state.serverPhone}
           />
+          
         </View>
         <GetUserInfo loadInfo={this.props.getUseInfo} />
       </View>

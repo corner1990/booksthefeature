@@ -20,7 +20,8 @@ class Home extends Component {
     showNavBar: true,
     pageInfo: {
       index: 0,
-      has_more: true
+      has_more: true,
+      page_size: 10
     }
   }
   
@@ -53,13 +54,13 @@ class Home extends Component {
    */
   loadInfo = async ()=> {
     let list = []
-    let pageInfo = {}
-    if (this.state.loading) return false
+    let { loading, pageInfo } = this.state
+    if (loading || !pageInfo.has_more) return false
     this.setState({
       loading: true
     })
 
-    let { errorCode, data } = await getProductList(this.state.pageInfo)
+    let { errorCode, data } = await getProductList(pageInfo)
     if (errorCode === 0) {
       list = data.page_info.index === 1 ? data.product_list : [...this.state.list, ...data.product_list]
       pageInfo = data.page_info
@@ -83,6 +84,7 @@ class Home extends Component {
           scrollY
           scrollWithAnimation
           onScrollToLower={this.loadInfo}
+          lowerThreshold={400}
           style={{ height: "100%" }}
         >
           { this.getNavBar() }

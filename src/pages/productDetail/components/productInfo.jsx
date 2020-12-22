@@ -20,9 +20,15 @@ const ProductInfo = props => {
   // }
   return (<View className='ProductProductInfo'>
     <View className='ProductName'>{base_info.product_name}</View>
-    <View className='ProductPrice'>
-      <Text className='currency'>&yen;</Text>
-      {base_info.format_sale_price}
+    <View className="ProductInfoBox">
+      <View className='ProductPrice'>
+        <Text className='currency'>&yen;</Text>
+        {base_info.format_sale_price}
+      </View>
+      <View className='ProductSale'>
+        <Text className='text'>{base_info.sale}</Text>
+        人购买
+      </View>
     </View>
     <View className='OperationWrap'>
       {/* <Addr change={addrChnage} /> */}
