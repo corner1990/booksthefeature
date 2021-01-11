@@ -19,23 +19,7 @@ class App extends Component {
 
   // this.props.children 是将要会渲染的页面
   render () {
-    const data = [
-      {
-        langName: '英语',
-        langCode: 'English',
-      },
-      {
-        langName: '中文',
-        langCode: 'china',
-      }
-    ]
 
-    const obj= {
-      list: {
-        Englist: '',
-        china: '',
-      }
-    }
     return (<Provider store={store}>
       { this.props.children }
     </Provider>)
