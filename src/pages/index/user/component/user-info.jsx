@@ -60,7 +60,7 @@ class UserInfo extends Component{
         <Image src={userInfo.avatar} className='userAvatar' />
         <View className='userInfoName'>{userInfo.nick_name}</View>
       </View>
-      <AtButton
+      {/* <AtButton
         type='primary'
         circle
         className='myInfoBtn'
@@ -69,7 +69,7 @@ class UserInfo extends Component{
         <AtBadge value={productCount} maxValue={99}>
           <AtIcon value='shopping-cart' size='22' color='#FFF' style={{marginTop: '-2px'}}></AtIcon>
         </AtBadge>
-      </AtButton>
+      </AtButton> */}
     </View>)
   }
 }

@@ -31,48 +31,7 @@
     }
   }
 
-  .OrdersCard{
-    box-shadow: 0 2px 8px 0 $shadow-color;
-    margin: 22px 38px;
-    padding: 24px;
-    background-color: $white;
-    border-radius: 16px;
 
-    .OrderCardHead{
-      @include flex;
-      justify-content: space-between;
-      height: 44px;
-      align-items: center;
-    }
-    .OrderCardHeadText{
-      font-family: PingFangSC-Medium;
-      font-size: 30px;
-    }
-    .OrderCardWrap{
-      @include flex;
-      margin-top: 20px;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .OrdersCardItem{
-      font-family: PingFangSC-Regular;
-      flex: 1;
-      text-align: center;
-      font-size: $font-xs;
-      color: $black;
-    }
-    .OrdersCardIconWrap{
-      width: 76px;
-      line-height: 72px;
-      text-align: center;
-      border-radius: 36px;
-      margin: 0 auto;
-      background: rgba(0,183,153,0.20);
-      .OrderCardIcon{
-        color: $primary;
-      }
-    }
-  }
   .serveInfo{
     @include shadow;
     background-color: $white;

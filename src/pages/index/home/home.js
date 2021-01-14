@@ -3,10 +3,11 @@ import { View, ScrollView } from '@tarojs/components'
 import { connect } from 'react-redux'
 // import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
-import Swiper from './home-components/swiper'
-import PromotionCard from './home-components/promotionCard'
+// import Swiper from './home-components/swiper'
+import TabBar from './home-components/tab'
 import NewProductList from './home-components/newProductList'
 import Welcome from './home-components/welcome'
+import NoTask from './home-components/no-task'
 
 import './home.scss'
 import { getProductList } from '../api'
@@ -54,6 +55,9 @@ class Home extends Component {
    */
   loadInfo = async ()=> {
     let list = []
+    if (list) {
+      return false
+    }
     let { loading, pageInfo } = this.state
     if (loading || !pageInfo.has_more) return false
     this.setState({
@@ -88,9 +92,9 @@ class Home extends Component {
           style={{ height: "100%" }}
         >
           { this.getNavBar() }
-          <Swiper />
-          <PromotionCard />
-          <NewProductList list={list} />
+          {/* <TabBar /> */}
+          <NoTask />
+          {/* <NewProductList list={list} /> */}
         </ScrollView>
       </View>
     )

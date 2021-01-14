@@ -1,0 +1,81 @@
+@import '../../../scss/index.scss';
+.task-info{
+  background-color: $white;
+  padding: 20px 30px;
+  margin-top: 20px;
+  .task-title{
+    font-size: $font-xl;
+    color: $black85;
+    line-height: 48px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $primary-light;
+  }
+  .task-desc{
+    font-size: $font-sm;
+    color: $black45;
+    line-height: 28px;
+    margin-top: 20px;
+  }
+  .progrss-warp,
+  .task-during,
+  .task-status{
+    margin-top: 20px;
+    font-size: $font-sm;
+    color: $black65;
+  }
+  .progrss-warp,
+  .task-status {
+    @include flex;
+  }
+  .progress-box{
+    flex: 1;
+  }
+
+  .task-status{
+    justify-content: flex-start;
+    .task-tag{
+      background-color: rgba(64,158,255,.1);
+      display: inline-block;
+      padding: 0 10px;
+      height: 60px;
+      line-height: 60px;
+      font-size: $font-sm;
+      color: #409eff;
+      border-radius: 8px;
+      box-sizing: border-box;
+      border: 1px solid rgba(64,158,255,.2);
+      white-space: nowrap;
+    }
+  }
+}
+
+.checkin-list{
+  margin-top: 20px;
+  padding-bottom: 60px;
+  .checkin-title{
+    background-color: $white;
+    font-size: $font-xl;
+    color: $black85;
+    line-height: 48px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $primary-light;
+    padding: 20px 30px;
+  }
+  .checkin-log-wrap{
+    background-color: $white;
+    margin: 20px 30px;
+    @include flex;
+    border-radius: 8px;
+    box-shadow: 0 0px 3px 0px #eee;
+    padding: 10px;
+    border-left: 4px solid transparent;
+  }
+  .check-log-info{
+    flex: 1;
+    margin-left: 20px;
+  }
+  .checkin-time{
+    font-size: $font-xs;
+    color: $black45;
+  }
+}

@@ -1,0 +1,88 @@
+
+// $animation-speed: 90s;
+// :root {
+//   --color-bg: #5C419A;
+//   --color-primary: #EF5B7E;
+//   --color-secondary: #59C2AA;
+//   --size-logo: 10rem;
+//   --font-family: 'Fredoka One', sans-serif;
+//   --animation-speed: 90s;
+// }
+@import '../../../../scss/index.scss';
+.addbutton {
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  color: #5C419A;
+  border-radius: 50%;
+  font-size: calc(100px * .65);
+  font-weight: bold;
+  // font-family: var(--font-family);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  View{
+    position: absolute;
+    width: 200%;
+    height: 200%;
+  }
+  .bg-circle-frist{
+    z-index: 1;
+    // mix-blend-mode: color-dodge;
+    background-color: $primary-dark;
+    border-radius: calc(200px * .3);
+    transform: rotate(-30deg);
+    animation: rotate1 20s linear infinite;
+
+  }
+  .bg-circle-second{
+    z-index: 2;
+    // mix-blend-mode: color-dodge;
+    background-color: $primary-light;
+    border-radius: calc(200px * .3);
+    transform: rotate(20deg);
+    animation: rotate2 calc(20s * .9) linear infinite;
+  }
+  .btn-text{
+    width: 200px;
+    height: 200px;
+    line-height: 168px;
+    color: $primary;
+    border-radius: 50%;
+    z-index: 3;
+    font-size: 200px;
+    // mix-blend-mode: color-dodge;
+    background-color: aliceblue;
+    text-align: center;
+  }
+}
+
+@keyframes rotate1 {
+  from {
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+  to {
+    -webkit-transform: rotate(330deg);
+    transform: rotate(330deg);
+  }
+}
+
+@keyframes rotate2 {
+  from {
+    -webkit-transform: rotate(380deg);
+    transform: rotate(380deg);
+  }
+  to {
+    -webkit-transform: rotate(20deg);
+    transform: rotate(20deg);
+  }
+}

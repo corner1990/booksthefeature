@@ -10,14 +10,15 @@ class CanlendarBar extends Component{
   state = {
     list: [
       {
-        label: '收花日历',
+        label: '我的计划',
         icon: 'calendar',
-        path: '/pages/calendar/index'
+        path: '/pages/taskList/index'
+        // path: '/pages/calendar/index'
       },
       {
-        label: '近期福利',
+        label: '我的行动历史',
         icon: 'shopping-bag',
-        path: ''
+        path: '/pages/checkInList/index'
       }
     ]
   }
@@ -34,22 +35,22 @@ class CanlendarBar extends Component{
   /**
    * @desc 跳转到日历页面
    */
-  jumpToCalendar = (url, key) => {
-    if (key) {
-      Taro.showModal({
-        title: '提示',
-        content: '功能正在开发中，敬请期待！',
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
-      return false
-    }
+  jumpToCalendar = (url) => {
+    // if (key ) {
+    //   Taro.showModal({
+    //     title: '提示',
+    //     content: '功能正在开发中，敬请期待！',
+    //     showCancel: false,
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         console.log('用户点击确定')
+    //       } else if (res.cancel) {
+    //         console.log('用户点击取消')
+    //       }
+    //     }
+    //   })
+    //   return false
+    // }
     Taro.navigateTo({
       url
     })

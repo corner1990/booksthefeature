@@ -77,7 +77,7 @@ class OrderDetail extends Component {
       <OrderInfo info={orderInfo} />
     </View>
     <View className='BtnWrap'>
-      <AtButton type='primary' onClick={() => this.btnClick(2)}>查看订单</AtButton>
+      <AtButton type='primary' onClick={() => this.btnClick(2)}>查看计划</AtButton>
       <AtButton onClick={() => this.btnClick(0)}>回到首页</AtButton>
     </View>
     </View>)

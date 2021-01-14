@@ -1,0 +1,76 @@
+@import '../../scss/index.scss';
+.create-task-wrap{
+  // background: #f6f6f6;
+  background: $white;
+  min-height: 100vh;
+  overflow: auto;
+  // .custom-navbar{
+  //   background: $white;
+  // }
+  .content{
+    background: #f6f6ff;
+    min-height: calc(100vh - 120px);
+    overflow: auto;
+    box-sizing: border-box;
+  }
+  .line{
+    background-color: $white;
+    padding: 20px 30px;
+    margin-top: 1px;
+  }
+  .input{
+    box-shadow: 0 0 3px 1px $primary-dark inset;
+    font-size: $font-sm;
+    color: $black85;
+    height: 48px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    transition: all 0.1s;
+    &:focus{
+      box-shadow: 0 0 6px $primary-dark inset;
+    }
+    &.textarea{
+      width: calc(100vw - 100px);
+      height: 90px;
+    }
+    
+  }
+  .line-title{
+    font-size: $font-md;
+    position: relative;
+    padding-left: 20px;
+    &::before{
+      content: "";
+      height: 40px;
+      width: 8px;
+      background: $primary-dark;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .line-time-wrap{
+    @include flex(flex-start, center);
+    .input{
+      flex: 1;
+    }
+  }
+
+  // 添加新地址
+  .AddBtnWrap{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    padding: 24px;
+    text-align: center;
+    box-sizing: border-box;
+    .at-button{
+      height: 84px;
+      line-height: 84px;
+      font-size: $font-md;
+    }
+  }
+}

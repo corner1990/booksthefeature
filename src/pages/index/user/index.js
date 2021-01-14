@@ -8,7 +8,6 @@ import CustomNavBar from '../../../components/navbar'
 import { setTab, getUseInfo } from '../../../store/actions/global'
 import UserInfo from './component/user-info'
 import CalendarBar from './component/calendar-bar'
-import OrdersCard from  './component/order-card'
 import GetUserInfo from './component/getUserInfo'
 import Item from '../../../components/item'
 
@@ -88,10 +87,9 @@ class Index extends Component {
 
     return (
       <View className='my-center'>
-        <CustomNavBar title='AS Flower Boutique' bgColor='#fff' />
+        <CustomNavBar title='有学有钱' bgColor='#fff' />
         <UserInfo />
         <CalendarBar />
-        <OrdersCard />
         <View className='serveInfo'>
           <Item
             title='联系我们'

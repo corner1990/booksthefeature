@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import { connect } from 'react-redux'
+import Taro from '@tarojs/taro'
 import './index.scss'
 import { setTab } from '../../store/actions/global'
 
@@ -19,27 +20,47 @@ const Index = props => {
     props.setTab(value)
   }
   
+  const createTask = () => {
+    Taro.navigateTo({ url: '/pages/createTask/index' })
+  }
   /**
    * @desc 处理tab item
    */
   const getTab = () => {
     let { tabIndex } = props
-    return tabList.map((item, key) => {
-      let title = ''
-      title = item.title
-      // if (item.active.includes(tabIndex)) {
-      //   title = item.title
-      // }
-      // 处理返回数据
-      let isActive = item.active.includes(tabIndex)
-      return (<View
-        key={key}
-        className={['tab-item', isActive ? 'active' : '']}
-        onClick={() => handleClick(key)} 
+    let home = tabList[0]
+    let my = tabList[2]
+    return [
+      (<View
+        key='1'
+        className={['tab-item', home.active.includes(tabIndex) ? 'active' : '']}
+        onClick={() => handleClick(0)} 
       >
-        <AtIcon value={item.iconType} size='20' className='tab-item-icon'></AtIcon>
-        { title  ? <View  className='tab-text'>{ title }</View> : null }
-      </View>)
+        <AtIcon value={home.iconType} size='20' className='tab-item-icon'></AtIcon>
+        <View>{ home.title }</View>
+      </View>),
+      (<View
+        key='2'
+        className={['tab-item']}
+        onClick={() => {}} 
+      >
+        <AtIcon
+          value='add'
+          size='20'
+          color='#00b4fc'
+          className='tab-item-icon tab-item-icon-add '
+        ></AtIcon>
+      </View>),
+      (<View
+        key='3'
+        className={['tab-item', my.active.includes(tabIndex) ? 'active' : '']}
+        onClick={() => handleClick(2)} 
+      >
+        <AtIcon value={my.iconType} size='20' className='tab-item-icon'></AtIcon>
+        <View>{ my.title }</View>
+      </View>),
+    ]
+    
 
       // return (<View
       //   key={key}
@@ -51,7 +72,7 @@ const Index = props => {
       //     { item.title }
       //   </View>
       // </View>)
-    })
+    
   }
     return (
       <View className='custom-tabbar-wrap' id='custom-tabbar-wrap'>

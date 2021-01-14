@@ -1,0 +1,97 @@
+@import '../../scss/index.scss';
+.task-detail-wrap{
+  // background: #f6f6f6;
+  background: $white;
+  min-height: 100vh;
+  overflow: auto;
+  // .custom-navbar{
+  //   background: $white;
+  // }
+  .content{
+    background: #f6f6ff;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+  }
+
+  .task-title{
+    font-size: $font-xl;
+    color: $black85;
+    line-height: 48px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $primary-light;
+  }
+  .task-desc{
+    font-size: $font-sm;
+    color: $black45;
+    line-height: 28px;
+    margin-top: 20px;
+  }
+  .top-bg{
+    width: 100%;
+    height: 240px;
+    background: $primary-dark;
+    color: $white;
+    position: relative;
+    text-align: center;
+    .top-time{
+      position: absolute;
+      background: $white url(http://saidad.oss-cn-guangzhou.aliyuncs.com/image/68001749c69dec9d5afbb28fa03a9d9b.jpeg) no-repeat 50% 50%;
+      // background: $white url(http://saidad.oss-cn-guangzhou.aliyuncs.com/image/ed44542f12f0bad4b8ad10648b9e7e3b.jpeg) no-repeat 50% 50%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      font-size: 120px;
+      width: 100%;
+      font-weight: 700;
+      height: 240px;
+      line-height: 240px;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    .top-slogan{
+      position: absolute;
+      top: 90px;
+      left: 60px;
+      z-index: 2;
+      width: calc(100% - 120px);
+      height: 60px;
+      line-height: 60px;
+      background: $white65;
+      font-size: $font-lg;
+      color: $primary-light;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+  }
+  .progrss-warp,
+  .task-during,
+  .task-status{
+    margin-top: 20px;
+    font-size: $font-sm;
+    color: $black65;
+  }
+  .progrss-warp,
+  .task-status {
+    @include flex;
+  }
+  .progress-box{
+    flex: 1;
+  }
+
+  .task-status{
+    justify-content: flex-start;
+    .task-tag{
+      background-color: rgba(64,158,255,.1);
+      display: inline-block;
+      padding: 0 10px;
+      height: 60px;
+      line-height: 60px;
+      font-size: $font-sm;
+      color: #409eff;
+      border-radius: 8px;
+      box-sizing: border-box;
+      border: 1px solid rgba(64,158,255,.2);
+      white-space: nowrap;
+    }
+  }
+}

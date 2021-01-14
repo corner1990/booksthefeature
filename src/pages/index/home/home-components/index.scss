@@ -1,0 +1,39 @@
+@import '../../../../scss/index.scss';
+.main-tabbar{
+  @include flex;
+  justify-content: space-around;
+  background-color: $white85;
+  padding: 10px;
+  .tabbar-item{
+    text-align: center;
+    color: $black65;
+    font-size: $font-sm;
+    &::after{
+      content: "";
+      position: absolute;
+      height: 4px;
+      width: 60px;
+      transform: translate(-50%, 10px);
+      // background: #00b4fc;
+    }
+    &.active::after{
+      background: #00b4fc;
+    }
+  }
+  .tabbar-item-text{
+    line-height: 40px;
+    margin-top: 12px;
+  }
+}
+.no-task-wrap{
+  @include flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 240px);
+  .slogan{
+    margin-top: 80px;
+    font-size: $font-md;
+    color: $primary;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../../scss/index.scss';
+
+.checkin-list{
+  margin-top: 20px;
+  padding-bottom: 60px;
+  overflow: auto;
+  .checkin-title{
+    background-color: $white;
+    font-size: $font-xl;
+    color: $black85;
+    line-height: 48px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $primary-light;
+    padding: 20px 30px;
+  }
+  .checkin-log-wrap{
+    background-color: $white;
+    margin: 20px 30px;
+    @include flex;
+    border-radius: 8px;
+    box-shadow: 0 0px 3px 0px #eee;
+    padding: 10px;
+    border-left: 4px solid transparent;
+  }
+  .check-log-info{
+    flex: 1;
+    margin-left: 20px;
+  }
+  .checkin-time{
+    font-size: $font-xs;
+    color: $black45;
+  }
+}
