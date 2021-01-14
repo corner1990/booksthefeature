@@ -30,7 +30,6 @@
       font-size: $font-sm;
       color: $black45;
       @include flex;
-      @include textHide(3);
     }
     .task-during-time,
     .progrss-warp{

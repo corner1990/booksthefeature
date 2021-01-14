@@ -51,8 +51,7 @@ class UserInfo extends Component{
    */
   render() {
     let {
-      userInfo,
-      productCount
+      userInfo
     } = this.props
     
     return(<View className='userInfo'>

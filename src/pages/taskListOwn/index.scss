@@ -9,14 +9,14 @@
   // }
   .content{
     background: #f6f6ff;
-    min-height: calc(100vh - 120px);
+    max-height: calc(100vh - 130px);
     overflow: auto;
     box-sizing: border-box;
   }
   .line{
     background-color: $white;
     padding: 20px 30px;
-    margin-top: 1px;
+    margin-top: 20px;
   }
   .input{
     box-shadow: 0 0 3px 1px $primary-dark inset;
@@ -36,16 +36,6 @@
     }
     
   }
-  .taskTitle,
-  .taskDesc {
-    font-size: $font-sm;
-    color: $black85;
-    padding-top: 20px;
-  }
-  .taskDesc{
-    color: $black65;
-    @include textHide(3);
-  }
   .line-title{
     font-size: $font-md;
     position: relative;
@@ -63,20 +53,10 @@
   }
   .line-time-wrap{
     @include flex(flex-start, center);
-    position: relative;
-    .DatePickerWRap{
-      height: 64px;
-      top: 20px;
-      width: calc(100vw - 160px);
-      right: 0;
-      z-index: 100;
-      
-    }
     .input{
       flex: 1;
     }
   }
-
   // 添加新地址
   .AddBtnWrap{
     position: fixed;

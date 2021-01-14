@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { View, ScrollView } from '@tarojs/components'
 import { connect } from 'react-redux'
-// import ListView from "taro-listview"
 import CustomNavBar from '../../../components/navbar'
-// import Swiper from './home-components/swiper'
 import TabBar from './home-components/tab'
 import NewProductList from './home-components/newProductList'
 import Welcome from './home-components/welcome'
 import NoTask from './home-components/no-task'
 
 import './home.scss'
-import { getProductList } from '../api'
+import { getTaskList } from './api'
 
 
 const mapState = state => state.global
@@ -23,7 +21,8 @@ class Home extends Component {
       index: 0,
       has_more: true,
       page_size: 10
-    }
+    },
+    isNoData: false
   }
   
   componentWillMount () { }
@@ -55,18 +54,16 @@ class Home extends Component {
    */
   loadInfo = async ()=> {
     let list = []
-    if (list) {
-      return false
-    }
+   
     let { loading, pageInfo } = this.state
     if (loading || !pageInfo.has_more) return false
     this.setState({
       loading: true
     })
 
-    let { errorCode, data } = await getProductList(pageInfo)
-    if (errorCode === 0) {
-      list = data.page_info.index === 1 ? data.product_list : [...this.state.list, ...data.product_list]
+    let { errorCode, data } = await getTaskList(pageInfo)
+    if (errorCode == 0) {
+      list = data.page_info.index === 1 ? data.list : [...this.state.list, ...data.list]
       pageInfo = data.page_info
     }
     this.setState({
@@ -77,8 +74,8 @@ class Home extends Component {
   }
   render () {
     
-    let { list } = this.state
-
+    let { list = [], pageInfo } = this.state
+    let isNoData = list.length == 0 && !pageInfo.has_more
     return (
       <View
         className='home'
@@ -92,9 +89,13 @@ class Home extends Component {
           style={{ height: "100%" }}
         >
           { this.getNavBar() }
-          {/* <TabBar /> */}
-          <NoTask />
-          {/* <NewProductList list={list} /> */}
+          {
+            !isNoData ? <TabBar /> : ''
+          }
+         {
+          isNoData ?  <NoTask /> : ''
+         }
+          {!isNoData ?  <NewProductList list={list} /> : ''}
         </ScrollView>
       </View>
     )

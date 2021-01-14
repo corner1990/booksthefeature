@@ -22,12 +22,13 @@ class NewProductList extends Component{
    * @desc 处理商品
    */
   getProduct = () => {
-    let { list = [] } = this.props
+    // let { list = [] } = this.props
+    let list = [1,2,3,4,5]
 
-    return list.map((item, key) => {
+    return list.map(item => {
       
       return (
-          <TaskCard key={key} info={item} />
+          <TaskCard key={item} />
         // </LazyBlock>
       )
     })

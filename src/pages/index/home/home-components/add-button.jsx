@@ -8,7 +8,7 @@ import './add-button.scss'
 class PromotionCard extends Component{
   creatTaskPage = () => {
     Taro.navigateTo({
-      url: `/pages/createTask/index`
+      url: `/pages/taskList/index`
     })
   }
   render() {

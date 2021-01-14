@@ -62,16 +62,16 @@ const Index = props => {
     ]
     
 
-      // return (<View
-      //   key={key}
-      //   className='tab-item'
-      //   onClick={() => handleClick(key)} 
-      // >
-      //   <AtIcon value={item.iconType} size='20' color='#FFF'></AtIcon>
-      //   <View  className='tab-text'>
-      //     { item.title }
-      //   </View>
-      // </View>)
+        // return (<View
+        //   key={key}
+        //   className='tab-item'
+        //   onClick={() => handleClick(key)} 
+        // >
+        //   <AtIcon value={item.iconType} size='20' color='#FFF'></AtIcon>
+        //   <View  className='tab-text'>
+        //     { item.title }
+        //   </View>
+        // </View>)
     
   }
     return (

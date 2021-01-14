@@ -6,8 +6,7 @@ import './newProductList.scss'
 /**
  * @desc 首页任务卡片
  */
-const TaskCard = props => {
-  let { info = {} } = props
+const TaskCard = () => {
   const toDetail = () => {
     Taro.navigateTo({ url: '/pages/taskDetail/index' })
   }
@@ -16,12 +15,18 @@ const TaskCard = props => {
       className='left-box'
       onClick={toDetail}
     >
-      <View className='task-title' onClick={toDetail}>{info.task_name ? info.task_name : ''}</View>
-      <View className='taks-desc' onClick={toDetail}>
-        {info.task_desc ? info.task_desc : ''}
-      </View>
+      <View className='task-title'>这是任务卡片标题</View>
+      {/* <View className='taks-desc'>
+        我是任务描述，我是任务描述，我是任务描述，我是任务描述，我是任务描述
+      </View> */}
       <View className='task-during-time'>
         <View>任务时间：2020-01-20 至 2021-02-04</View>
+        {/* <AtCountdown
+          isCard
+          minutes={1}
+          seconds={10}
+          color="0090ca"
+        /> */}
       </View>
       <View className='progrss-warp'>
         <AtProgress percent={75} isHidePercent color="#00b4fc" />

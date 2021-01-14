@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { View, Input, Textarea } from '@tarojs/components'
 import { connect } from 'react-redux'
+import { AtProgres, AtButton, AtImagePicker } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import CustomNavBar from '../../components/navbar'
 import TaskList from './components/newProductList'
 // import None from '../../components/none'
-import { getPubTaskList } from './api'
 import './index.scss'
 
 const mapState = state => state.global
@@ -17,31 +17,18 @@ const TaskDetail = () => {
   const backHistory = () => {
     Taro.navigateBack()
   }
-  const [list, setList] = useState([])
-  const [firstLoad, setFirstLoad] = useState(false)
-  
-  /**
-   * @desc 下载数据
-   */
-  const loadInfo = async () => {
-    let { errorCode, data } = await getPubTaskList()
-    if (errorCode == 0) {
-      setList(data.list)
-      setFirstLoad(true)
-    }
+  const [files, setFiles] = useState([])
+  const fileChange = (files, action) => {
+    setFiles(files)
+    console.log('args', args)
   }
-  // 首次加载
-  if (!firstLoad) {
-    loadInfo()
-  }
-  
   return <View className='create-task-wrap'>
      <CustomNavBar
         title={title}
         clickLeft={backHistory}
       />
     <View className='content'>
-      <TaskList list={list} />
+      <TaskList />
     </View>
     
   </View>
