@@ -19,7 +19,7 @@ const mapState = state => {
 class UserInfo extends Component{
   state = {}
   componentDidMount() {
-    this.loadCartCount()
+    // this.loadCartCount()
   }
   /**
    * @desc 跳转到个人资料
@@ -57,7 +57,7 @@ class UserInfo extends Component{
     return(<View className='userInfo'>
       <View className='userInfoLeft' onClick={this.jumpToUserInfo}>
         <Image src={userInfo.avatar} className='userAvatar' />
-        <View className='userInfoName'>{userInfo.nick_name}</View>
+        <View className='userInfoName'>{userInfo.nick_name || '高富帅'}</View>
       </View>
       {/* <AtButton
         type='primary'

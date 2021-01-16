@@ -1,6 +1,7 @@
 export default {
   pages: [
     
+    'pages/checkIn/index',
     'pages/index/index',
     'pages/user-info/index',
     'pages/login/index',
@@ -8,7 +9,6 @@ export default {
     'pages/createTask/index',
     'pages/taskDetail/index',
     'pages/taskList/index',
-    'pages/checkIn/index',
     'pages/checkInList/index',
   ],
   window: {

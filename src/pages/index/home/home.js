@@ -44,7 +44,7 @@ class Home extends Component {
    * @desc 动态控制是否显示navBar
    */
   getNavBar = () => {
-    let title = 'Books The Feature'
+    let title = '有学有钱'
     let { showNavBar } = this.state
     if(!showNavBar) return ''
     return (<CustomNavBar title={title} />)
@@ -75,6 +75,7 @@ class Home extends Component {
   render () {
     
     let { list = [], pageInfo } = this.state
+    // 
     let isNoData = list.length == 0 && !pageInfo.has_more
     return (
       <View

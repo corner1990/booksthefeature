@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Image } from '@tarojs/components'
 import { connect } from 'react-redux'
 import { AtProgress, AtTag } from 'taro-ui'
@@ -8,6 +8,7 @@ import TaskInfo from './components/taskInfo'
 import CheckinList from './components/checkInlist'
 // import None from '../../components/none'
 import './index.scss'
+import { getTaskInfo } from './api'
 
 const mapState = state => state.global
 /**
@@ -15,9 +16,31 @@ const mapState = state => state.global
  */
 const TaskDetail = () => {
   let title = '任务详情'
+  let { params } = Taro.Current.router
+  let [ firstLoad, setFirstLoad ] = useState(true)
+
+  let [ info, setInfo ] = useState({})
+  /**
+   * @desc 返回
+   */
   const backHistory = () => {
     Taro.navigateBack()
   }
+  /**
+   * @desc 首次加载
+   */
+  const loadInfo = async () => {
+    setFirstLoad(false)
+    let { errorCode, data } = await getTaskInfo(params)
+    if (errorCode == 0) {
+      console.log('data', data)
+      setInfo(data)
+    }
+  }
+  if (firstLoad) {
+    loadInfo()
+  }
+  
   return <View className='task-detail-wrap'>
      <CustomNavBar
         title={title}
