@@ -10,7 +10,9 @@ const mapState = state => state.global
 /**
  * @desc 历史
  */
-const CheckinList = () => {
+const CheckinList = props => {
+  let { info= { sign_record_list: [] } } = props
+  // let { sign_record_list = [] } = props.info
   /**
    * @desc create random r
    */
@@ -21,8 +23,8 @@ const CheckinList = () => {
    * @desc create log item
    */
   const getLogs = () => {
-    let list = [1,2,3,4, 5]
-    return list.map(key => {
+    
+    return info.sign_record_list.map(key => {
       let color = randomColor()
       return (<View
         className='checkin-log-wrap'

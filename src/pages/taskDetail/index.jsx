@@ -16,7 +16,8 @@ const mapState = state => state.global
  */
 const TaskDetail = () => {
   let title = '任务详情'
-  let { params } = Taro.Current.router
+  // let { params } = Taro.Current.router
+  let params = {"task_id":"2","task_order_sn":"btf20210114085120329"}
   let [ firstLoad, setFirstLoad ] = useState(true)
 
   let [ info, setInfo ] = useState({})
@@ -55,8 +56,8 @@ const TaskDetail = () => {
           你所有的努力都会有回报！
         </View>
       </View>
-      <TaskInfo />
-      <CheckinList />
+      <TaskInfo info={info} />
+      <CheckinList list={{}} />
     </View>
   </View>
 }
