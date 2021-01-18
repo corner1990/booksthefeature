@@ -12,7 +12,7 @@ class CanlendarBar extends Component{
       {
         label: '我的计划',
         icon: 'calendar',
-        path: '/pages/taskList/index'
+        path: '/pages/taskListOwn/index'
         // path: '/pages/calendar/index'
       },
       {

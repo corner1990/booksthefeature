@@ -8,7 +8,8 @@ import TaskInfo from './components/taskInfo'
 // import None from '../../components/none'
 import './index.scss'
 import { getTaskInfo } from '../taskDetail/api'
-import { uploadBase64Image } from '../index/user/api'
+import { checkIn } from './api'
+// import { uploadBase64Image } from '../index/user/api'
 
 const mapState = state => state.global
 /**
@@ -21,8 +22,10 @@ const TaskDetail = () => {
   const [files, setFiles] = useState([])
   let [ firstLoad, setFirstLoad ] = useState(true)
   let [ info, setInfo ] = useState({})
+  let [ sign_content, setSignInfo ] = useState('')
   let { task_order_sn } = params
-  let sign_content = '' // 文字说明
+  let loading = false
+  // let sign_content = '' // 文字说明
   /**
    * @desc 返回
    */
@@ -90,22 +93,38 @@ const TaskDetail = () => {
    * @desc 获取上传凭证
    */
   const uploadImg = async file => {
-    let file_base_64 = file.base64Url
+    let file_base_64 = file.file
     // 上传完成不继续执行业务
     if (file.upload) {
       return false
     }
-    let { errorCode, data } = await uploadBase64Image({file_base_64})
-    if (errorCode === 0) {
-      file.upload = true
-      file.link = data
-      // this.updateAvatar(data)
-    }
+    Taro.uploadFile({
+      url: 'http://47.115.3.230/system/media/uploadImage',
+      filePath: file.compressUrl,
+      name: 'file',
+      success({ statusCode, data }) {
+        if (statusCode == 200) {
+          data = JSON.parse(data)
+          if (data.errorCode == 0) {
+            file.link = data.data
+            file.upload = true
+          } 
+
+        }
+      }
+    })
+    // let { errorCode, data } = await uploadBase64Image({file: file_base_64})
+    // if (errorCode === 0) {
+    //   file.upload = true
+    //   file.link = data
+    //   // this.updateAvatar(data)
+    // }
   }
   /**
    * @desc 打卡
    */
-  const setCheckIn = () => {
+  const setCheckIn = async () => {
+    if (loading) return false // 防止多次提交
     if (files.length <= 0) {
       return Taro.showToast({
         icon: 'none',
@@ -117,7 +136,8 @@ const TaskDetail = () => {
     // })
     let data_list = files.map(item => {
       return {
-        
+        data_link: item.link,
+        data_type: 'image'
       }
     })
     let params = {
@@ -126,6 +146,12 @@ const TaskDetail = () => {
       sign_data_detail: {
         data_list
       }
+    }
+    loading = true
+    let { errorCode } = await checkIn(params)
+    loading = false
+    if (errorCode == 0) {
+      Taro.navigateBack()
     }
   }
   /**
@@ -137,16 +163,16 @@ const TaskDetail = () => {
     console.log('files', files)
     files.map(file => {
       if (file.compressUrl) {
-        toBase64(file)
+        uploadImg(file)
         return false
       }
       wx.compressImage({
         src: file.url, // 图片路径
-        quality: 71, // 压缩质量
+        quality: 76, // 压缩质量
       }).then(({ errMsg, tempFilePath }) => {
         if (errMsg == 'compressImage:ok'){
           file.compressUrl = tempFilePath
-          toBase64(file)
+          uploadImg(file)
         }
         
       })
@@ -159,7 +185,8 @@ const TaskDetail = () => {
    */
   const descChange = e => {
     let { value } = e.detail
-    sign_content = value
+    // sign_content = value
+    setSignInfo(value)
   }
   const onImageClick = () => {}
   return <View className='create-task-wrap'>
@@ -195,7 +222,7 @@ const TaskDetail = () => {
       </View>
     </View>
     <View className='AddBtnWrap'>
-      <AtButton type='primary' onClick={() => {}}>打卡</AtButton>
+      <AtButton type='primary' onClick={setCheckIn}>打卡</AtButton>
     </View>
   </View>
 }

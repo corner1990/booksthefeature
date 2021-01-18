@@ -31,6 +31,9 @@
       color: $black45;
       @include flex;
     }
+    .taks-desc{
+      @include textHide(2)
+    }
     .task-during-time,
     .progrss-warp{
       margin-top: 20px;
@@ -46,6 +49,10 @@
       height: 100px;
       border-radius: 50%;
       background: $primary-dark;
+      &.disabled{
+        background: $bg-grey;
+        cursor: no-drop;
+      }
     }
   }
 }

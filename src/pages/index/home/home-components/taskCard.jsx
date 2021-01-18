@@ -76,7 +76,10 @@ const TaskCard = props => {
         <AtProgress percent={getProgress()} isHidePercent color="#00b4fc" />
       </View>
     </View>
-    <View className="checkin-btn" onClick={toCheckIn} >打卡</View>
+    <View
+      className={['checkin-btn', (info.is_sign_today == 1 ? 'disabled' : '')]}
+      onClick={toCheckIn}
+    >打卡</View>
   </View>)
 }
 

@@ -20,7 +20,8 @@ class Home extends Component {
     pageInfo: {
       index: 0,
       has_more: true,
-      page_size: 10
+      page_size: 10,
+      task_order_query_type: 0
     },
     isNoData: false
   }
@@ -72,6 +73,23 @@ class Home extends Component {
       loading: false
     })
   }
+  refresh = type => {
+    let { pageInfo } = this.state
+    let { loadInfo } = this
+    
+    this.setState({
+      pageInfo: {
+        ...pageInfo,
+        index: 1, 
+        has_more: true,
+        task_order_query_type: type,
+      },
+      loading: false
+    }, () => {
+      console.log('33333')
+      loadInfo()
+    })
+  }
   render () {
     
     let { list = [], pageInfo } = this.state
@@ -91,7 +109,7 @@ class Home extends Component {
         >
           { this.getNavBar() }
           {
-            !isNoData ? <TabBar /> : ''
+            !isNoData ? <TabBar refresh={this.refresh} /> : ''
           }
          {
           isNoData ?  <NoTask /> : ''

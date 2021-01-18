@@ -11,8 +11,8 @@ const TaskCard = props => {
   /**
    * @desc 创建详情
    */
-  const toDetail = () => {
-    Taro.navigateTo({ url: `/pages/taskDetail/index?task_id=${info.task_id}` })
+  const showMoreInfo = () => {
+    props.updateDetail(info)
   }
   /**
    * @desc 创建订单
@@ -26,22 +26,11 @@ const TaskCard = props => {
       className='left-box'
 
     >
-      <View className='task-title' onClick={toDetail}>{info.task_name ? info.task_name : ''}</View>
-      <View className='taks-desc' onClick={toDetail}>
+      <View className='task-title' onClick={showMoreInfo}>{info.task_name ? info.task_name : ''}</View>
+      <View className='taks-desc' onClick={showMoreInfo}>
         {info.task_desc ? info.task_desc : ''}
       </View>
-      {/* <View className='task-during-time'>
-        <View>任务时间：2020-01-20 至 2021-02-04</View>
-        <AtCountdown
-          isCard
-          minutes={1}
-          seconds={10}
-          color="0090ca"
-        />
-      </View> */}
-      {/* <View className='progrss-warp'>
-        <AtProgress percent={75} isHidePercent color="#00b4fc" />
-      </View> */}
+      
     </View>
     <View className="checkin-btn" onClick={toCreateTask}>创建</View>
   </View>)

@@ -5,15 +5,13 @@ import TaskCard from './taskCard'
 
 import './newProductList.scss'
 
-class NewProductList extends Component{
-  
-  componentDidMount() {
-  }
+const TaskList = props =>{
+  let { list = [] } = props
   /**
    * @desc 跳转详情
    * @param {*} info 
    */
-  goDetail = info => {
+  const goDetail = info => {
     let  id = info.base_info.item_id
     // eslint-disable-next-line no-undef
     Taro.navigateTo({ url: `/pages/productDetail/index?id=${id}`})
@@ -21,28 +19,25 @@ class NewProductList extends Component{
   /**
    * @desc 处理商品
    */
-  getProduct = () => {
-    // let { list = [] } = this.props
-    let list = [1,2,3,4,5]
+  const getProduct = () => {
+    // let list = [1,2,3,4,5]
 
-    return list.map(item => {
+    return list.map((item, key) => {
       
       return (
-          <TaskCard key={item} />
+          <TaskCard key={key} info={item} />
         // </LazyBlock>
       )
     })
   }
-  render() {
-    let { getProduct} = this
-    return (
-      <View className='newProductListWrap'>
-        <View className='newProductList'>
-          { getProduct() }
-
-        </View>
-      </View>)
-  }
+  
+  return (
+    <View className='newProductListWrap'>
+      <View className='newProductList'>
+        { getProduct() }
+      </View>
+    </View>)
+  
 }
 
-export default NewProductList
+export default TaskList

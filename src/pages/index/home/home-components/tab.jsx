@@ -23,22 +23,22 @@ class PromotionCard extends Component{
     let tabs = [
       {
         name: '全部',
-        value: 1,
+        value: 0,
         icon: 'bullet-list'
       },
       {
         name: '进行中',
-        value: 2,
+        value: 1,
         icon: 'filter'
       },
       {
         name: '审核中',
-        value: 3,
+        value: 2,
         icon: 'clock'
       },
       {
         name: '已结束',
-        value: 4,
+        value: 3,
         icon: 'check-circle'
       }
     ]
@@ -60,6 +60,7 @@ class PromotionCard extends Component{
   }
   setActive = (active) => {
     this.setState({ active })
+    this.props.refresh(active)
   }
   render() {
     return (<View className='main-tabbar' >

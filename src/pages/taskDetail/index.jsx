@@ -57,7 +57,7 @@ const TaskDetail = () => {
         </View>
       </View>
       <TaskInfo info={info} />
-      <CheckinList list={{}} />
+      <CheckinList list={info.sign_record_list} />
     </View>
   </View>
 }

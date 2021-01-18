@@ -19,9 +19,8 @@ const Index = props => {
   const handleClick =  (value) => {
     props.setTab(value)
   }
-  
   const createTask = () => {
-    Taro.navigateTo({ url: '/pages/createTask/index' })
+    Taro.navigateTo({ url: '/pages/taskList/index' })
   }
   /**
    * @desc 处理tab item
@@ -42,7 +41,7 @@ const Index = props => {
       (<View
         key='2'
         className={['tab-item']}
-        onClick={() => {}} 
+        onClick={createTask} 
       >
         <AtIcon
           value='add'
