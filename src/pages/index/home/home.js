@@ -17,6 +17,7 @@ class Home extends Component {
     list: [],
     // laoding: false,
     showNavBar: true,
+    firstLoad: true,
     pageInfo: {
       index: 0,
       has_more: true,
@@ -56,7 +57,7 @@ class Home extends Component {
   loadInfo = async ()=> {
     let list = []
    
-    let { loading, pageInfo } = this.state
+    let { loading, pageInfo, firstLoad, isNoData } = this.state
     if (loading || !pageInfo.has_more) return false
     this.setState({
       loading: true
@@ -67,10 +68,15 @@ class Home extends Component {
       list = data.page_info.index === 1 ? data.list : [...this.state.list, ...data.list]
       pageInfo = data.page_info
     }
+    if (firstLoad) {
+      isNoData = list.length == 0
+    }
     this.setState({
       list,
       pageInfo,
-      loading: false
+      loading: false,
+      firstLoad: false,
+      isNoData
     })
   }
   refresh = type => {
@@ -80,21 +86,20 @@ class Home extends Component {
     this.setState({
       pageInfo: {
         ...pageInfo,
-        index: 1, 
+        index: 0, 
         has_more: true,
         task_order_query_type: type,
       },
       loading: false
     }, () => {
-      console.log('33333')
       loadInfo()
     })
   }
   render () {
     
-    let { list = [], pageInfo } = this.state
+    let { list = [], isNoData } = this.state
     // 
-    let isNoData = list.length == 0 && !pageInfo.has_more
+    // let isNoData = list.length == 0 && !pageInfo.has_more
     return (
       <View
         className='home'

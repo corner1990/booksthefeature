@@ -18,7 +18,7 @@ const TaskCard = props => {
    * @desc 创建订单
    */
   const toCreateTask = () => {
-    Taro.navigateTo({ url: `/pages/createTask/index?task_id=${info.task_id}` })
+    Taro.navigateTo({ url: `/pages/createTask/index?task_id=${info.id}` })
   }
   
   return (<View className='task-card-wrap'>

@@ -15,7 +15,7 @@ const mapState = state => state.global
  * @desc 订单详情
  */
 const TaskDetail = () => {
-  let title = '任务详情'
+  let title = '未来事件'
   // let { params } = Taro.Current.router
   let params = {"task_id":"2","task_order_sn":"btf20210114085120329"}
   let [ firstLoad, setFirstLoad ] = useState(true)

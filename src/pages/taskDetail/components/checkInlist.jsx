@@ -18,7 +18,8 @@ const CheckinList = props => {
    * @desc create random r
    */
   const randomColor = () => {
-    return ('#' + Math.random().toString(16).substr(2, 6).toUpperCase())
+    // return ('#' + Math.random().toString(16).substr(2, 6).toUpperCase())
+    return '#00b4fc'
   }
   const getTime = num => {
     let t = new Date(num * 1000)
@@ -29,8 +30,7 @@ const CheckinList = props => {
    * @desc create log item
    */
   const getLogs = () => {
-    console.log('sign_record_list', props)
-    // let list = [1,2,3]
+    
     return list.map((info, key) => {
       let color = randomColor()
       return (<View

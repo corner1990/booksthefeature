@@ -9,7 +9,7 @@ import './index.scss'
  */
 class PromotionCard extends Component{
   state = {
-    active: 1
+    active: 0
   }
   toDetail = type => {
     Taro.navigateTo({

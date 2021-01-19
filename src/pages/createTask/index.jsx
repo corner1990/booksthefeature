@@ -16,10 +16,11 @@ const mapState = state => state.global
  * @desc 订单详情
  */
 const TaskDetail = props => {
-  let title = '创建计划'
+  let title = '创建未来事件'
   let {
-    task_id= '2'
-  } =  Taro.Current.router
+    task_id
+  } =  Taro.Current.router.params
+  console.log(Taro.Current.router)
   let [ firstLoad, setFirstLoad ] = useState(true)
   let [info, setInfo] = useState({})
   let [ startDate, setStartDate ] = useState([])
@@ -152,7 +153,7 @@ const TaskDetail = props => {
     if (errorCode == 0) {
       let { task_order_sn } = data
       props.setTab(2)
-      Taro.navigateTo({url: '/pages/index/index'})
+      Taro.navigateTo({url: '/pages/order-result/index'})
     }
   }
 
