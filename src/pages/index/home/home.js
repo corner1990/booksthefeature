@@ -6,6 +6,7 @@ import TabBar from './home-components/tab'
 import NewProductList from './home-components/newProductList'
 import Welcome from './home-components/welcome'
 import NoTask from './home-components/no-task'
+import Event from '../../../utils/event'
 
 import './home.scss'
 import { getTaskList } from './api'
@@ -31,6 +32,8 @@ class Home extends Component {
 
   componentDidMount () {
     this.loadInfo()
+    Event.listen('refresh', () => this.refresh())
+    
   }
 
   componentWillUnmount () { }
@@ -68,6 +71,7 @@ class Home extends Component {
       list = data.page_info.index === 1 ? data.list : [...this.state.list, ...data.list]
       pageInfo = data.page_info
     }
+    // 首次进入页面判断是否有
     if (firstLoad) {
       isNoData = list.length == 0
     }
@@ -95,6 +99,7 @@ class Home extends Component {
       loadInfo()
     })
   }
+  
   render () {
     
     let { list = [], isNoData } = this.state

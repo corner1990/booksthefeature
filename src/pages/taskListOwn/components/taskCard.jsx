@@ -3,7 +3,8 @@ import { View, Image } from '@tarojs/components'
 import { AtCountdown, AtProgress } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import './newProductList.scss'
-import { getDays } from '../../../utils/utils'
+import { dateFormat, getDays } from '../../../utils/utils'
+import { createOrderPayInfo } from '../../createTask/api'
 /**
  * @desc 首页任务卡片
  */
@@ -57,22 +58,54 @@ const TaskCard = props => {
       let reg = /([\d]{4})([\d]{2})([\d]{2})/;
       start_date = start_date.replace(reg, '$1-$2-$3')
       end_date = end_date.replace(reg, '$1-$2-$3')
+
       let now = new Date()
-      let endDay = now.toLocaleDateString().replace(/\//g, '-')
+      let endDay = dateFormat(now, 'YYY-mm-dd')
+      let startDay = new Date(start_date)
       let allDays = getDays(start_date, end_date)
       let days = getDays(start_date, endDay)
+      if (startDay - 0 > now - 0) return 0 // 任务时间大于今天
+      
       progress = Math.round(days / allDays * 100)
     }
     return progress
+  }
+  
+  /**
+   * @desc 发起支付
+   * @param {*} params 
+   */
+  const toPay = async (params) => {
+    let url = `/pages/order-result/index?task_order_sn=${params.task_order_sn}&price=${info.display_bet_amount}`
+  
+    let { errorCode, data} = await  createOrderPayInfo({'pay_type': 5, ...params})
+    if (errorCode === 0) {
+      Taro.requestPayment({
+        ...data,
+        signType: 'MD5',
+        success () {
+          url = `${url}&pay_status=1`
+          Taro.navigateTo({ url })
+        },
+        fail () {
+          url = `${url}&pay_status=0`
+          Taro.navigateTo({ url })
+        }
+      })
+    }
+    
   }
   return (<View className='task-card-wrap'>
     <View
       className='left-box'
       onClick={toDetail}
     >
-      <View className='task-title'>{info.task_name}</View>
+      
+      <View className='task-title'>{info.task_order_name}</View>
+      <View className='task_order_sn'>未来计划编号：{info.task_order_sn}</View>
+      <View className='task-sub-title'>{info.task_name}</View>
       <View className='taks-desc'>
-        {info.task_desc}
+        {info.user_remark || '暂无承诺'}
       </View>
       <View className='task-during-time'>
         <View>{getTimeStr}</View>
@@ -81,10 +114,14 @@ const TaskCard = props => {
         <AtProgress percent={getProgress()} isHidePercent color="#00b4fc" />
       </View>
     </View>
-    <View
-      className={['checkin-btn', (info.is_sign_today == 1 ? 'disabled' : '')]}
+    {info.task_order_status == 20 ? <View
+      className={['checkin-btn', (info.sign_enable == 0 ? 'disabled' : '')]}
       onClick={toCheckIn}
-    >打卡</View>
+    >打卡</View> : ''}
+    {info.task_order_status == 1 ? <View
+      className={['checkin-btn']}
+      onClick={() => toPay({ task_order_sn: info.task_order_sn })}
+    >去支付</View> : ''}
   </View>)
 }
 

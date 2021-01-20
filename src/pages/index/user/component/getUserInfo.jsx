@@ -13,9 +13,7 @@ class GetUserInfo extends Component {
     open: false
   }
 
-  componentWillMount() {
-    
-  }
+  componentWillMount() {}
 
   componentDidMount() {
     let syncInfo = Taro.getStorageSync('$syncInfo')

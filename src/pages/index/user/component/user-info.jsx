@@ -1,11 +1,13 @@
 import React, { Component } from  'react'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import { AtButton, AtIcon, AtBadge } from 'taro-ui'
 import { connect } from 'react-redux'
 import Taro from '@tarojs/taro'
 import './user-info.scss'
 import { getUserShoppingCartCount } from '../../../productDetail/api'
 import { update } from '../../../../store/actions/shopping-cart'
+import { getUseInfo } from '../../../../store/actions/global'
+import { bindPhone, updateUserInfo } from '../api'
 
 const mapState = state => {
   return {
@@ -46,6 +48,112 @@ class UserInfo extends Component{
       this.props.update({key: 'productCount', val: data})
     }
   }
+
+  /**
+   * @desc 获取用户信息
+   */
+  getInfo = () => {
+    let self = this
+    Taro.login({
+      success() {
+        Taro.getUserInfo({
+          success: (res) => {
+            let userInfo = res.userInfo
+            self.updateInfo(userInfo)
+          }
+        })
+      }
+    })
+  }
+  /**
+   * @desc 更新用户信息
+   * @param {*} info 
+   */
+  updateInfo = async info => {
+    let {
+      avatarUrl,
+      gender,
+      nickName,
+    } = info
+    let { errorCode } = await updateUserInfo({
+      set: gender,
+      avatar: avatarUrl,
+      nick_name: nickName
+    })
+    if (errorCode === 0) {
+      // Taro.showToast({
+      //   title: '同步信息成功!',
+      //   icon: 'none'
+      // })
+      this.props.getUseInfo()
+      // Taro.setStorageSync('$syncInfo', '1')
+    }
+  }
+  /**
+   * @desc 手机号码绑定
+   */
+  getPhoneNumber = (e) => {
+    let { errMsg, encryptedData, iv } = e.detail
+    let self = this
+    
+    if (errMsg.includes('ok')) {
+      Taro.login({
+        success (res) {
+          if (res.code) {
+            //发起网络请求
+            self.bindPhoneFn({ code: res.code, encryptedData, iv, provider: 'wxMin' })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
+    }
+  }
+  /**
+   * @desc 绑定手机号
+   * @param { object } params 
+   */
+  async bindPhoneFn(params) {
+    await bindPhone(params)
+    this.props.getUseInfo()
+    
+  }
+  /**
+   * @desc 按钮
+   */
+  getPhoneBtn = () => {
+    let {
+      userInfo
+    } = this.props
+    if (userInfo.phone_num) {
+      return (<View>
+        <AtIcon value='iphone' size='20' color='#eee'></AtIcon>
+        <Text>{userInfo.phone_num}</Text>
+      </View>)
+    }
+    return (<AtButton         
+      className='phoneButton'
+      openType='getPhoneNumber'
+      onGetPhoneNumber={this.getPhoneNumber}
+    >
+      <AtIcon value='iphone' size='20' color='#eee'></AtIcon>
+    </AtButton>)
+  }
+  getLoginBtn = () => {
+    let {
+      userInfo
+    } = this.props
+    // let token = Taro.getStorageSync('token')
+    if (!userInfo.nick_name) {
+      return (<AtButton
+        type='secondary'
+        className='getUserInfoBtn'
+        openType='getUserInfo'
+        onClick={this.getInfo}
+      >未登陆</AtButton>)
+    }
+    return userInfo.nick_name
+  }
   /**
    * @desc 跳转到日历页面
    */
@@ -53,11 +161,15 @@ class UserInfo extends Component{
     let {
       userInfo
     } = this.props
-    
     return(<View className='userInfo'>
-      <View className='userInfoLeft' onClick={this.jumpToUserInfo}>
-        <Image src={userInfo.avatar} className='userAvatar' />
-        <View className='userInfoName'>{userInfo.nick_name || '高富帅'}</View>
+      <View className='userInfoLeft'>
+        <Image src={userInfo.avatar} className='userAvatar'  onClick={this.jumpToUserInfo} />
+        <View className='userInfoNameWrap'>
+          <View className='userInfoName'>{this.getLoginBtn()}</View>
+          <View className='phone-wrap'>
+            {this.getPhoneBtn()}
+          </View>
+        </View>
       </View>
       {/* <AtButton
         type='primary'
@@ -73,4 +185,4 @@ class UserInfo extends Component{
   }
 }
 
-export default connect(mapState, { update })(UserInfo)
+export default connect(mapState, { update, getUseInfo })(UserInfo)

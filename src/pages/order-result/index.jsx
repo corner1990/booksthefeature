@@ -35,16 +35,7 @@ const OrderResult = props => {
       receiver: '',
     }
   })
-  const [firstLoad, setFirstLoad] = useState(true)
-  /**
-   * @desc 加载数据
-   */
-  const loadInfo = async() => {
-    let { errorCode, data } = await queryOrderDetailInfo(params)
-    if (errorCode === 0) {
-      setInfo(data)
-    }
-  }
+
   /**
    * @desc 跳转
    * @param {*} url 
@@ -54,9 +45,7 @@ const OrderResult = props => {
     props.setTab(tab)
     jumpTo()
   }
-  if (firstLoad) {
-    loadInfo()
-  }
+ 
   return (<View className='OrderDetailWrap'>
    <Header info={info} />
    <View className='OrderDetailContent'>

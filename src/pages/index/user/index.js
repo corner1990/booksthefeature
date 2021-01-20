@@ -7,9 +7,9 @@ import Taro from '@tarojs/taro'
 import CustomNavBar from '../../../components/navbar'
 import { setTab, getUseInfo } from '../../../store/actions/global'
 import UserInfo from './component/user-info'
-import CalendarBar from './component/calendar-bar'
-import GetUserInfo from './component/getUserInfo'
+// import GetUserInfo from './component/getUserInfo'
 import Item from '../../../components/item'
+import { wxMiniCodeLogin } from './api'
 
 import './index.scss'
 
@@ -20,7 +20,7 @@ const mapState = state => state.global
 class Index extends Component {
 
   state = {
-    serverPhone: '13681924547'
+    serverPhone: ''
   }
 
   componentWillMount() {
@@ -29,7 +29,11 @@ class Index extends Component {
     
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    this.updateToken()
+    // this.login()
+  }
+
   shouldComponentUpdate() {
     // let { userInfo } = props
     // if (!userInfo.avatar) {
@@ -45,6 +49,54 @@ class Index extends Component {
 
   toEndorsement = () => {
     this.props.setTab(3)
+  }
+  /**
+   * @desc 定期更新token
+   */
+  updateToken() {
+    // let t = 864000000 // 十天
+    let t = 1000 * 5
+    let $tokenTime = Taro.getStorageSync('$tokenTime')
+    let token = wx.getStorageSync('token') || 'token'
+    if (!$tokenTime || token) {
+      t = new Date() - 0 + t
+      Taro.setStorageSync('$tokenTime', t)
+      this.login()
+      return false
+    }
+    let now = new Date() - 0
+    $tokenTime = $tokenTime  - 0
+    if (now >= $tokenTime) {
+      this.login()
+    }
+  }
+  login = () => {
+    // let token = Taro.getStorageSync('token')
+    // if (token) return false
+    let { codeLogin } = this
+    Taro.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          codeLogin(res.code)
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  }
+  /**
+   * @desc code登陆
+   * @param {*} code 
+   */
+  codeLogin = async (code) => {
+    let { errorCode, data } = await wxMiniCodeLogin({code})
+    if (errorCode == 0) {
+      let { access_token, user_id } = data
+      Taro.setStorageSync('token', access_token)
+      Taro.setStorageSync('$user_id', user_id)
+      this.props.getUseInfo()
+    }
   }
   getInfo = () => {
     let success = this.questInfo
@@ -70,18 +122,8 @@ class Index extends Component {
       phoneNumber: this.state.serverPhone
     })
   }
-  pasteWx = () => {
-    let phone = this.state.serverPhone
-    // Taro.questInfosetClipboardData
-    Taro.setClipboardData({
-      data: phone,
-      success: function () {
-        Taro.showToast({
-          icon: 'none', 
-          title: '微信号复制成功'
-        })
-      }
-    })
+  createTask = () => {
+    Taro.navigateTo({ url: '/pages/taskListOwn/index' })
   }
   render() {
 
@@ -89,13 +131,21 @@ class Index extends Component {
       <View className='my-center'>
         <CustomNavBar title='有学有钱' bgColor='#fff' />
         <UserInfo />
-        <CalendarBar />
-        <View className='serveInfo'>
+        {/* <CalendarBar /> */}
+        {/* <View className='serveInfo'>
           <Item
             title='联系我们'
             click={this.tel}
             subTitle='客服电话'
           />
+        </View> */}
+         <View className='serveInfo'>
+          <Item
+            title='我的任务'
+            click={this.createTask}
+            // subTitle={this.state.serverPhone}
+          />
+          
         </View>
         <View className='serveInfo'>
           <Button openType='contact' className='OpenContact'></Button>
@@ -105,7 +155,6 @@ class Index extends Component {
           />
           
         </View>
-        <GetUserInfo loadInfo={this.props.getUseInfo} />
       </View>
     )
   }

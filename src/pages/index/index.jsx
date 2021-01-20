@@ -7,7 +7,9 @@ import Home from './home/home' // 首页
 import Found from './found/found' // 发现
 import User from './user' // 我的页面
 // import Article from './article' // 文章列表页
+import { getUseInfo } from '../../store/actions/global'
 import './index.scss'
+import { wxMiniCodeLogin } from './user/api'
 
 const mapState = state => state.global
 class Index extends Component {
@@ -17,7 +19,7 @@ class Index extends Component {
     components: [Home, Found, User]
   }
   componentWillMount () { 
-    
+    this.updateToken()
   }
 
   componentDidMount () { }
@@ -32,6 +34,54 @@ class Index extends Component {
       withShareTicket:true,
       menus:['shareAppMessage','shareTimeline']
     })
+  }
+  /**
+   * @desc 定期更新token
+   */
+  updateToken() {
+    // let t = 864000000 // 十天
+    let t = 1000 * 50
+    let $tokenTime = Taro.getStorageSync('$tokenTime')
+    let token = wx.getStorageSync('token') || 'token'
+    if (!$tokenTime || token) {
+      t = new Date() - 0 + t
+      Taro.setStorageSync('$tokenTime', t)
+      this.login()
+      return false
+    }
+    let now = new Date() - 0
+    $tokenTime = $tokenTime  - 0
+    if (now >= $tokenTime) {
+      this.login()
+    }
+  }
+  login = () => {
+    // let token = Taro.getStorageSync('token')
+    // if (token) return false
+    let { codeLogin } = this
+    Taro.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          codeLogin(res.code)
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  }
+  /**
+   * @desc code登陆
+   * @param {*} code 
+   */
+  codeLogin = async (code) => {
+    let { errorCode, data } = await wxMiniCodeLogin({code})
+    if (errorCode == 0) {
+      let { access_token, user_id } = data
+      Taro.setStorageSync('token', access_token)
+      Taro.setStorageSync('$user_id', user_id)
+      this.props.getUseInfo()
+    }
   }
   // onShareAppMessage() {
   //   let res = {
@@ -56,4 +106,4 @@ class Index extends Component {
   }
 }
 
-export default connect(mapState)(Index)
+export default connect(mapState, { getUseInfo })(Index)

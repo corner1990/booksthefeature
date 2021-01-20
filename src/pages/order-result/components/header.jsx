@@ -25,7 +25,7 @@ const ResultHeader = props => {
     <View class='pay-status' >
       <View class='pay-info'>
         <View class='pay-title'>{params.pay_status === '1' ? '成功支付' : '等待支付'}</View>
-        <View class='pay-small-title'>{info.shipping_word}</View>
+        {/* <View class='pay-small-title'>{info.shipping_word}</View> */}
       </View>
     </View>
   </View>)

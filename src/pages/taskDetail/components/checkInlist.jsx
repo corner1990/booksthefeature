@@ -37,6 +37,10 @@ const CheckinList = props => {
         className='checkin-log-wrap'
         style={{borderColor: color}}
         key={key}
+        onClick={() => {
+          props.setCheckInfo(info)
+          props.setOpen(true)
+        }}
       >
         <AtIcon value='check-circle' size='30' color={color}></AtIcon>
         <View className='check-log-info'>

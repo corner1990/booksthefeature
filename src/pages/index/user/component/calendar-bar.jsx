@@ -15,11 +15,11 @@ class CanlendarBar extends Component{
         path: '/pages/taskListOwn/index'
         // path: '/pages/calendar/index'
       },
-      {
-        label: '我的行动历史',
-        icon: 'shopping-bag',
-        path: '/pages/checkInList/index'
-      }
+      // {
+      //   label: '我的行动历史',
+      //   icon: 'shopping-bag',
+      //   path: '/pages/checkInList/index'
+      // }
     ]
   }
   getCard = () => {

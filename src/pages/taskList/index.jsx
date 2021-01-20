@@ -13,12 +13,12 @@ const mapState = state => state.global
  * @desc 订单详情
  */
 const TaskDetail = () => {
-  let title = '任务打卡历史'
+  let title = '未来事件'
   const backHistory = () => {
     Taro.navigateBack()
   }
   const [list, setList] = useState([])
-  const [firstLoad, setFirstLoad] = useState(false)
+  const [firstLoad, setFirstLoad] = useState(true)
   
   /**
    * @desc 下载数据
@@ -27,11 +27,11 @@ const TaskDetail = () => {
     let { errorCode, data } = await getPubTaskList()
     if (errorCode == 0) {
       setList(data.list)
-      setFirstLoad(true)
+      setFirstLoad(false)
     }
   }
   // 首次加载
-  if (!firstLoad) {
+  if (firstLoad) {
     loadInfo()
   }
   

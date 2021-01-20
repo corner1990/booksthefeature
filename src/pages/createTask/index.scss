@@ -9,9 +9,10 @@
   // }
   .content{
     background: #f6f6ff;
-    min-height: calc(100vh - 120px);
+    max-height: calc(100vh - 200px);
     overflow: auto;
     box-sizing: border-box;
+    padding-bottom: 120px;
   }
   .line{
     background-color: $white;
@@ -80,6 +81,8 @@
   // 添加新地址
   .AddBtnWrap{
     position: fixed;
+    z-index: 10;;
+    background-color: $white;
     left: 0;
     bottom: 0;
     width: 100vw;

@@ -13,7 +13,7 @@ const mapState = state => state.global
  * @desc 订单详情
  */
 const TaskDetail = () => {
-  let title = '任务历史'
+  let title = '我的未来'
   const backHistory = () => {
     Taro.navigateBack()
   }

@@ -2,9 +2,11 @@
 .my-center{
   min-height: calc(100vh - 116px);
   overflow: auto;
+  background-color: $white;
+  
   .custom-navbar-wrap{
-    background-color: #6bcaf0;
-    border-color: #6bcaf0
+    // background-color: #6bcaf0;
+    // border-color: #6bcaf0;
   }
 
   .myCalendarBar{

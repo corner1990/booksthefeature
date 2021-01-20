@@ -22,6 +22,12 @@
       transform: translateY(-50%);
     }
   }
+  .task_order_sn{
+    margin-top: 10px;
+    font-size: $font-sm;
+    color: $black65;
+  }
+  .task-sub-title,
   .task-desc{
     font-size: $font-sm;
     color: $black45;

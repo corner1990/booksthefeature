@@ -5,8 +5,9 @@
   justify-content: space-between;
   // margin-top: 2px;
   height: 200px;
-  background: linear-gradient(180deg, #6bcaf0, $white);
+  // background: linear-gradient(180deg, #6bcaf0, $white);
   padding: 0 28px;
+  margin-bottom: 100px;
 
   .userInfoLeft{
     @include flex;
@@ -18,14 +19,28 @@
     height: 120px;
     border-radius: 60px;
   }
-  .userInfoName{
-    @include textHide(2);
-    max-width: 368px;
+  .userInfoNameWrap{
+    max-width: calc(100vw - 160px);
     font-family: Avenir-Heavy;
-    font-size: 44px;
-    color: $black;
-    letter-spacing: 0.35px;
+    
     margin-left: 24px;
+    .userInfoName{
+      @include textHide(1);
+      font-size: 44px;
+      color: $black;
+      letter-spacing: 0.35px;
+    }
+  }
+  .phone-wrap{
+    margin-top: 12px;
+    color: $black65;
+    font-size: $font-sm;
+  }
+  .phoneButton{
+    border: none;
+    background-color: transparent;
+    width: 14px;
+    margin: 0;
   }
   
 }

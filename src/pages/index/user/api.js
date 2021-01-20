@@ -18,3 +18,9 @@ export const updateUserInfo = params => axios.post('/user/user/updateUserInfo', 
  * @desc 上传图片
  */
 export const uploadBase64Image =  (params) => axios.post('/system/media/uploadBase64Image', params)
+
+// 第三方登录
+export const bindPhone = (params) => axios.post('/user/user/wxMiniLoginBindPhone', params)
+
+// code登陆
+export const wxMiniCodeLogin = (params) => axios.post('/user/user/wxMiniCodeLogin', params)

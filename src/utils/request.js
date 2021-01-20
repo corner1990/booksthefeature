@@ -22,7 +22,8 @@ axios.defaults.adapter = function (config) {
       method: config.method,
       data: {
         ...data,
-        platform: 'wxMin',
+        platform: 'wxMini',
+        provider: 'wxMini',
         user_id: userId
       },
       header: {
@@ -51,7 +52,7 @@ const reject = data => {
     }, `${path}?`)
 
     Taro.setStorageSync({ $reject })
-    Taro.navigateTo({ url: '/pages/login/index' })
+    // Taro.navigateTo({ url: '/pages/login/index' })
     return false
   }
   return data

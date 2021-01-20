@@ -20,10 +20,13 @@
     background: $white85;
     border-radius: 8px;
     padding: 20px;
+
+    
     .task-title{
       line-height: 44px;
       font-size: $font-md;
     }
+    .task-sub-title,
     .taks-desc,
     .task-during-time{
       margin-top: 10px;
@@ -34,10 +37,16 @@
     .taks-desc{
       @include textHide(2)
     }
+    .task_order_sn{
+      margin-top: 10px;
+      font-size: $font-sm;
+      color: $black65;
+    }
     .task-during-time,
     .progrss-warp{
       margin-top: 20px;
     }
+    
     .left-box{
       width: calc(100% - 110px);
     }

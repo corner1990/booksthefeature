@@ -79,8 +79,8 @@ class Login extends Component {
     </View>
       <View className='MainContent'>
         <View className='CenterContent'>
-          <Image src='https://ipxcdn.jfshare.com/ipxmall/7dad82f9bcde329c438fc26f9ea87157' class='LoginIcon' alt='log-bg' />
-          <View className='authorText'>授权AS Flower Boutique登录</View>
+          <Image src='http://ipxcdn.jfshare.com/ipxmall/d30d619ab6babb67300131abf7bb002a' class='LoginIcon' alt='log-bg' />
+          <View className='authorText'>授权 有学有钱 登录</View>
           <AtButton         
             className='SubmitBtn'
             type='primary'

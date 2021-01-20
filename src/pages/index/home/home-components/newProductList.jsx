@@ -23,9 +23,12 @@ class NewProductList extends Component{
    */
   getProduct = () => {
     let { list = [] } = this.props
-
+    if (list.length == 0) {
+      return (<View className='noTask'>
+        暂无对应的未来任务
+      </View>)
+    }
     return list.map((item, key) => {
-      
       return (
           <TaskCard key={key} info={item} />
         // </LazyBlock>
@@ -38,7 +41,6 @@ class NewProductList extends Component{
       <View className='newProductListWrap'>
         <View className='newProductList'>
           { getProduct() }
-
         </View>
       </View>)
   }
