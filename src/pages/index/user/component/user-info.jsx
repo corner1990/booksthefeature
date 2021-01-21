@@ -1,5 +1,5 @@
 import React, { Component } from  'react'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Image, Text, Button } from '@tarojs/components'
 import { AtButton, AtIcon, AtBadge } from 'taro-ui'
 import { connect } from 'react-redux'
 import Taro from '@tarojs/taro'
@@ -136,7 +136,7 @@ class UserInfo extends Component{
       openType='getPhoneNumber'
       onGetPhoneNumber={this.getPhoneNumber}
     >
-      <AtIcon value='iphone' size='20' color='#eee'></AtIcon>
+      <AtIcon value='iphone' size='20' color='#eee'></AtIcon>绑定手机号
     </AtButton>)
   }
   getLoginBtn = () => {
@@ -145,12 +145,12 @@ class UserInfo extends Component{
     } = this.props
     // let token = Taro.getStorageSync('token')
     if (!userInfo.nick_name) {
-      return (<AtButton
+      return (<View
         type='secondary'
         className='getUserInfoBtn'
         openType='getUserInfo'
         onClick={this.getInfo}
-      >未登陆</AtButton>)
+      >点击登陆</View>)
     }
     return userInfo.nick_name
   }

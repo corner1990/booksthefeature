@@ -27,8 +27,11 @@ class TaskDetail extends React.Component {
   // let [ reward, setReward ] = useState('')
   // let [ user_remark, setUserRemark ] = useState('')
   
-  stats = {
-    info: {},
+  state = {
+    info: {
+      task_name: '',
+      task_desc: ''
+    },
     startDate: '',
     price: '',
     card_no: '',
@@ -69,7 +72,10 @@ class TaskDetail extends React.Component {
    */
   startTimeChange = date => {
     let value = date.detail.value
-    setStartDate(value)
+    // setStartDate(value)
+    this.setState({
+      startDate: value
+    })
   }
   
   /**
@@ -99,15 +105,14 @@ class TaskDetail extends React.Component {
    */
   pirceInput = e => {
     let {
-      display_max_amount = '*',
-      display_min_amount = '*',
+      display_max_amount = '0',
+      display_min_amount = '0',
       reward_rate = 1
     } = this.state.info
     let { value } = e.detail
     let reg = /^\d+$/;
     if (!value || !reg.test(value)) {
-      setReward('')
-      setPrice('')
+      
       this.setState({
         reward: '',
         price: ''
@@ -122,14 +127,20 @@ class TaskDetail extends React.Component {
     if (!reg.test(value)) {
       value = 0
     }
-    display_max_amount -= 0
-    display_min_amount -= 0
-    value -= 0
-    value = value > display_max_amount ? display_max_amount : value
-    value = value < display_min_amount ? display_min_amount : value
+    display_max_amount = display_max_amount - 0
+    display_min_amount = display_min_amount - 0
+    value = value - 0
+    reward_rate = (reward_rate - 0) / 100
+    
+    if (value > display_max_amount) {
+      value = display_max_amount
+    } else if (value < display_min_amount) {
+      value = display_min_amount
+    }
+    console.log('display_max_amount', display_max_amount, display_min_amount, value, reward_rate, Math.floor(value * reward_rate))
     this.setState({
-      reward: value,
-      price: value * reward_rate
+      reward: value * reward_rate,
+      price: value
     })
   }
   /**
@@ -147,6 +158,7 @@ class TaskDetail extends React.Component {
       card_bank,
       card_no,
       card_owner,
+      user_remark
     } = this.state
     let {
       task_id='2'
@@ -200,7 +212,7 @@ class TaskDetail extends React.Component {
       start_date: startDate.replace(/\-/g, ''),
       task_id
     }
-    setCreateReq(params)
+    this.setCreateReq(params)
   }
 
   /**
@@ -211,7 +223,7 @@ class TaskDetail extends React.Component {
     let { errorCode, data } = await createTaskOrder(params)
     if (errorCode == 0) {
       let { task_order_sn } = data
-      toPay({ task_order_sn })
+      this.toPay({ task_order_sn })
       // props.setTab(2)
       // Taro.navigateTo({url: '/pages/order-result/index'})
     }
@@ -221,7 +233,8 @@ class TaskDetail extends React.Component {
    * @param {*} params 
    */
   toPay = async (params) => {
-    let url = `/pages/order-result/index?task_order_sn=${params.task_order_sn}&price=${params.display_bet_amount}`
+    let { display_bet_amount } = this.state.info
+    let url = `/pages/order-result/index?task_order_sn=${params.task_order_sn}&price=${display_bet_amount}`
   
     let { errorCode, data} = await  createOrderPayInfo({'pay_type': 5, ...params})
     if (errorCode === 0) {
@@ -244,14 +257,23 @@ class TaskDetail extends React.Component {
   render() {
     let {
       display_max_amount = '*',
-      display_min_amount = '*'
-    } = this.state.info
+      display_min_amount = '*',
+      task_order_name,
+      startDate,
+      price,
+      reward,
+      card_no,
+      card_owner,
+      card_bank
+    } = this.state
+    let { info } = this.state
+    let start = this.getStart()
     let title = '创建未来事件'
     let placeholder = `请输入${display_min_amount} - ${display_max_amount} 元梦想基金`
     return (<View className='create-task-wrap'>
       <CustomNavBar
           title={title}
-          clickLeft={backHistory}
+          clickLeft={this.backHistory}
         />
       <View className='content'>
         <View className='line'>
@@ -295,7 +317,7 @@ class TaskDetail extends React.Component {
             <Textarea
               className='input textarea'
               placeholder='请输入计划描述'
-              onChange={remarkChange}
+              onChange={this.remarkChange}
             />
           </View>
         </View>
@@ -303,7 +325,7 @@ class TaskDetail extends React.Component {
           <View className='line-title'>计划时间周期</View>
           <View className='line-input-wrap line-time-wrap'>
             <PickerDate
-              onChange={startTimeChange}
+              onChange={this.startTimeChange}
               start={dateFormat(start, 'YYYY-mm-dd')} 
               value={start}
             />
@@ -331,7 +353,7 @@ class TaskDetail extends React.Component {
             <Input
               className='input'
               placeholder={placeholder}
-              onInput={pirceInput}
+              onInput={this.pirceInput}
               value={price}
             />
           </View>
@@ -383,7 +405,7 @@ class TaskDetail extends React.Component {
       </View>
       
       <View className='AddBtnWrap'>
-        <AtButton type='primary' onClick={createTask}>创建计划</AtButton>
+        <AtButton type='primary' onClick={this.createTask}>创建计划</AtButton>
       </View>
     </View>)
     }

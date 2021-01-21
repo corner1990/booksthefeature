@@ -54,11 +54,11 @@ class Index extends Component {
    * @desc 定期更新token
    */
   updateToken() {
-    // let t = 864000000 // 十天
-    let t = 1000 * 5
+    let t = 864000000 // 十天
+    // let t = 1000 * 5
     let $tokenTime = Taro.getStorageSync('$tokenTime')
-    let token = wx.getStorageSync('token') || 'token'
-    if (!$tokenTime || token) {
+    let token = wx.getStorageSync('token')
+    if (!$tokenTime || !token) {
       t = new Date() - 0 + t
       Taro.setStorageSync('$tokenTime', t)
       this.login()
@@ -67,6 +67,8 @@ class Index extends Component {
     let now = new Date() - 0
     $tokenTime = $tokenTime  - 0
     if (now >= $tokenTime) {
+      Taro.setStorageSync('$tokenTime', now + t)
+      
       this.login()
     }
   }

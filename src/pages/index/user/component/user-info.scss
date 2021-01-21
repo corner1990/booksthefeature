@@ -26,7 +26,7 @@
     margin-left: 24px;
     .userInfoName{
       @include textHide(1);
-      font-size: 44px;
+      font-size: 38px;
       color: $black;
       letter-spacing: 0.35px;
     }
@@ -36,10 +36,17 @@
     color: $black65;
     font-size: $font-sm;
   }
+  .getUserInfoBtn{
+    font-size: 38px;
+    color: $black;
+    letter-spacing: 0.35px;
+    border: 0;
+  }
   .phoneButton{
     border: none;
     background-color: transparent;
-    width: 14px;
+    justify-content: flex-start;
+    padding: 0;
     margin: 0;
   }
   
