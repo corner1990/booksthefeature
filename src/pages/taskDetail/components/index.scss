@@ -86,3 +86,21 @@
     color: $black45;
   }
 }
+
+.ViewDetail{
+  .at-modal__container{
+    width: 84vw;
+    // height: 60vh;
+  }
+  .at-modal__content{
+    max-height: 100%;
+  }
+  .detail-img{
+    width: 100%;
+    height: 610px;
+  }
+  .DetailText{
+    margin-top: 20px;
+    font-size: $font-sm;
+  }
+}

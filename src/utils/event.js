@@ -14,6 +14,9 @@ const event = {
       fns.forEach(fn => {
           fn.apply(this, [money])
       })
+  },
+  remove(type) {
+    this.clientList[type] = []
   }
 }
 export default event

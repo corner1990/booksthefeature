@@ -40,6 +40,7 @@ const CheckinList = props => {
         onClick={() => {
           props.setCheckInfo(info)
           props.setOpen(true)
+          
         }}
       >
         <AtIcon value='check-circle' size='30' color={color}></AtIcon>

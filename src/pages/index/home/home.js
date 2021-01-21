@@ -38,7 +38,9 @@ class Home extends Component {
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () { 
+    
+  }
 
   componentDidHide () { }
   pageInfo = {
@@ -84,6 +86,7 @@ class Home extends Component {
     })
   }
   refresh = type => {
+    console.log('refresh')
     let { pageInfo } = this.state
     let { loadInfo } = this
     

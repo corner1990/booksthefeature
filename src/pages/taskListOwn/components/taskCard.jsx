@@ -5,6 +5,7 @@ import Taro from '@tarojs/taro'
 import './newProductList.scss'
 import { dateFormat, getDays } from '../../../utils/utils'
 import { createOrderPayInfo } from '../../createTask/api'
+React.useRef
 /**
  * @desc 首页任务卡片
  */
@@ -24,9 +25,9 @@ const TaskCard = props => {
    * @desc 去打卡
    */
   const toCheckIn = () => {
-    let { task_id, task_order_sn, is_sign_today } = info
+    let { task_id, task_order_sn, is_sign_today, sign_enable } = info
     // 防止重新打卡
-    if (is_sign_today) {
+    if (is_sign_today || sign_enable == 0) {
       return false
     }
     Taro.navigateTo({
@@ -115,7 +116,7 @@ const TaskCard = props => {
       </View>
     </View>
     {info.task_order_status == 20 ? <View
-      className={['checkin-btn', (info.sign_enable == 0 ? 'disabled' : '')]}
+      className={['checkin-btn', (info.sign_enable == 0 || info.is_sign_today ? 'disabled' : '')]}
       onClick={toCheckIn}
     >打卡</View> : ''}
     {info.task_order_status == 1 ? <View

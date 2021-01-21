@@ -9,7 +9,6 @@ import { createOrderPayInfo } from '../../../createTask/api'
  * @desc 首页任务卡片
  */
 const TaskCard = props => {
-  console.log(props.info)
   let info = props.info
 
   /**
@@ -25,9 +24,9 @@ const TaskCard = props => {
    * @desc 去打卡
    */
   const toCheckIn = () => {
-    let { task_id, task_order_sn, is_sign_today } = info
+    let { task_id, task_order_sn, is_sign_today, sign_enable } = info
     // 防止重新打卡
-    if (is_sign_today) {
+    if (is_sign_today || sign_enable == 0) {
       return false
     }
     Taro.navigateTo({
@@ -70,23 +69,11 @@ const TaskCard = props => {
       if (startDay - 0 > now - 0) return 0 // 任务时间大于今天
       end_date = end_date.replace(reg, '$1-$2-$3')
       
-      console.log('info','days', days, 'allDays', allDays, 'start_date', start_date, 'end_date', end_date)
       progress = Math.round(days / allDays * 100)
     }
     return progress
   }
-  /**
-   * @desc 判断是否可以打卡
-   */
-  const isDisabled = () => {
-    let { start_date='' } = info
-    let reg = /([\d]{4})([\d]{2})([\d]{2})/;
-    start_date = start_date.replace(reg, '$1-$2-$3')
-    let now = new Date()
-    let startDay = new Date(start_date)
-    if (startDay - 0 > now - 0 || info.is_sign_today == 1) return true // 任务时间大于今天
-    return false
-  }
+ 
   /**
    * @desc 发起支付
    * @param {*} params 

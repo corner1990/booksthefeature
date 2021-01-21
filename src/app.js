@@ -8,8 +8,10 @@ import './app.scss'
 
 const store = createStore()
 class App extends Component {
-
-  componentDidMount () {}
+  
+  componentDidMount () {
+    // this.ref = React.useRef()
+  }
 
   componentDidShow () {}
 
@@ -19,7 +21,7 @@ class App extends Component {
 
   // this.props.children 是将要会渲染的页面
   render () {
-
+    
     return (<Provider store={store}>
       { this.props.children }
     </Provider>)

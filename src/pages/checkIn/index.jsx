@@ -31,7 +31,7 @@ class TaskDetail extends React.Component {
    */
   backHistory = () => {
     Event.trigger('refresh')
-    // Taro.navigateBack()
+    Taro.navigateBack()
   }
    /**
    * @desc 首次加载
@@ -39,7 +39,7 @@ class TaskDetail extends React.Component {
   loadInfo = async () => {
     let { params } = Taro.Current.router
     let { errorCode, data } = await getTaskInfo(params)
-
+    
     if (errorCode == 0) {
       // setInfo(data)
       this.setState({info: data})
@@ -158,6 +158,7 @@ class TaskDetail extends React.Component {
     }
     loading = true
     let { errorCode } = await checkIn(params)
+    Event.trigger('refresh')
     loading = false
     if (errorCode == 0) {
       Taro.navigateBack()
