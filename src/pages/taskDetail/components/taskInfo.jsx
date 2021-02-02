@@ -13,11 +13,33 @@ const mapState = state => state.global
  */
 const TaskInfo = props => {
   let { info } = props
+  let statusObj = {
+    '1': {
+      label: '待付款',
+      type: 'danger'
+    },
+    '10': {
+      label: '待审核',
+      type: 'warning'
+    },
+    '20': {
+      label: '进行中',
+      type: 'success'
+    },
+    '30': {
+      label: '待终审核',
+      type: 'warning'
+    },
+    '100': {
+      label: '已结束',
+      type: 'info'
+    }
+  }
   /**
    * @desc 处理任务时间
    */
   const getTimeStr = () => {
-    let str = '任务时间：****-**-** 至 ****-**-**'
+    let str = '任务时间：'
     let { end_date='', start_date } = info
     if (end_date && start_date) {
       let reg = /([\d]{4})([\d]{2})([\d]{2})/;
@@ -32,8 +54,12 @@ const TaskInfo = props => {
    * @desc 获取时间进度
    */
   const getProgress = () => {
-    let { end_date='', start_date } = info
+    let { end_date='', start_date, task_order_status } = info
     let progress = 0
+    // 行动结束
+    if (task_order_status == 100) {
+      return progress
+    }
     if (end_date && start_date) {
       let reg = /([\d]{4})([\d]{2})([\d]{2})/;
       start_date = start_date.replace(reg, '$1-$2-$3')
@@ -50,18 +76,8 @@ const TaskInfo = props => {
     }
     return progress
   }
-  /**
-   * @desc 判断是否可以打卡
-   */
-  const isDisabled = () => {
-    let { start_date='' } = info
-    let reg = /([\d]{4})([\d]{2})([\d]{2})/;
-    start_date = start_date.replace(reg, '$1-$2-$3')
-    let now = new Date()
-    let startDay = new Date(start_date)
-    if (startDay - 0 > now - 0 || info.is_sign_today == 1) return true // 任务时间大于今天
-    return false
-  }
+  let status = statusObj[info.task_order_status] || { type: '', label: '' }
+  
   return (<View className='task-info'>
       <View className='task-title'>{info.task_order_name}</View>
       <View className='task_order_sn'>未来计划编号：{info.task_order_sn}</View>
@@ -80,9 +96,9 @@ const TaskInfo = props => {
       </View>
       <View className='task-status'>
         <View>任务状态：</View>
-        {/* <View className='task-tag'>
-        审核中
-        </View> */}
+        <View className={['tag', status.type]}>
+          {status.label}
+        </View>
       </View>
     </View>)
 }

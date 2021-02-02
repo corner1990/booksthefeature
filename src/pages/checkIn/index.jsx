@@ -101,7 +101,7 @@ class TaskDetail extends React.Component {
       return false
     }
     Taro.uploadFile({
-      url: 'http://47.115.3.230/system/media/uploadImage',
+      url: 'https://future.zbgwc.com/system/media/uploadImage',
       filePath: file.compressUrl,
       name: 'file',
       success({ statusCode, data }) {

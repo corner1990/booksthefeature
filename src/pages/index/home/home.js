@@ -86,7 +86,7 @@ class Home extends Component {
     })
   }
   refresh = type => {
-    console.log('refresh')
+    // console.log('refresh')
     let { pageInfo } = this.state
     let { loadInfo } = this
     

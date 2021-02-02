@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Input, Textarea } from '@tarojs/components'
 import { connect } from 'react-redux'
-import { AtProgres, AtButton } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 import Taro, { render } from '@tarojs/taro'
 import CustomNavBar from '../../components/navbar'
 // import None from '../../components/none'
@@ -137,7 +137,7 @@ class TaskDetail extends React.Component {
     } else if (value < display_min_amount) {
       value = display_min_amount
     }
-    console.log('display_max_amount', display_max_amount, display_min_amount, value, reward_rate, Math.floor(value * reward_rate))
+    
     this.setState({
       reward: value * reward_rate,
       price: value
@@ -233,8 +233,8 @@ class TaskDetail extends React.Component {
    * @param {*} params 
    */
   toPay = async (params) => {
-    let { display_bet_amount } = this.state.info
-    let url = `/pages/order-result/index?task_order_sn=${params.task_order_sn}&price=${display_bet_amount}`
+    let { price } = this.state
+    let url = `/pages/order-result/index?task_order_sn=${params.task_order_sn}&price=${price}`
   
     let { errorCode, data} = await  createOrderPayInfo({'pay_type': 5, ...params})
     if (errorCode === 0) {
@@ -256,8 +256,7 @@ class TaskDetail extends React.Component {
   // placholer
   render() {
     let {
-      display_max_amount = '*',
-      display_min_amount = '*',
+      
       task_order_name,
       startDate,
       price,
@@ -267,6 +266,10 @@ class TaskDetail extends React.Component {
       card_bank
     } = this.state
     let { info } = this.state
+    let {
+      display_max_amount = '*',
+      display_min_amount = '*',
+    } = info
     let start = this.getStart()
     let title = '创建未来事件'
     let placeholder = `请输入${display_min_amount} - ${display_max_amount} 元梦想基金`
@@ -358,7 +361,7 @@ class TaskDetail extends React.Component {
             />
           </View>
           <View className='line-input-wrap line-time-wrap'>
-            预估奖励：<View className='input'>{reward ? `预计可的奖励${reward}元` : ''}</View>
+            预估奖励：<View className='input' style="box-shadow: none;">{reward ? `预计可的奖励${reward}元` : ''}</View>
           </View>
         </View>
         <View className='line'>

@@ -17,7 +17,7 @@ const TaskInfo = props => {
    * @desc 处理任务时间
    */
   const getTimeStr = () => {
-    let str = '任务时间：****-**-** 至 ****-**-**'
+    let str = '任务时间：'
     let { end_date='', start_date } = info
     if (end_date && start_date) {
       let reg = /([\d]{4})([\d]{2})([\d]{2})/;
@@ -32,8 +32,12 @@ const TaskInfo = props => {
    * @desc 获取时间进度
    */
   const getProgress = () => {
-    let { end_date='', start_date } = info
+    let { end_date='', start_date, task_order_status } = info
     let progress = 0
+    // 行动结束
+    if (task_order_status == 100) {
+      return progress
+    }
     if (end_date && start_date) {
       let reg = /([\d]{4})([\d]{2})([\d]{2})/;
       start_date = start_date.replace(reg, '$1-$2-$3')

@@ -66,7 +66,7 @@ class TaskDetail extends React.Component {
   render() {
     let title = '我的未来'
     let { list } = this.state
-    console.log('list', list)
+    
     return (<View className='create-task-wrap'>
      <ScrollView
           scrollY

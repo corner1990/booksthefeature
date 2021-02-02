@@ -145,12 +145,18 @@ class UserInfo extends Component{
     } = this.props
     // let token = Taro.getStorageSync('token')
     if (!userInfo.nick_name) {
-      return (<View
+      return (<View>
+        <View
         type='secondary'
         className='getUserInfoBtn'
-        openType='getUserInfo'
-        onClick={this.getInfo}
-      >点击登陆</View>)
+        
+      >点击登陆</View>
+        <Button
+          openType='getUserInfo'
+          style="position: absolute;line-height: -70rpx;margin: -34px 0 0 2rpx;opacity: 0;"
+          onClick={this.getInfo}
+        >点击登陆</Button>
+      </View>)
     }
     return userInfo.nick_name
   }

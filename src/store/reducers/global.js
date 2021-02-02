@@ -2,7 +2,7 @@
 import { SETTAB, GETUSERINFO, GLOBALUPDATE } from '../types'
 
 const initState = {
-  tabIndex: 2, // 首页tabar下标
+  tabIndex: 0, // 首页tabar下标
   order_type: 0,
   userInfo: {
     avatar: 'https://ipxcdn.jfshare.com/system/admin/acf6f273c1cd77066b4541308f782a88.png',

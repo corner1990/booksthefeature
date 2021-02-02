@@ -16,7 +16,6 @@ const  ViewDetail = props =>{
   const hide = () => {
     update(false)
   }
-  console.log('info', info)
   return (
     <View className='ViewDetail'>
       <AtModal

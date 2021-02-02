@@ -40,18 +40,38 @@
 
   .task-status{
     justify-content: flex-start;
-    .task-tag{
+    .tag{
       background-color: rgba(64,158,255,.1);
       display: inline-block;
       padding: 0 10px;
-      height: 40px;
-      line-height: 40px;
-      font-size: $font-xs;
+      height: 44px;
+      line-height: 44px;
+      font-size: $font-sm;
       color: #409eff;
       border-radius: 8px;
       box-sizing: border-box;
       border: 1px solid rgba(64,158,255,.2);
       white-space: nowrap;
+    }
+    .tag.info{
+      background-color: hsla(220,4%,58%,.1);
+      border-color: hsla(220,4%,58%,.2);
+      color: #909399;
+    }
+    .tag.success{
+      background-color: rgba(103,194,58,.1);
+      border-color: rgba(103,194,58,.2);
+      color: #67c23a;
+    }
+    .tag.warning{
+      background-color: rgba(230,162,60,.1);
+      border-color: rgba(230,162,60,.2);
+      color: #e6a23c;
+    }
+    .tag.danger{
+      background-color: hsla(0,87%,69%,.1);
+      border-color: hsla(0,87%,69%,.2);
+      color: #f56c6c;
     }
   }
 }
