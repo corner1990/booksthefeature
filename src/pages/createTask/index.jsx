@@ -303,7 +303,8 @@ class TaskDetail extends React.Component {
         <View className='line'>
           <View className='line-title'>未来计划</View>
           <View className='line-input-wrap'>
-            <Input className='input'
+            <Input
+              className='input input-name'
               placeholder='请输入计划名称'
               value={task_order_name}
               onInput={e => {
@@ -334,7 +335,7 @@ class TaskDetail extends React.Component {
             />
             开始时间：
             <Input
-              className='input'
+              className='input input-time'
               placeholder='请输选择开始时间'
               readonly
               value={startDate}
@@ -354,7 +355,7 @@ class TaskDetail extends React.Component {
           <View className='line-input-wrap line-time-wrap'>
             梦想金额：
             <Input
-              className='input'
+              className='input input-price'
               placeholder={placeholder}
               onInput={this.pirceInput}
               value={price}

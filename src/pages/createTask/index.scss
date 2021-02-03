@@ -34,6 +34,24 @@
     &.textarea{
       width: calc(100vw - 100px);
       height: 90px;
+      line-height: 48px;
+      background: url('http://saidad.oss-cn-guangzhou.aliyuncs.com/image/41e7f96e512b4ddf5233aaf86b36cf28.png') no-repeat 20px 20px;
+      background-size: 36px 36px;
+      text-indent: 70px;
+    }
+    &.input-name{
+      background: url('http://saidad.oss-cn-guangzhou.aliyuncs.com/image/47c404666f58a9fde6ae75615566bce0.png') no-repeat 20px center;
+      background-size: 36px 36px;
+      padding-left: 70px;
+    }
+    &.input-time{
+      background: url('http://saidad.oss-cn-guangzhou.aliyuncs.com/image/65df695244f90a8ea7d17a7c6d4e595b.png') no-repeat 20px center;
+      background-size: 36px 36px;
+      padding-left: 70px;
+    }&.input-price{
+      background: url('http://saidad.oss-cn-guangzhou.aliyuncs.com/image/bee8aed5c6f7592cd81351d9cee62f43.png') no-repeat 20px center;
+      background-size: 36px 36px;
+      padding-left: 70px;
     }
     
   }
